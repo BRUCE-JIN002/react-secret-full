@@ -1,10 +1,10 @@
 import React, { CSSProperties, useState } from "react";
-import "./styles.scss";
 import Space, { SpaceProps } from "./Space";
 import { ConfigProvider } from "./ConfigProvider";
 import { useToggle } from "ahooks";
 import { Button, Radio, Switch } from "antd";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import "./styles.scss";
 
 const getSplitStyle = (direction: SpaceProps["direction"]): CSSProperties => {
   if (direction === "horizontal") {
@@ -119,7 +119,7 @@ const SpaceDemo: React.FC = () => {
           </Button.Group>
         </div>
       </div>
-      <div className="container">
+      <div className="containerWrapper">
         <ConfigProvider space={{ size: stateSize }}>
           <Space
             direction={direction as SpaceProps["direction"]}
@@ -132,10 +132,10 @@ const SpaceDemo: React.FC = () => {
               ) : null
             }
           >
-            <div className="box" />
-            <div className="box" />
-            <div className="box" />
-            <div className="box" />
+            <div className="boxs" />
+            <div className="boxs" />
+            <div className="boxs" />
+            <div className="boxs" />
           </Space>
         </ConfigProvider>
       </div>

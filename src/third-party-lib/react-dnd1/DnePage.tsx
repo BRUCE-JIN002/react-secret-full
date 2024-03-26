@@ -1,7 +1,9 @@
 import { DndProvider, useDrag, useDragLayer, useDrop } from "react-dnd";
 import { useEffect, useRef, useState } from "react";
-import { HTML5Backend, getEmptyImage } from "react-dnd-html5-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import DragTip from "./dragTip";
 import "./index.scss";
+import { Space } from "antd";
 
 interface ItemType {
   color: string;
@@ -26,7 +28,7 @@ function Box(props: BoxProps) {
 
   useEffect(() => {
     drag(ref);
-    dragPreview(getEmptyImage());
+    // dragPreview(getEmptyImage());
   }, []);
 
   return (
@@ -34,13 +36,12 @@ function Box(props: BoxProps) {
       ref={ref}
       className={dragging ? "box dragging" : "box"}
       style={{ background: props.color || "blue" }}
-    ></div>
+    />
   );
 }
 
-function Container() {
+function TargetContainer() {
   const [boxes, setBoxes] = useState<ItemType[]>([]);
-
   const ref = useRef(null);
 
   const [, drop] = useDrop(() => {
@@ -58,6 +59,7 @@ function Container() {
 
   return (
     <div ref={ref} className="container">
+      {Array.isArray(boxes) && boxes.length === 0 && <DragTip />}
       {boxes.map((item) => {
         return <Box color={item.color}></Box>;
       })}
@@ -81,25 +83,39 @@ const DragLayer = () => {
       style={{
         left: currentOffset?.x,
         top: currentOffset?.y,
+        color: item.color,
       }}
     >
-      {item.color}拖拖拖
+      dragging...
     </div>
   );
 };
 
-function App() {
+function DndPage1() {
   return (
     <DndProvider backend={HTML5Backend}>
-      <div>
-        <Container></Container>
-        <Box color="blue"></Box>
-        <Box color="red"></Box>
-        <Box color="green"></Box>
-        <DragLayer></DragLayer>
+      <div style={{ display: "flex", justifyContent: "center", gap: 35 }}>
+        <div
+          style={{
+            border: "1px solid #00000070",
+            height: 300,
+            aspectRatio: 1,
+            borderRadius: 4,
+            padding: 10,
+          }}
+        >
+          <Space size={10} direction="vertical">
+            <Box color="red" />
+            <Box color="gold" />
+            <Box color="skyblue" />
+            <Box color="yellowgreen" />
+            <DragLayer />
+          </Space>
+        </div>
+        <TargetContainer />
       </div>
     </DndProvider>
   );
 }
 
-export default App;
+export default DndPage1;

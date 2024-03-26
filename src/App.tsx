@@ -10,11 +10,12 @@ import CalendarDemo from "./components/calendar/CalendarDemo";
 import IconDemo from "./components/Icon/IconDemo";
 import MyQRcode from "./components/QRCode/QrCode";
 import SpaceDemo from "./components/space/SpaceDemo";
-import { CodeDemoComponent } from "./components/code";
+import { CodeDemo } from "./components/code/CodeDemo";
 import { UseReducerCode } from "./react-hooks/useReducer/UseReducerCode";
 import { UseContextCode } from "./react-hooks/useContext/UseContextCode";
 import { UseStateCode } from "./react-hooks/useState/UseStateCode";
 import DndPage2 from "./third-party-lib/react-dnd-2/DndPage2";
+import DndPage1 from "./third-party-lib/react-dnd1/DnePage";
 
 export interface PageState {
   currentPage: ComponentsType | HooksType | ThirdParyLibrary;
@@ -53,10 +54,11 @@ const App: FC = () => {
         {/* Space组件 */}
         {currentPage === ComponentsType.Space && <SpaceDemo />}
         {/* 代码示例 */}
-
-        {currentPage === ComponentsType.CodeDemo && <CodeDemoComponent />}
-        {/* Dnd拖拽示例 */}
-        {currentPage === ThirdParyLibrary.ReactDnd && <DndPage2 />}
+        {currentPage === ComponentsType.CodeDemo && <CodeDemo />}
+        {/* Dnd基础拖拽示例 */}
+        {currentPage === ThirdParyLibrary.ReactDnd1 && <DndPage1 />}
+        {/* Dnd进阶拖拽示例 */}
+        {currentPage === ThirdParyLibrary.ReactDnd2 && <DndPage2 />}
       </div>
     </div>
   );
