@@ -1,0 +1,27 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.icon {
+  display: inline-block;
+}
+
+.icon-spin {
+  animation: spin 2s linear infinite;
+}
+
+.layout {
+  & > div {
+    margin-bottom: 20px;
+  }
+  & > div span {
+    font-size: 14px;
+    color: rgba($color: #000000, $alpha: 0.6);
+  }
+}

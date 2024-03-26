@@ -1,0 +1,36 @@
+.container {
+  padding: 20px;
+  background-color: greenyellow;
+}
+
+.box {
+  width: 100px;
+  aspect-ratio: 1/1;
+  background-color: pink;
+  border: 1px solid #00000050;
+}
+
+.space {
+  display: inline-flex;
+
+  &-vertical {
+    flex-direction: column;
+  }
+
+  &-align {
+    &-center {
+      align-items: center;
+    }
+
+    &-start {
+      align-items: start;
+    }
+
+    &-end {
+      align-items: end;
+    }
+    &-baseline {
+      align-items: baseline;
+    }
+  }
+}
