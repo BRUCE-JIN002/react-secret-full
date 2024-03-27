@@ -44,3 +44,12 @@ export const isWeekends = (date: Dayjs) => {
   }
   return false;
 };
+
+/** 对象数组去重 */
+export const uniqObjArr = (arr: any[], field: string | number) =>
+  arr.reduce((acc, cur) => {
+    if (!acc.find((item: any) => item[field] === cur[field])) {
+      acc.push(cur);
+    }
+    return acc;
+  }, []);

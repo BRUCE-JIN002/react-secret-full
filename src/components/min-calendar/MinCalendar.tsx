@@ -1,5 +1,5 @@
 import React, { useImperativeHandle, useState } from "react";
-import "./index.css";
+import "./index.scss";
 
 export interface CalendarProps {
   value?: Date;

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import MiniCalendar, { CalendarRef } from "./MinCalendar";
+import "./index.scss";
 
 const MinCalendarDemo: React.FC = () => {
   const canlendarRef = useRef<CalendarRef>(null);

@@ -15,7 +15,7 @@ import { UseReducerCode } from "./react-hooks/useReducer/UseReducerCode";
 import { UseContextCode } from "./react-hooks/useContext/UseContextCode";
 import { UseStateCode } from "./react-hooks/useState/UseStateCode";
 import DndPage2 from "./third-party-lib/react-dnd-2/DndPage2";
-import DndPage1 from "./third-party-lib/react-dnd1/DnePage";
+import DndPage1 from "./third-party-lib/react-dnd1/Page";
 
 export interface PageState {
   currentPage: ComponentsType | HooksType | ThirdParyLibrary;
