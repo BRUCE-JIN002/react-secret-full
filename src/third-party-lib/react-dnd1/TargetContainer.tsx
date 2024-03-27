@@ -4,6 +4,7 @@ import { DropTargetMonitor, useDrop } from "react-dnd";
 import "./index.scss";
 import DragTip from "./DragTips";
 import { ItemType } from "./Page";
+import DragLayer from "./DragLayout";
 
 interface DataSource {
   data: ItemType[];
@@ -42,6 +43,7 @@ const TargetContainer: React.FC<DataSource> = (props) => {
       {data.map((item, index) => {
         return <Box color={item.color} key={index} />;
       })}
+      <DragLayer />
     </div>
   );
 };
