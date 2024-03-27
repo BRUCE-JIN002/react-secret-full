@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Box from "./Box";
 import DragLayer from "./DragLayout";
-import { useDrop } from "react-dnd";
+import { DropTargetMonitor, useDrop } from "react-dnd";
 import DragTip from "./DragTips";
 import { ItemType } from "./Page";
 
@@ -14,14 +14,18 @@ const SourceContainer: React.FC<DataSource> = (props) => {
   const { data, onChange } = props;
   const ref = useRef(null);
 
-  const [, drop] = useDrop(() => {
+  const [{ isOver, canDrop }, drop] = useDrop(() => {
     return {
       accept: "box",
       drop: (item: ItemType) => {
         onChange(item);
       },
+      collect: (monitor: DropTargetMonitor<ItemType>) => ({
+        isOver: !!monitor.isOver(),
+        canDrop: !!monitor.canDrop(),
+      }),
     };
-  });
+  }, [ref]);
 
   drop(ref);
 
@@ -29,19 +33,12 @@ const SourceContainer: React.FC<DataSource> = (props) => {
     <div
       ref={ref}
       style={{
-        border: "1px solid #00000070",
-        height: 300,
-        aspectRatio: 1,
-        borderRadius: 4,
-        padding: 10,
-        display: "flex",
-        flexDirection: "column",
-        flexWrap: "wrap",
-        gap: 10,
-        position: "relative",
+        border: canDrop ? "1px dashed #9ACD32" : "1px solid #00000070",
+        background: isOver ? "#00000010" : undefined,
       }}
+      className="container"
     >
-      {Array.isArray(data) && data.length === 0 && <DragTip />}
+      {((Array.isArray(data) && data.length === 0) || canDrop) && <DragTip />}
       {data.map((box, index) => {
         return <Box color={box.color} key={index} />;
       })}
