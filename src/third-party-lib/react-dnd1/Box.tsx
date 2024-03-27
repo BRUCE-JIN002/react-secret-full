@@ -22,10 +22,8 @@ const Box: React.FC<BoxProps> = (props) => {
     },
   });
 
-  //自定义预览
-  // useEffect(() => {
-  //   dragPreview(getEmptyImage());
-  // }, []);
+  // 自定义预览时用
+  // dragPreview(getEmptyImage());
 
   drag(ref);
 
