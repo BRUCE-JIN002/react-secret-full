@@ -1,4 +1,4 @@
-import { CopyOutlined } from "@ant-design/icons";
+import { CopyOutlined, SkinOutlined } from "@ant-design/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
   anOldHope,
@@ -9,6 +9,8 @@ import {
 import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
 import { Select, message } from "antd";
 import { useState } from "react";
+import { getRandomColor } from "../utils";
+import Space from "../space/Space";
 
 const intialOption = [
   "anOldHope",
@@ -39,6 +41,7 @@ export const Code: React.FC<CodeProps> = (props) => {
   const [, copy] = useCopyToClipboard();
   const [messageApi, contextHolder] = message.useMessage();
   const [stateTheme, setTheme] = useState<string>("anOldHope");
+  const [stateColor, setColor] = useState<string>("#00b56d");
 
   const handleCopy = (text: string) => () => {
     copy(text)
@@ -67,7 +70,7 @@ export const Code: React.FC<CodeProps> = (props) => {
         border: "1px solid #00000050",
         borderRadius: 8,
         color: "#00000090",
-        backgroundColor: "#00b56d",
+        backgroundColor: stateColor,
       }}
     >
       <div
@@ -87,7 +90,12 @@ export const Code: React.FC<CodeProps> = (props) => {
       >
         {contextHolder}
         <div>{fileName}</div>
-        <div>
+        <Space size={8}>
+          <SkinOutlined
+            style={{ fontSize: 14, marginTop: 3 }}
+            title="换肤"
+            onClick={() => setColor(getRandomColor())}
+          />
           <Select
             showSearch
             size="small"
@@ -98,7 +106,7 @@ export const Code: React.FC<CodeProps> = (props) => {
               setTheme(value);
             }}
             style={{
-              border: "1px solid #00000050",
+              border: "1px solid #00000060",
               borderRadius: 4,
               height: 21,
             }}
@@ -109,7 +117,7 @@ export const Code: React.FC<CodeProps> = (props) => {
             <span style={{ margin: "0px 8px" }}>复制代码</span>
             <CopyOutlined />
           </span>
-        </div>
+        </Space>
       </div>
       <SyntaxHighlighter
         language="javascript"
