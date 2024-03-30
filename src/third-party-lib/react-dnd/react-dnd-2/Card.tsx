@@ -33,6 +33,7 @@ const Card: React.FC<CardProps> = (props) => {
       };
     },
   });
+
   const [, drop] = useDrop({
     accept: "card",
     hover: (item: DragData) => {
@@ -46,7 +47,7 @@ const Card: React.FC<CardProps> = (props) => {
 
   return (
     <div ref={ref} className={dragging ? "card dragging" : "card"}>
-      {data.content}
+      <span>{data.content}</span>
     </div>
   );
 };

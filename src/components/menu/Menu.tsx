@@ -37,6 +37,10 @@ export const enum ThirdParyLibrary {
   ThirdParyLib = "thirdParyLib",
   TailwindCss = "tailwindCss",
   ReactSpring = "reactSpring",
+  ReactSpring1 = "reactSpring1",
+  ReactSpring2 = "reactSpring2",
+  ReactSpring3 = "reactSpring3",
+  ReactSprings = "reactSprings",
   ReactDnd = "ReactDnd",
   ReactDnd1 = "ReactDnd1",
   ReactDnd2 = "ReactDnd2",
@@ -96,7 +100,12 @@ const items: MenuProps["items"] = [
 
   getItem("三方库", ThirdParyLibrary.ThirdParyLib, <SettingOutlined />, [
     getItem("Tailwind-css", ThirdParyLibrary.TailwindCss),
-    getItem("React-spring", ThirdParyLibrary.ReactSpring),
+    getItem("React-spring", ThirdParyLibrary.ReactSpring, "", [
+      getItem("单元素动画", ThirdParyLibrary.ReactSpring1),
+      getItem("多元素动画", ThirdParyLibrary.ReactSpring2),
+      getItem("复杂动画", ThirdParyLibrary.ReactSpring3),
+      getItem("综合应用", ThirdParyLibrary.ReactSprings),
+    ]),
     getItem("React-dnd", ThirdParyLibrary.ReactDnd, "", [
       getItem("普通拖拽", ThirdParyLibrary.ReactDnd1),
       getItem("进阶拖拽", ThirdParyLibrary.ReactDnd2),

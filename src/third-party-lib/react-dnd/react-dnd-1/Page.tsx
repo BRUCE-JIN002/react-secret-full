@@ -4,7 +4,7 @@ import TargetContainer from "./TargetContainer";
 import SourceContainer from "./SourceContainer";
 import { useEffect, useState } from "react";
 import { SwapOutlined } from "@ant-design/icons";
-import { uniqObjArr } from "../../components/utils";
+import { uniqObjArr } from "../../../components/utils";
 import { useLocalStorageState } from "ahooks";
 
 const AverageDndStorageKey = "average_DndStorage_Key";

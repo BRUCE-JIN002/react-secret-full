@@ -30,7 +30,7 @@ const Box: React.FC<BoxProps> = (props) => {
   return (
     <div
       ref={ref}
-      className={dragging ? "box dragging" : "box"}
+      className={dragging ? "dragbox dragging" : "dragbox"}
       style={{ background: color || "blue" }}
     />
   );
