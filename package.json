@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.0",
-    "@types/react-syntax-highlighter": "^15.5.11"
+    "@types/react-syntax-highlighter": "^15.5.11",
+    "@use-gesture/react": "^10.3.1"
   }
 }

@@ -35,8 +35,9 @@ const TargetContainer: React.FC<DataSource> = (props) => {
       ref={ref}
       className="container"
       style={{
-        border: canDrop ? "1px dashed #9ACD32" : "1px solid #00000070",
+        border: "1px solid #00000070",
         background: isOver ? "#00000010" : undefined,
+        boxShadow: canDrop ? "8px 8px 30px #00000070" : undefined,
       }}
     >
       {((Array.isArray(data) && data.length === 0) || canDrop) && <DragTip />}

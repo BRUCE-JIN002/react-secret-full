@@ -1,4 +1,8 @@
-import { CopyOutlined, SkinOutlined } from "@ant-design/icons";
+import {
+  CompressOutlined,
+  CopyOutlined,
+  SkinOutlined,
+} from "@ant-design/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
   anOldHope,
@@ -34,10 +38,11 @@ interface CodeProps {
   codeString: string;
   fileName?: string;
   width?: number | string;
+  onClick?: () => void;
 }
 
 export const Code: React.FC<CodeProps> = (props) => {
-  const { codeString, fileName, width = 900 } = props;
+  const { codeString, fileName, width = 900, onClick } = props;
   const [, copy] = useCopyToClipboard();
   const [messageApi, contextHolder] = message.useMessage();
   const [stateTheme, setTheme] = useState<string>("anOldHope");
@@ -71,6 +76,8 @@ export const Code: React.FC<CodeProps> = (props) => {
         borderRadius: 8,
         color: "#00000090",
         backgroundColor: stateColor,
+        width,
+        position: "relative",
       }}
     >
       <div
@@ -85,12 +92,16 @@ export const Code: React.FC<CodeProps> = (props) => {
           padding: "4px 12px",
           marginBottom: -10,
           cursor: "pointer",
-          width: width,
         }}
       >
         {contextHolder}
         <div>{fileName}</div>
-        <Space size={8}>
+        <Space size={12}>
+          <CompressOutlined
+            style={{ fontSize: 14, marginTop: 3 }}
+            title="查看示例"
+            onClick={onClick}
+          />
           <SkinOutlined
             style={{ fontSize: 14, marginTop: 3 }}
             title="换肤"
@@ -119,14 +130,16 @@ export const Code: React.FC<CodeProps> = (props) => {
           </span>
         </Space>
       </div>
-      <SyntaxHighlighter
-        language="javascript"
-        style={themeMap.get(stateTheme)}
-        showLineNumbers={true}
-        wrapLongLines={true}
-      >
-        {codeString}
-      </SyntaxHighlighter>
+      <div style={{ maxHeight: 600, overflow: "auto" }}>
+        <SyntaxHighlighter
+          language="javascript"
+          style={themeMap.get(stateTheme)}
+          showLineNumbers={true}
+          wrapLongLines={true}
+        >
+          {codeString}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 };

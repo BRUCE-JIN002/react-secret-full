@@ -44,6 +44,7 @@ export const enum ThirdParyLibrary {
   ReactDnd = "ReactDnd",
   ReactDnd1 = "ReactDnd1",
   ReactDnd2 = "ReactDnd2",
+  UseGesture = "useGesture",
 }
 
 const getItem = (
@@ -110,6 +111,7 @@ const items: MenuProps["items"] = [
       getItem("普通拖拽", ThirdParyLibrary.ReactDnd1),
       getItem("进阶拖拽", ThirdParyLibrary.ReactDnd2),
     ]),
+    getItem("use-gestrue", ThirdParyLibrary.UseGesture),
   ]),
 ];
 

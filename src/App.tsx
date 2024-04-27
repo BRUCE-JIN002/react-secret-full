@@ -20,6 +20,7 @@ import SpringBox1 from "./third-party-lib/react-spring/spring-1/SpringBox1";
 import SpringBox2 from "./third-party-lib/react-spring/spring-2/SpringBox2";
 import SpringBox3 from "./third-party-lib/react-spring/spring-3/SpringBox3";
 import Springs from "./third-party-lib/react-spring/springs/Springs";
+import Viewpager from "./third-party-lib/use-gestrue/GestureDemo";
 
 export interface PageState {
   currentPage: ComponentsType | HooksType | ThirdParyLibrary;
@@ -71,6 +72,8 @@ const App: FC = () => {
         {currentPage === ThirdParyLibrary.ReactSpring3 && <SpringBox3 />}
         {/* react-spring综合示例 */}
         {currentPage === ThirdParyLibrary.ReactSprings && <Springs />}
+        {/* UseGesture & react-spring 手势动画示例 */}
+        {currentPage === ThirdParyLibrary.UseGesture && <Viewpager />}
       </div>
     </div>
   );

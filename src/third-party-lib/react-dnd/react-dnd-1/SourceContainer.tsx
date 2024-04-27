@@ -33,8 +33,9 @@ const SourceContainer: React.FC<DataSource> = (props) => {
     <div
       ref={ref}
       style={{
-        border: canDrop ? "1px dashed #9ACD32" : "1px solid #00000070",
+        border: "1px solid #00000070",
         background: isOver ? "#00000010" : undefined,
+        boxShadow: canDrop ? "8px 8px 30px #00000070" : undefined,
       }}
       className="container"
     >
