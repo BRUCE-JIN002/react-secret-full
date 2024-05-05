@@ -31,6 +31,8 @@ export const enum ComponentsType {
   QRcode = "qrCode",
   Space = "space",
   CodeDemo = "codeDemo",
+  Popover = "popover",
+  Message = "message",
 }
 
 export const enum ThirdParyLibrary {
@@ -95,6 +97,8 @@ const items: MenuProps["items"] = [
     getItem("QRcode 二维码", ComponentsType.QRcode),
     getItem("Space 间距", ComponentsType.Space),
     getItem("Code 代码块", ComponentsType.CodeDemo),
+    getItem("Popover 气泡卡片", ComponentsType.Popover),
+    getItem("Message 全局提示", ComponentsType.Message),
   ]),
 
   { type: "divider" },

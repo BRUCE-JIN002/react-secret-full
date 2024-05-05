@@ -1,6 +1,6 @@
 import { animated, useSprings } from "@react-spring/web";
 import React, { useRef } from "react";
-import { useDrag, useGesture } from "@use-gesture/react";
+import { useDrag } from "@use-gesture/react";
 import "./styles.scss";
 import { useBoolean } from "ahooks";
 import ViewpagerCode from "./Codes";
@@ -54,10 +54,6 @@ const Viewpager: React.FC = () => {
     }
   );
 
-  const bind2 = useGesture({
-    onWheel: (state) => console.log(state.distance),
-  });
-
   return (
     <>
       {stateShowCode === false ? (
@@ -67,7 +63,6 @@ const Viewpager: React.FC = () => {
             <animated.div
               className="page"
               {...bind()}
-              {...bind2()}
               key={index}
               style={{ x }}
             >

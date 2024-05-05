@@ -8,7 +8,7 @@ import MenuList, {
 import { create } from "zustand";
 import CalendarDemo from "./components/calendar/CalendarDemo";
 import IconDemo from "./components/Icon/IconDemo";
-import MyQRcode from "./components/QRCode/QrCode";
+import MyQRcode from "./components/qrcode/QrCode";
 import SpaceDemo from "./components/space/SpaceDemo";
 import { CodeDemo } from "./components/code/CodeDemo";
 import { UseReducerCode } from "./react-hooks/useReducer/UseReducerCode";
@@ -21,6 +21,8 @@ import SpringBox2 from "./third-party-lib/react-spring/spring-2/SpringBox2";
 import SpringBox3 from "./third-party-lib/react-spring/spring-3/SpringBox3";
 import Springs from "./third-party-lib/react-spring/springs/Springs";
 import Viewpager from "./third-party-lib/use-gestrue/GestureDemo";
+import PopoverDemo from "./components/popover/PopoverDemo";
+import MessageDemo from "./components/message/MessageDemo";
 
 export interface PageState {
   currentPage: ComponentsType | HooksType | ThirdParyLibrary;
@@ -58,8 +60,12 @@ const App: FC = () => {
         {currentPage === ComponentsType.QRcode && <MyQRcode />}
         {/* Space组件 */}
         {currentPage === ComponentsType.Space && <SpaceDemo />}
-        {/* 代码示例 */}
+        {/* 代码块 */}
         {currentPage === ComponentsType.CodeDemo && <CodeDemo />}
+        {/* Popover */}
+        {currentPage === ComponentsType.Popover && <PopoverDemo />}
+        {/* Message */}
+        {currentPage === ComponentsType.Message && <MessageDemo />}
         {/* Dnd基础拖拽示例 */}
         {currentPage === ThirdParyLibrary.ReactDnd1 && <DndPage1 />}
         {/* Dnd进阶拖拽示例 */}
