@@ -3,6 +3,7 @@ import MinCalendarDemo from "./components/min-calendar/Demo";
 import MenuList, {
   ComponentsType,
   HooksType,
+  Projects,
   ThirdParyLibrary,
 } from "./components/menu/Menu";
 import { create } from "zustand";
@@ -23,16 +24,17 @@ import Springs from "./third-party-lib/react-spring/springs/Springs";
 import Viewpager from "./third-party-lib/use-gestrue/GestureDemo";
 import PopoverDemo from "./components/popover/PopoverDemo";
 import MessageDemo from "./components/message/MessageDemo";
+import TodoListDemo from "./ts-projects/dnd-todo-list/TodoListDemo";
 
+type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
-  currentPage: ComponentsType | HooksType | ThirdParyLibrary;
-  updateCurrentPage: (v: ComponentsType | HooksType | ThirdParyLibrary) => void;
+  currentPage: MenuKey;
+  updateCurrentPage: (v: MenuKey) => void;
 }
 
 export const useMenuStore = create<PageState>()((set) => ({
   currentPage: ComponentsType.MinCalendar,
-  updateCurrentPage: (value: ComponentsType | HooksType | ThirdParyLibrary) =>
-    set(() => ({ currentPage: value })),
+  updateCurrentPage: (value: MenuKey) => set(() => ({ currentPage: value })),
 }));
 
 const App: FC = () => {
@@ -80,6 +82,8 @@ const App: FC = () => {
         {currentPage === ThirdParyLibrary.ReactSprings && <Springs />}
         {/* UseGesture & react-spring 手势动画示例 */}
         {currentPage === ThirdParyLibrary.UseGesture && <Viewpager />}
+        {/* TodoList 综合实战 */}
+        {currentPage === Projects.TodoList && <TodoListDemo />}
       </div>
     </div>
   );
