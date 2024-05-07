@@ -32,6 +32,7 @@ export const Item: FC<ItemProps> = (props) => {
 
   return (
     <div
+      title="双击编辑"
       ref={ref}
       className={classNames(
         "h-[65px] border-[1px] border-[#e0e0e0] bg-blue-300 p-10 rounded-md",
@@ -69,9 +70,16 @@ export const Item: FC<ItemProps> = (props) => {
                 content: editingContent,
               });
             }}
+            onPressEnter={() => {
+              setIsEditing(false);
+              updateItem({
+                ...data,
+                content: editingContent,
+              });
+            }}
           />
         ) : (
-          data.content + data.id
+          data.content
         )}
       </p>
     </div>

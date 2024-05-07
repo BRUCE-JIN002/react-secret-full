@@ -34,6 +34,7 @@ export const enum ComponentsType {
   CodeDemo = "codeDemo",
   Popover = "popover",
   Message = "message",
+  OnBoarding = "onBoarding",
 }
 
 export const enum ThirdParyLibrary {
@@ -105,11 +106,12 @@ const items: MenuProps["items"] = [
     getItem("Code 代码块", ComponentsType.CodeDemo),
     getItem("Popover 气泡卡片", ComponentsType.Popover),
     getItem("Message 全局提示", ComponentsType.Message),
+    getItem("OnBoarding 漫游式引导", ComponentsType.OnBoarding),
   ]),
 
   { type: "divider" },
 
-  getItem("三方库", ThirdParyLibrary.ThirdParyLib, <SettingOutlined />, [
+  getItem("三方库", ThirdParyLibrary.ThirdParyLib, <ProductOutlined />, [
     getItem("Tailwind-css", ThirdParyLibrary.TailwindCss),
     getItem("React-spring", ThirdParyLibrary.ReactSpring, "", [
       getItem("单元素动画", ThirdParyLibrary.ReactSpring1),
@@ -126,7 +128,7 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
-  getItem("综合项目", Projects.Comprehesive, <ProductOutlined />, [
+  getItem("综合项目", Projects.Comprehesive, <SettingOutlined />, [
     getItem("TodoList", Projects.TodoList),
   ]),
 ];

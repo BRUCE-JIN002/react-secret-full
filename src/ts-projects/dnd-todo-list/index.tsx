@@ -14,9 +14,10 @@ export const TodoList: FC<TodoListProps> = (props) => {
       <div
         className={classNames(
           "w-1000 h-600 m-auto mt-100 p-10",
-          " border-[1px] border-[#ccc] rounded-lg",
-          " flex justify-between items-start"
+          "rounded-lg",
+          "flex justify-between items-start"
         )}
+        style={{ boxShadow: "5px 5px 50px 5px #e0e0e0" }}
       >
         <div
           className={classNames("flex-2 h-full mr-10 overflow-auto rounded-lg")}

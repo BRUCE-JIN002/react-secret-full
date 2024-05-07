@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC } from "react";
+import { CSSProperties, FC } from "react";
 import { Item } from "./Item";
 import { Gap } from "./Gap";
 import { useTodoListStore } from "../store";
@@ -7,6 +7,7 @@ import { animated, useTransition } from "@react-spring/web";
 
 interface ListProps {
   className?: string | string[];
+  style?: CSSProperties;
 }
 
 export const List: FC<ListProps> = (props) => {
@@ -21,7 +22,7 @@ export const List: FC<ListProps> = (props) => {
   });
 
   return (
-    <div className={cs}>
+    <div className={cs} style={props.style}>
       {list.length
         ? transitions((style, item) => {
             return (

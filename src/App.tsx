@@ -25,6 +25,7 @@ import Viewpager from "./third-party-lib/use-gestrue/GestureDemo";
 import PopoverDemo from "./components/popover/PopoverDemo";
 import MessageDemo from "./components/message/MessageDemo";
 import TodoListDemo from "./ts-projects/dnd-todo-list/TodoListDemo";
+import OnBoardingDemo from "./components/onBoarding/Demo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -68,6 +69,8 @@ const App: FC = () => {
         {currentPage === ComponentsType.Popover && <PopoverDemo />}
         {/* Message */}
         {currentPage === ComponentsType.Message && <MessageDemo />}
+        {/* OnBoarding */}
+        {currentPage === ComponentsType.OnBoarding && <OnBoardingDemo />}
         {/* Dnd基础拖拽示例 */}
         {currentPage === ThirdParyLibrary.ReactDnd1 && <DndPage1 />}
         {/* Dnd进阶拖拽示例 */}
