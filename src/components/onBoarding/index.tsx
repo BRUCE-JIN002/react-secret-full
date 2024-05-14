@@ -1,18 +1,23 @@
-import React, { FC, useEffect, useState } from "react";
+import React, {
+  ForwardRefRenderFunction,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 import { Button, Flex, Popover } from "antd";
 import { Mask } from "./Mask";
 import { TooltipPlacement } from "antd/es/tooltip";
 import { useMount } from "ahooks";
-import "./index.scss";
 import classNames from "classnames";
 import { CloseOutlined } from "@ant-design/icons";
+import "./index.scss";
 
 export interface OnBoardingStepConfig {
   placement?: TooltipPlacement;
   selector: () => HTMLElement | null;
-  beforeForward?: (currentStep: number) => void;
   beforeBack?: (currentStep: number) => void;
+  beforeForward?: (currentStep: number) => void;
   renderContent?: (currentStep: number) => React.ReactNode;
 }
 
@@ -23,7 +28,14 @@ export interface OnBoardingProps {
   getContainer?: () => HTMLElement;
 }
 
-const OnBoarding: FC<OnBoardingProps> = (props) => {
+export interface BoardingRef {
+  reStart(): void;
+}
+
+const OnBoarding: ForwardRefRenderFunction<BoardingRef, OnBoardingProps> = (
+  props,
+  ref
+) => {
   const { step = 0, steps, onStepsEnd, getContainer } = props;
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [done, setDone] = useState(false);
@@ -136,6 +148,18 @@ const OnBoarding: FC<OnBoardingProps> = (props) => {
     setRenderTick(1);
   });
 
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        reStart: () => {
+          console.log("useImperativeHandle: linkButton Clicked");
+        },
+      };
+    },
+    []
+  );
+
   if (!currentSelectedElement || done) {
     return null;
   }
@@ -153,4 +177,4 @@ const OnBoarding: FC<OnBoardingProps> = (props) => {
   return createPortal(mask, currentContainerElement);
 };
 
-export default OnBoarding;
+export default React.forwardRef(OnBoarding);
