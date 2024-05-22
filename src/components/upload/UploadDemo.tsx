@@ -29,10 +29,14 @@ const UploadDemo = () => {
   };
   return (
     <Upload {...props}>
-      <p>
-        <InboxOutlined style={{ fontSize: "50px" }} />
-      </p>
-      <span className="text-[12px]">点击或者拖拽文件到此处</span>
+      <div className="flex flex-col gap-[16px]">
+        <p>
+          <InboxOutlined style={{ fontSize: "50px", color: "#2b8ffa" }} />
+        </p>
+        <span className="text-[14px] font-medium">
+          Click or drag file to this area to upload
+        </span>
+      </div>
     </Upload>
   );
 };

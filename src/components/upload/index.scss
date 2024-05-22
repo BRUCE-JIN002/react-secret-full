@@ -56,15 +56,18 @@
 .upload-dragger {
   background: #eee;
   border: 1px dashed #aaa;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   padding: 20px;
-  width: 200px;
-  height: 100px;
+  width: 300px;
+  height: 150px;
   text-align: center;
 
   &.is-dragover {
     border: 1px dashed rgb(45, 183, 245);
     background: rgb(45, 183, 245, 0.3);
+  }
+  &:hover {
+    border: 1px dashed rgb(45, 183, 245);
   }
 }
