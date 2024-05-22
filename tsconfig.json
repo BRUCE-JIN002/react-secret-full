@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2016",
     "lib": ["dom", "dom.iterable", "esnext"],
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "allowJs": true,

@@ -35,6 +35,8 @@ export const enum ComponentsType {
   Popover = "popover",
   Message = "message",
   OnBoarding = "onBoarding",
+  Form = "form",
+  Upload = "upload",
 }
 
 export const enum ThirdParyLibrary {
@@ -107,6 +109,8 @@ const items: MenuProps["items"] = [
     getItem("Popover 气泡卡片", ComponentsType.Popover),
     getItem("Message 全局提示", ComponentsType.Message),
     getItem("OnBoarding 漫游式引导", ComponentsType.OnBoarding),
+    getItem("Form 表单组件", ComponentsType.Form),
+    getItem("Upload 拖拽上传", ComponentsType.Upload),
   ]),
 
   { type: "divider" },
@@ -135,11 +139,12 @@ const items: MenuProps["items"] = [
 
 const MenuList: React.FC = () => {
   const updateCurrentPage = useMenuStore((state) => state.updateCurrentPage);
+  const currentPage = useMenuStore((state) => state.currentPage);
 
   return (
     <Menu
       onClick={(e) => updateCurrentPage(e.key as ComponentsType | HooksType)}
-      defaultSelectedKeys={[ComponentsType.MinCalendar]}
+      defaultSelectedKeys={[currentPage as ComponentsType.MinCalendar]}
       defaultOpenKeys={[
         ComponentsType.ComponentsDemo,
         ThirdParyLibrary.ThirdParyLib,

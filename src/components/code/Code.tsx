@@ -13,7 +13,7 @@ import {
 import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
 import { Select, message } from "antd";
 import { useState } from "react";
-import { getRandomColor } from "../utils";
+import { getRandomColor } from "../../common/utils";
 import Space from "../space/Space";
 
 const intialOption = [

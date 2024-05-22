@@ -6,7 +6,7 @@ import MenuList, {
   Projects,
   ThirdParyLibrary,
 } from "./components/menu/Menu";
-import { create } from "zustand";
+import { StateCreator, create } from "zustand";
 import CalendarDemo from "./components/calendar/CalendarDemo";
 import IconDemo from "./components/Icon/IconDemo";
 import MyQRcode from "./components/qrcode/QrCode";
@@ -26,17 +26,27 @@ import PopoverDemo from "./components/popover/PopoverDemo";
 import MessageDemo from "./components/message/MessageDemo";
 import TodoListDemo from "./ts-projects/dnd-todo-list/TodoListDemo";
 import OnBoardingDemo from "./components/onBoarding/Demo";
+import FormDemo from "./components/form/FormDemo";
+import { persist } from "zustand/middleware";
+import UploadDemo from "./components/upload/UploadDemo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
-  currentPage: MenuKey;
+  currentPage?: MenuKey;
   updateCurrentPage: (v: MenuKey) => void;
 }
 
-export const useMenuStore = create<PageState>()((set) => ({
+const stateCreator: StateCreator<PageState> = (set) => ({
   currentPage: ComponentsType.MinCalendar,
   updateCurrentPage: (value: MenuKey) => set(() => ({ currentPage: value })),
-}));
+});
+
+export const useMenuStore = create<PageState>()(
+  persist(stateCreator, {
+    name: "menuList",
+    version: 1,
+  })
+);
 
 const App: FC = () => {
   const currentPage = useMenuStore((state) => state.currentPage);
@@ -53,6 +63,8 @@ const App: FC = () => {
         {currentPage === HooksType.UseReducer && <UseReducerCode />}
         {/* useContext */}
         {currentPage === HooksType.UseContext && <UseContextCode />}
+        {/**---------------------------------------------------- */}
+
         {/** 迷你日历 */}
         {currentPage === ComponentsType.MinCalendar && <MinCalendarDemo />}
         {/* 日历组件 */}
@@ -71,6 +83,12 @@ const App: FC = () => {
         {currentPage === ComponentsType.Message && <MessageDemo />}
         {/* OnBoarding */}
         {currentPage === ComponentsType.OnBoarding && <OnBoardingDemo />}
+        {/** Form */}
+        {currentPage === ComponentsType.Form && <FormDemo />}
+        {/** Upload */}
+        {currentPage === ComponentsType.Upload && <UploadDemo />}
+        {/**---------------------------------------------------- */}
+
         {/* Dnd基础拖拽示例 */}
         {currentPage === ThirdParyLibrary.ReactDnd1 && <DndPage1 />}
         {/* Dnd进阶拖拽示例 */}
@@ -85,6 +103,8 @@ const App: FC = () => {
         {currentPage === ThirdParyLibrary.ReactSprings && <Springs />}
         {/* UseGesture & react-spring 手势动画示例 */}
         {currentPage === ThirdParyLibrary.UseGesture && <Viewpager />}
+        {/**---------------------------------------------------- */}
+
         {/* TodoList 综合实战 */}
         {currentPage === Projects.TodoList && <TodoListDemo />}
       </div>

@@ -1,6 +1,7 @@
 {
   "name": "react-secret-full",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.3.1",
@@ -15,9 +16,14 @@
     "@types/react-dom": "^18.2.20",
     "ahooks": "^3.7.10",
     "antd": "^5.15.1",
+    "async-validator": "^4.2.5",
+    "axios": "^1.7.1",
     "classnames": "^2.5.1",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.10",
+    "express": "^4.19.2",
     "lodash": "^4.17.21",
+    "multer": "^1.4.5-lts.1",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

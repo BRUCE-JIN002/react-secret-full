@@ -1,0 +1,70 @@
+.upload-input {
+  display: inline-block;
+}
+.upload-file-input {
+  display: none;
+}
+
+.upload-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.upload-list-item {
+  margin-top: 5px;
+
+  font-size: 14px;
+  line-height: 2em;
+  font-weight: bold;
+
+  box-sizing: border-box;
+  width: 350px;
+
+  position: relative;
+
+  &-success {
+    color: #52c41a;
+  }
+
+  &-error {
+    color: red;
+  }
+
+  .file-name {
+    .anticon {
+      margin-right: 10px;
+    }
+  }
+
+  .file-actions {
+    display: none;
+
+    position: absolute;
+    right: 7px;
+    top: 0;
+
+    cursor: pointer;
+  }
+
+  &:hover {
+    .file-actions {
+      display: block;
+      color: #000;
+    }
+  }
+}
+.upload-dragger {
+  background: #eee;
+  border: 1px dashed #aaa;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 20px;
+  width: 200px;
+  height: 100px;
+  text-align: center;
+
+  &.is-dragover {
+    border: 1px dashed rgb(45, 183, 245);
+    background: rgb(45, 183, 245, 0.3);
+  }
+}
