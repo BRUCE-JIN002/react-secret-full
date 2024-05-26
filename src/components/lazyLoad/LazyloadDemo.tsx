@@ -1,15 +1,28 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import MyLazyload from ".";
 import { Skeleton } from "antd";
 
-const list: ReactNode[] = [];
+const nodeList: ReactNode[] = [];
 for (let i = 0; i < 100; i++) {
-  list.push(<p key={i}>xxxxxx占位符xxxxxxxxx</p>);
+  nodeList.push(<p key={i}>xxxxxx占位符xxxxxxxxx</p>);
 }
+
 export default function LazyloadDemo() {
+  const [imgUrl, setImgUrl] = useState<string>();
+
+  useEffect(() => {
+    const getImgData = () => {
+      return setTimeout(() => {
+        setImgUrl(
+          "https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        );
+      }, 3000);
+    };
+    getImgData();
+  }, []);
   return (
     <div>
-      {list.map((node) => node)}
+      {nodeList.map((node) => node)}
 
       <MyLazyload
         width={350}
@@ -19,13 +32,9 @@ export default function LazyloadDemo() {
           <Skeleton.Image active={true} style={{ height: 250, width: 350 }} />
         }
       >
-        <img
-          style={{ height: "100%", width: "100%" }}
-          src={
-            "https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-          }
-          alt=""
-        />
+        {imgUrl ? (
+          <img style={{ height: "100%", width: "100%" }} src={imgUrl} alt="" />
+        ) : null}
       </MyLazyload>
     </div>
   );
