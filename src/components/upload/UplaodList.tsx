@@ -5,6 +5,7 @@ import {
   CloseOutlined,
   DeleteOutlined,
   LoadingOutlined,
+  PaperClipOutlined,
 } from "@ant-design/icons";
 import "./index.scss";
 
@@ -39,22 +40,18 @@ export const UploadList: FC<UploadListProps> = (props) => {
               {(item.status === "uploading" || item.status === "ready") && (
                 <LoadingOutlined style={{ color: "#2b8ffa" }} />
               )}
-              {item.status === "success" && <CheckOutlined />}
-              {item.status === "error" && <CloseOutlined />}
+              {item.status === "success" && <PaperClipOutlined />}
+              {item.status === "error" && <PaperClipOutlined />}
               {item.name}
             </span>
             <span className="file-actions">
-              {item.status === "uploading" && (
-                <CloseOutlined
-                  title="取消"
-                  onClick={() => {
-                    onRemove(item);
-                  }}
-                />
-              )}
               {(item.status === "error" || item.status === "success") && (
                 <DeleteOutlined
-                  title="删除"
+                  title={
+                    item.status === "error" || item.status === "success"
+                      ? "删除"
+                      : "取消"
+                  }
                   onClick={() => {
                     onRemove(item);
                   }}

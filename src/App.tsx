@@ -1,5 +1,5 @@
 import { FC } from "react";
-import MinCalendarDemo from "./components/min-calendar/Demo";
+import MinCalendarDemo from "./components/miniCalendar/Demo";
 import MenuList, {
   ComponentsType,
   HooksType,
@@ -29,6 +29,7 @@ import OnBoardingDemo from "./components/onBoarding/Demo";
 import FormDemo from "./components/form/FormDemo";
 import { persist } from "zustand/middleware";
 import UploadDemo from "./components/upload/UploadDemo";
+import LazyloadDemo from "./components/lazyLoad/LazyloadDemo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -87,6 +88,8 @@ const App: FC = () => {
         {currentPage === ComponentsType.Form && <FormDemo />}
         {/** Upload */}
         {currentPage === ComponentsType.Upload && <UploadDemo />}
+        {/** Lazyload */}
+        {currentPage === ComponentsType.Lazyload && <LazyloadDemo />}
         {/**---------------------------------------------------- */}
 
         {/* Dnd基础拖拽示例 */}

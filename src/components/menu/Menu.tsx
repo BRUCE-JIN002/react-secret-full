@@ -37,6 +37,7 @@ export const enum ComponentsType {
   OnBoarding = "onBoarding",
   Form = "form",
   Upload = "upload",
+  Lazyload = "lazyload",
 }
 
 export const enum ThirdParyLibrary {
@@ -111,6 +112,7 @@ const items: MenuProps["items"] = [
     getItem("OnBoarding 漫游式引导", ComponentsType.OnBoarding),
     getItem("Form 表单组件", ComponentsType.Form),
     getItem("Upload 拖拽上传", ComponentsType.Upload),
+    getItem("Lazyload 懒加载", ComponentsType.Lazyload),
   ]),
 
   { type: "divider" },
