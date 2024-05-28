@@ -3,8 +3,6 @@ import { useSyncExternalStore } from "react";
 const createStore = (createState) => {
   let state;
   const listeners = new Set();
-  console.log("listeners:-----", listeners);
-  console.log("state:", state);
 
   const setState = (partial, replace) => {
     const nextState = typeof partial === "function" ? partial(state) : partial;
@@ -21,10 +19,6 @@ const createStore = (createState) => {
         state = nextState;
       }
       listeners.forEach((listener) => listener(state, previousState));
-      console.log(
-        "listener:",
-        listeners.forEach((listener) => listener(state, previousState))
-      );
     }
   };
 
@@ -32,7 +26,6 @@ const createStore = (createState) => {
 
   const subscribe = (listener) => {
     listeners.add(listener);
-    console.log("add listener", listener);
     return () => listeners.delete(listener);
   };
 
