@@ -21,7 +21,7 @@ export default function LazyloadDemo() {
     getImgData();
   }, []);
   return (
-    <div>
+    <div className="flex justify-center flex-col items-center">
       {nodeList.map((node) => node)}
 
       <MyLazyload

@@ -30,6 +30,7 @@ import FormDemo from "./components/form/FormDemo";
 import { persist } from "zustand/middleware";
 import UploadDemo from "./components/upload/UploadDemo";
 import LazyloadDemo from "./components/lazyLoad/LazyloadDemo";
+import TestZustand from "./zustand/TestZustand";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -89,7 +90,8 @@ const App: FC = () => {
         {/** Upload */}
         {currentPage === ComponentsType.Upload && <UploadDemo />}
         {/** Lazyload */}
-        {currentPage === ComponentsType.Lazyload && <LazyloadDemo />}
+        {/* {currentPage === ComponentsType.Lazyload && <LazyloadDemo />} */}
+        {currentPage === ComponentsType.Lazyload && <TestZustand />}
         {/**---------------------------------------------------- */}
 
         {/* Dnd基础拖拽示例 */}
