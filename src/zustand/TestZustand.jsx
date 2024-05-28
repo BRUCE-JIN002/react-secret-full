@@ -13,12 +13,10 @@ export default function TestZustand() {
   const updateBbb = useTestStore((state) => state.updateBbb);
   const aaa = useTestStore((state) => state.aaa);
   const bbb = useTestStore((state) => state.bbb);
-  const store = useTestStore((state) => state);
-
-  console.log("store", store);
 
   return (
     <div>
+      <div className="mb-[10px]">My Zustand Test</div>
       <Input onChange={(e) => updateAaa(e.currentTarget.value)} value={aaa} />
       <div className="h-[8px]" />
       <Input onChange={(e) => updateBbb(e.currentTarget.value)} value={bbb} />

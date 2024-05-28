@@ -90,8 +90,7 @@ const App: FC = () => {
         {/** Upload */}
         {currentPage === ComponentsType.Upload && <UploadDemo />}
         {/** Lazyload */}
-        {/* {currentPage === ComponentsType.Lazyload && <LazyloadDemo />} */}
-        {currentPage === ComponentsType.Lazyload && <TestZustand />}
+        {currentPage === ComponentsType.Lazyload && <LazyloadDemo />}
         {/**---------------------------------------------------- */}
 
         {/* Dnd基础拖拽示例 */}
@@ -108,6 +107,8 @@ const App: FC = () => {
         {currentPage === ThirdParyLibrary.ReactSprings && <Springs />}
         {/* UseGesture & react-spring 手势动画示例 */}
         {currentPage === ThirdParyLibrary.UseGesture && <Viewpager />}
+        {/** zustand 实现 */}
+        {currentPage === ThirdParyLibrary.Zustand && <TestZustand />}
         {/**---------------------------------------------------- */}
 
         {/* TodoList 综合实战 */}
