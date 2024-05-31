@@ -41,7 +41,7 @@ const SourceContainer: React.FC<DataSource> = (props) => {
     >
       {((Array.isArray(data) && data.length === 0) || canDrop) && <DragTip />}
       {data.map((box, index) => {
-        return <Box color={box.color} key={index} />;
+        return <Box color={box.color} key={index} id={box.id} />;
       })}
       <DragLayer />
     </div>

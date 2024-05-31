@@ -11,6 +11,7 @@ const AverageDndStorageKey = "average_DndStorage_Key";
 
 export interface ItemType {
   color: string;
+  id: number;
 }
 
 interface DndDataType {
@@ -18,12 +19,12 @@ interface DndDataType {
   target: ItemType[];
 }
 const initialColors = ["red", "gold", "skyblue", "yellowgreen", "purple"];
-const initialBoxs = initialColors.map(
-  (color) => ({ color: color } as ItemType)
+const initialBoxes = initialColors.map(
+  (color, index) => ({ color: color, id: index + 1 } as ItemType)
 );
 
 const initialState: DndDataType = {
-  source: initialBoxs,
+  source: initialBoxes,
   target: [],
 };
 
@@ -49,7 +50,7 @@ const DndPage1: React.FC = () => {
           onChange={(item) => {
             setBoxes((stateboxs) => ({
               source: uniqObjArr([...stateboxs.source, item], "color"),
-              target: stateboxs.target.filter((v) => v.color !== item.color),
+              target: stateboxs.target.filter((v) => v.id !== item.id),
             }));
           }}
         />
@@ -60,7 +61,7 @@ const DndPage1: React.FC = () => {
           data={localStorage?.target ?? stateboxs.target}
           onChange={(item) => {
             setBoxes((stateboxs) => ({
-              source: stateboxs.source.filter((v) => v.color !== item.color),
+              source: stateboxs.source.filter((v) => v.id !== item.id),
               target: uniqObjArr([...stateboxs.target, item], "color"),
             }));
           }}

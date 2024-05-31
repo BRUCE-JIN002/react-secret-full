@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import { useDrag } from "react-dnd";
 import "./index.scss";
+import { ItemType } from "./Page";
+import classNames from "classnames";
 
-interface BoxProps {
-  color: string;
-}
+interface BoxProps extends ItemType {}
 
 const Box: React.FC<BoxProps> = (props) => {
-  const { color } = props;
+  const { color, id } = props;
   const ref = useRef(null);
 
   const [{ dragging }, drag, dragPreview] = useDrag({
@@ -30,9 +30,14 @@ const Box: React.FC<BoxProps> = (props) => {
   return (
     <div
       ref={ref}
-      className={dragging ? "dragbox dragging" : "dragbox"}
-      style={{ background: color || "blue" }}
-    />
+      className={classNames(
+        "flex justify-center items-center",
+        dragging ? "dragbox dragging" : "dragbox"
+      )}
+      style={{ background: color || "blue", color: "#eee" }}
+    >
+      {id}
+    </div>
   );
 };
 
