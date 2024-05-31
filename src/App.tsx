@@ -31,6 +31,7 @@ import { persist } from "zustand/middleware";
 import UploadDemo from "./components/upload/UploadDemo";
 import LazyloadDemo from "./components/lazyLoad/LazyloadDemo";
 import TestZustand from "./zustand/TestZustand";
+import ClickToComponentDemo from "./third-party-lib/click-to-component";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -109,6 +110,10 @@ const App: FC = () => {
         {currentPage === ThirdParyLibrary.UseGesture && <Viewpager />}
         {/** zustand 实现 */}
         {currentPage === ThirdParyLibrary.Zustand && <TestZustand />}
+        {/** clickToComponent */}
+        {currentPage === ThirdParyLibrary.ToComponent && (
+          <ClickToComponentDemo />
+        )}
         {/**---------------------------------------------------- */}
 
         {/* TodoList 综合实战 */}

@@ -3,7 +3,7 @@ import Box from "./Box";
 import { DropTargetMonitor, useDrop } from "react-dnd";
 import "./index.scss";
 import DragTip from "./DragTips";
-import { ItemType } from "./Page";
+import { ItemType } from "../Page";
 import DragLayer from "./DragLayout";
 
 interface DataSource {

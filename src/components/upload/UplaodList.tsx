@@ -1,8 +1,6 @@
 import { FC } from "react";
 import { Progress } from "antd";
 import {
-  CheckOutlined,
-  CloseOutlined,
   DeleteOutlined,
   LoadingOutlined,
   PaperClipOutlined,

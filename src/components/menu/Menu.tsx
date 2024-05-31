@@ -53,6 +53,7 @@ export const enum ThirdParyLibrary {
   ReactDnd2 = "ReactDnd2",
   UseGesture = "useGesture",
   Zustand = "zustand",
+  ToComponent = "toComponent",
 }
 
 export const enum Projects {
@@ -132,6 +133,7 @@ const items: MenuProps["items"] = [
     ]),
     getItem("use-gestrue", ThirdParyLibrary.UseGesture),
     getItem("my-zustand", ThirdParyLibrary.Zustand),
+    getItem("click-to-component", ThirdParyLibrary.ToComponent),
   ]),
 
   { type: "divider" },

@@ -1,7 +1,7 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import TargetContainer from "./TargetContainer";
-import SourceContainer from "./SourceContainer";
+import TargetContainer from "./components/TargetContainer";
+import SourceContainer from "./components/SourceContainer";
 import { useEffect, useState } from "react";
 import { SwapOutlined } from "@ant-design/icons";
 import { uniqObjArr } from "../../../common/utils";
