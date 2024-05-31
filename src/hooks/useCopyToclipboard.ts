@@ -1,11 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef } from "react";
 
 type CopiedValue = string | null;
 
 type CopyFn = (text: string) => Promise<boolean>;
 
-export function useCopyToClipboard(): [CopiedValue, CopyFn] {
-  const [copiedText, setCopiedText] = useState<CopiedValue>(null);
+type useCopyToClipboardType = () => [CopiedValue, CopyFn];
+
+export const useCopyToClipboard: useCopyToClipboardType = () => {
+  const copiedTextRef = useRef<string | null>(null);
 
   const copy: CopyFn = useCallback(async (text) => {
     if (!navigator?.clipboard) {
@@ -16,14 +18,15 @@ export function useCopyToClipboard(): [CopiedValue, CopyFn] {
     // Try to save to clipboard then save it in the state if worked
     try {
       await navigator.clipboard.writeText(text);
-      setCopiedText(text);
+      copiedTextRef.current = text;
       return true;
     } catch (error) {
       console.warn("Copy failed", error);
-      setCopiedText(null);
+      copiedTextRef.current = null;
+
       return false;
     }
   }, []);
 
-  return [copiedText, copy];
-}
+  return [copiedTextRef.current, copy];
+};

@@ -16,7 +16,7 @@ export default function LazyloadDemo() {
         setImgUrl(
           "https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
         );
-      }, 3000);
+      }, 1500);
     };
     getImgData();
   }, []);
