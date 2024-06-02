@@ -103,6 +103,13 @@ export const Upload: FC<UploadProps> = (props) => {
     });
   };
 
+  // 创建 CancelToken 实例
+  const source = axios.CancelToken.source();
+
+  const cancelRequest = () => {
+    source.cancel("canceld!!!");
+  };
+
   const post = (file: File) => {
     let uploadFile: UploadFile = {
       uid: Date.now() + "upload-file",
@@ -131,6 +138,7 @@ export const Upload: FC<UploadProps> = (props) => {
           ...headers,
           "Content-Type": "multipart/form-data",
         },
+        cancelToken: source.token,
         withCredentials,
         onUploadProgress: (e) => {
           let percentage = Math.round((e.loaded * 100) / e.total!) || 0;
@@ -153,6 +161,10 @@ export const Upload: FC<UploadProps> = (props) => {
         onChange?.(file);
       })
       .catch((err) => {
+        if (axios.isCancel(err)) {
+          // 如果请求被取消，这里可以进行相应的处理
+          console.log("Request canceled:", err.message);
+        }
         updateFileList(uploadFile, { status: "error", error: err });
 
         onError?.(err, file);
@@ -174,7 +186,11 @@ export const Upload: FC<UploadProps> = (props) => {
         />
       </div>
 
-      <UploadList fileList={fileList} onRemove={handleRemove} />
+      <UploadList
+        fileList={fileList}
+        onRemove={handleRemove}
+        onCancel={cancelRequest}
+      />
     </div>
   );
 };

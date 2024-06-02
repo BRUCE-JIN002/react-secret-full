@@ -38,6 +38,7 @@ export const enum ComponentsType {
   Form = "form",
   Upload = "upload",
   Lazyload = "lazyload",
+  CountDown = "countDown",
 }
 
 export const enum ThirdParyLibrary {
@@ -103,6 +104,7 @@ const items: MenuProps["items"] = [
   { type: "divider" },
 
   getItem("组件示例", ComponentsType.ComponentsDemo, <AppstoreOutlined />, [
+    getItem("倒计时", ComponentsType.CountDown),
     getItem("MinCalendar 迷你日历", ComponentsType.MinCalendar),
     getItem("Calendar 日历", ComponentsType.Calendar),
     getItem("Icon 图标", ComponentsType.Icon),

@@ -13,8 +13,8 @@ const props: UploadProps = {
     }
     return true;
   },
-  onSuccess(ret) {
-    console.log("onSuccess", ret);
+  onSuccess(res) {
+    console.log("onSuccess", res);
   },
   onError(err) {
     console.log("onError", err);

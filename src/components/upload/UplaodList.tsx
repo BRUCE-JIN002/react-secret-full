@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Progress } from "antd";
 import {
+  CloseCircleFilled,
   DeleteOutlined,
   LoadingOutlined,
   PaperClipOutlined,
@@ -21,10 +22,11 @@ export interface UploadFile {
 interface UploadListProps {
   fileList: UploadFile[];
   onRemove: (file: UploadFile) => void;
+  onCancel?: () => void;
 }
 
 export const UploadList: FC<UploadListProps> = (props) => {
-  const { fileList, onRemove } = props;
+  const { fileList, onRemove, onCancel } = props;
 
   return (
     <ul className="upload-list">
@@ -45,12 +47,19 @@ export const UploadList: FC<UploadListProps> = (props) => {
             <span className="file-actions">
               {(item.status === "error" || item.status === "success") && (
                 <DeleteOutlined
-                  title={
-                    item.status === "error" || item.status === "success"
-                      ? "删除"
-                      : "取消"
-                  }
+                  className="text-[#747373]"
+                  title={"删除"}
                   onClick={() => {
+                    onRemove(item);
+                  }}
+                />
+              )}
+              {(item.status === "uploading" || item.status === "ready") && (
+                <CloseCircleFilled
+                  className="text-[#2d2c2c]"
+                  title="取消"
+                  onClick={() => {
+                    onCancel?.();
                     onRemove(item);
                   }}
                 />

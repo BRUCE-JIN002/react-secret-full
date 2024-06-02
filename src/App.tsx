@@ -32,6 +32,7 @@ import UploadDemo from "./components/upload/UploadDemo";
 import LazyloadDemo from "./components/lazyLoad/LazyloadDemo";
 import TestZustand from "./zustand/TestZustand";
 import ClickToComponentDemo from "./third-party-lib/click-to-component";
+import CountDemo from "./components/countDown";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -68,6 +69,8 @@ const App: FC = () => {
         {currentPage === HooksType.UseContext && <UseContextCode />}
         {/**---------------------------------------------------- */}
 
+        {/** 倒计时 */}
+        {currentPage === ComponentsType.CountDown && <CountDemo />}
         {/** 迷你日历 */}
         {currentPage === ComponentsType.MinCalendar && <MinCalendarDemo />}
         {/* 日历组件 */}
