@@ -74,61 +74,56 @@ export const Code: React.FC<CodeProps> = (props) => {
       style={{
         border: "1px solid #00000050",
         borderRadius: 8,
+        paddingBottom: 8,
         color: "#00000090",
         backgroundColor: stateColor,
-        width,
         position: "relative",
+        width,
       }}
     >
+      {contextHolder}
       <div
         style={{
-          fontSize: 12,
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingRight: 8,
           height: 16,
-          gap: 10,
-          padding: "4px 12px",
-          marginBottom: -10,
-          cursor: "pointer",
+          fontSize: 12,
+          alignItems: "center",
+          gap: 8,
+          margin: 4,
         }}
       >
-        {contextHolder}
-        <div>{fileName}</div>
-        <Space size={12}>
-          <CompressOutlined
-            style={{ fontSize: 14, marginTop: 3 }}
-            title="查看示例"
-            onClick={onClick}
-          />
-          <SkinOutlined
-            style={{ fontSize: 14, marginTop: 3 }}
-            title="换肤"
-            onClick={() => setColor(getRandomColor())}
-          />
-          <Select
-            showSearch
-            size="small"
-            defaultValue={stateTheme}
-            placeholder="Select a person"
-            optionFilterProp="children"
-            onChange={(value) => {
-              setTheme(value);
-            }}
-            style={{
-              border: "1px solid #00000060",
-              borderRadius: 4,
-              height: 21,
-            }}
-            filterOption={filterOption}
-            options={getSelectOptions()}
-          />
-          <span onClick={handleCopy(codeString)}>
-            <span style={{ margin: "0px 8px" }}>复制代码</span>
-            <CopyOutlined />
-          </span>
-        </Space>
+        <div style={{ marginRight: "auto" }}> {fileName}</div>
+        <CompressOutlined
+          style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+          title="查看示例"
+          onClick={onClick}
+        />
+        <SkinOutlined
+          style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+          title="换肤"
+          onClick={() => setColor(getRandomColor())}
+        />
+        <Select
+          showSearch
+          size="small"
+          defaultValue={stateTheme}
+          placeholder="Select a person"
+          optionFilterProp="children"
+          onChange={(value) => {
+            setTheme(value);
+          }}
+          style={{
+            border: "1px solid #00000060",
+            borderRadius: 4,
+            height: 21,
+          }}
+          filterOption={filterOption}
+          options={getSelectOptions()}
+        />
+        <span onClick={handleCopy(codeString)}>
+          <span style={{ margin: "0px 8px", cursor: "pointer" }}>复制代码</span>
+          <CopyOutlined />
+        </span>
       </div>
       <div style={{ maxHeight: 600, overflow: "auto" }}>
         <SyntaxHighlighter
