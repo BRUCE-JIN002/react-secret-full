@@ -1,6 +1,8 @@
 import {
   CompressOutlined,
   CopyOutlined,
+  ExpandOutlined,
+  EyeInvisibleOutlined,
   SkinOutlined,
 } from "@ant-design/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -14,7 +16,7 @@ import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
 import { Select, message } from "antd";
 import { useState } from "react";
 import { getRandomColor } from "../../common/utils";
-import Space from "../space/Space";
+import { useToggle } from "ahooks";
 
 const intialOption = [
   "anOldHope",
@@ -47,6 +49,7 @@ export const Code: React.FC<CodeProps> = (props) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [stateTheme, setTheme] = useState<string>("anOldHope");
   const [stateColor, setColor] = useState<string>("#00b56d");
+  const [isFullScreen, setIsFullScreen] = useToggle<boolean>(false);
 
   const handleCopy = (text: string) => () => {
     copy(text)
@@ -75,10 +78,10 @@ export const Code: React.FC<CodeProps> = (props) => {
         border: "1px solid #00000050",
         borderRadius: 8,
         paddingBottom: 8,
-        color: "#00000090",
+        color: "rgba(0,0,0, 0.75)",
         backgroundColor: stateColor,
         position: "relative",
-        width,
+        width: isFullScreen ? "100%" : width,
       }}
     >
       {contextHolder}
@@ -92,12 +95,27 @@ export const Code: React.FC<CodeProps> = (props) => {
           margin: 4,
         }}
       >
-        <div style={{ marginRight: "auto" }}> {fileName}</div>
-        <CompressOutlined
-          style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-          title="查看示例"
-          onClick={onClick}
-        />
+        <div style={{ marginRight: "auto" }}>{fileName}</div>
+        {onClick && (
+          <EyeInvisibleOutlined
+            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+            title="收起代码"
+            onClick={onClick}
+          />
+        )}
+        {isFullScreen ? (
+          <CompressOutlined
+            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+            title="退出全屏"
+            onClick={() => setIsFullScreen.toggle()}
+          />
+        ) : (
+          <ExpandOutlined
+            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+            title="全屏查看"
+            onClick={() => setIsFullScreen.toggle()}
+          />
+        )}
         <SkinOutlined
           style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
           title="换肤"
@@ -125,7 +143,7 @@ export const Code: React.FC<CodeProps> = (props) => {
           <CopyOutlined />
         </span>
       </div>
-      <div style={{ maxHeight: 600, overflow: "auto" }}>
+      <div style={{ maxHeight: "calc(100vh - 50px)", overflow: "auto" }}>
         <SyntaxHighlighter
           language="javascript"
           style={themeMap.get(stateTheme)}
