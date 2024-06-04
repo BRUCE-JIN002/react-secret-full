@@ -33,6 +33,7 @@ import LazyloadDemo from "./components/lazyLoad/LazyloadDemo";
 import TestZustand from "./zustand/TestZustand";
 import ClickToComponentDemo from "./third-party-lib/click-to-component";
 import CountDemo from "./components/countDown";
+import WatermarkDemo from "./components/watermark/WatermarkDemo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -79,6 +80,8 @@ const App: FC = () => {
         {currentPage === ComponentsType.Icon && <IconDemo />}
         {/* 二维码组件 */}
         {currentPage === ComponentsType.QRcode && <MyQRcode />}
+        {/** 水印组件 */}
+        {currentPage === ComponentsType.Watermark && <WatermarkDemo />}
         {/* Space组件 */}
         {currentPage === ComponentsType.Space && <SpaceDemo />}
         {/* 代码块 */}

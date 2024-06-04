@@ -39,6 +39,7 @@ export const enum ComponentsType {
   Upload = "upload",
   Lazyload = "lazyload",
   CountDown = "countDown",
+  Watermark = "watermark",
 }
 
 export const enum ThirdParyLibrary {
@@ -109,6 +110,7 @@ const items: MenuProps["items"] = [
     getItem("Calendar 日历", ComponentsType.Calendar),
     getItem("Icon 图标", ComponentsType.Icon),
     getItem("QRcode 二维码", ComponentsType.QRcode),
+    getItem("Watermark 水印 ", ComponentsType.Watermark),
     getItem("Space 间距", ComponentsType.Space),
     getItem("Code 代码块", ComponentsType.CodeDemo),
     getItem("Popover 气泡卡片", ComponentsType.Popover),

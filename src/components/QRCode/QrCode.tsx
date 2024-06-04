@@ -1,5 +1,5 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, QRCode, Watermark } from "antd";
+import { Button, QRCode } from "antd";
 import React, { useState } from "react";
 
 const MyQRcode: React.FC = () => {
@@ -25,63 +25,60 @@ const MyQRcode: React.FC = () => {
     });
   };
   return (
-    <Watermark
-      content="Wifi Password"
-      style={{ height: "100%", width: "100%" }}
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
+      <QRCode
+        errorLevel="H"
+        size={size}
+        iconSize={size / 4}
+        value="WIFI:T:WPA;P:pnkzcv7s;S:ChinaNet-FaxU;H:false;"
+        color="#07c941"
+      />
       <div
         style={{
           position: "absolute",
-          inset: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
+          borderLeft: "1px solid #efefef",
+          padding: "0px 8px",
+          width: 190,
+          backgroundColor: "#fff",
+          zIndex: 99,
         }}
       >
-        <QRCode
-          errorLevel="H"
-          size={size}
-          iconSize={size / 4}
-          value="WIFI:T:WPA;P:pnkzcv7s;S:ChinaNet-FaxU;H:false;"
-          color="#07c941"
-        />
-        <div
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            display: "flex",
-            alignItems: "center",
-            borderLeft: "1px solid #efefef",
-            padding: "0px 8px",
-            width: 190,
-            backgroundColor: "#fff",
-            zIndex: 99,
-          }}
-        >
-          <span style={{ fontSize: 14 }}>大小：</span>
-          <Button.Group>
-            <Button
-              size="small"
-              type="primary"
-              onClick={decline}
-              disabled={size <= 200}
-              icon={<MinusOutlined />}
-              style={{ width: 45 }}
-            />
-            <Button
-              type="primary"
-              size="small"
-              onClick={increase}
-              disabled={size >= 600}
-              icon={<PlusOutlined />}
-              style={{ width: 45 }}
-            />
-          </Button.Group>
-        </div>
+        <span style={{ fontSize: 14 }}>大小：</span>
+        <Button.Group>
+          <Button
+            size="small"
+            type="primary"
+            onClick={decline}
+            disabled={size <= 200}
+            icon={<MinusOutlined />}
+            style={{ width: 45 }}
+          />
+          <Button
+            type="primary"
+            size="small"
+            onClick={increase}
+            disabled={size >= 600}
+            icon={<PlusOutlined />}
+            style={{ width: 45 }}
+          />
+        </Button.Group>
       </div>
-    </Watermark>
+    </div>
   );
 };
 
