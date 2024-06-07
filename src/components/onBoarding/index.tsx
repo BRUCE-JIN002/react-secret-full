@@ -12,6 +12,7 @@ import { useMount } from "ahooks";
 import classNames from "classnames";
 import { CloseOutlined } from "@ant-design/icons";
 import "./index.scss";
+import useUpdate from "../../hooks/useUpdate";
 
 export interface OnBoardingStepConfig {
   placement?: TooltipPlacement;
@@ -47,28 +48,28 @@ const OnBoarding: ForwardRefRenderFunction<BoardingRef, OnBoardingProps> = (
     return steps[currentStep];
   };
 
-  const back = async () => {
+  const back = () => {
     if (currentStep === 0) {
       return;
     }
     const { beforeBack } = getCurrentStep();
-    await beforeBack?.(currentStep);
+    beforeBack?.(currentStep);
     setCurrentStep(currentStep - 1);
   };
 
-  const forward = async () => {
+  const forward = () => {
     if (currentStep === steps.length - 1) {
-      await onStepsEnd?.();
+      onStepsEnd?.();
       setDone(true);
       return;
     }
     const { beforeForward } = getCurrentStep();
-    await beforeForward?.(currentStep);
+    beforeForward?.(currentStep);
     setCurrentStep(currentStep + 1);
   };
 
-  const terminate = async () => {
-    await onStepsEnd?.();
+  const terminate = () => {
+    onStepsEnd?.();
     setDone(true);
     return;
   };
@@ -86,20 +87,22 @@ const OnBoarding: ForwardRefRenderFunction<BoardingRef, OnBoardingProps> = (
     const { renderContent } = config;
     const content = renderContent ? renderContent(currentStep) : null;
 
-    const indicator = () =>
+    const stepIndicator = () =>
       steps.map((step, index) => (
         <div
           key={index}
           className={classNames(
             "rounded-full h-[6px] w-[6px] bg-[#e0e0e0] ml-[6px]",
-            index === currentStep ? " bg-blue-400" : ""
+            { "bg-blue-400": index === currentStep }
           )}
         />
       ));
 
     const operation = (
       <div className="onboarding-operation">
-        <div className="flex justify-around items-center">{indicator()}</div>
+        <div className="flex justify-around items-center">
+          {stepIndicator()}
+        </div>
         <div>
           {currentStep !== 0 && (
             <Button size="small" onClick={() => back()}>
@@ -142,11 +145,9 @@ const OnBoarding: ForwardRefRenderFunction<BoardingRef, OnBoardingProps> = (
     );
   };
 
-  const [, setRenderTick] = useState<number>(0);
+  const updateFn = useUpdate();
 
-  useMount(() => {
-    setRenderTick(1);
-  });
+  useMount(updateFn);
 
   useImperativeHandle(
     ref,

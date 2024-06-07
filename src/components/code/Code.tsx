@@ -25,7 +25,7 @@ const intialOption = [
   "hopscotch",
 ];
 
-const themeMap = new Map<string, { [key: string]: React.CSSProperties }>([
+const themeMap = new Map<string, Record<string, React.CSSProperties>>([
   ["anOldHope", anOldHope],
   ["hopscotch", hopscotch],
   ["gradientDark", gradientDark],
@@ -35,7 +35,6 @@ const themeMap = new Map<string, { [key: string]: React.CSSProperties }>([
 const getSelectOptions = () =>
   intialOption.map((theme) => ({ label: theme, value: theme }));
 
-getSelectOptions();
 interface CodeProps {
   codeString: string;
   fileName?: string;
@@ -81,7 +80,9 @@ export const Code: React.FC<CodeProps> = (props) => {
         color: "rgba(0,0,0, 0.75)",
         backgroundColor: stateColor,
         position: "relative",
-        width: isFullScreen ? "100%" : width,
+        width: isFullScreen ? "98%" : width,
+        maxHeight: "calc(100vh - 10px)",
+        transition: "all 0.3s ease-in-out",
       }}
     >
       {contextHolder}

@@ -1,7 +1,6 @@
 import React from "react";
 import { Code } from "../../components/code/Code";
 import { useStateFuncUpdateCode, useStateCode } from "./codeSnippet";
-import Space from "../../components/space/Space";
 
 export const UseStateCode: React.FC = () => {
   return (
@@ -11,13 +10,14 @@ export const UseStateCode: React.FC = () => {
         width: "100%",
         overflow: "auto",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
+        placeItems: "center",
+        gap: 20,
+        padding: 10,
       }}
     >
-      <Space direction="vertical" size={20} style={{ padding: "20px 0px" }}>
-        <Code codeString={useStateCode} fileName="App.tsx" />
-        <Code codeString={useStateFuncUpdateCode} fileName="App.tsx" />
-      </Space>
+      <Code codeString={useStateCode} fileName="App.tsx" />
+      <Code codeString={useStateFuncUpdateCode} fileName="App.tsx" />
     </div>
   );
 };

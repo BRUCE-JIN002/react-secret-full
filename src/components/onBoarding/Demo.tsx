@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Flex, FloatButton } from "antd";
 import OnBoarding, { BoardingRef } from "./index";
-import "./index.scss";
 import { useToggle } from "ahooks";
+import "./index.scss";
 
 const OnBoardingDemo: React.FC = () => {
   const restartRef = React.useRef<BoardingRef>(null);
