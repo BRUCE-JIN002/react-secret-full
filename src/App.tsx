@@ -34,6 +34,7 @@ import TestZustand from "./zustand/TestZustand";
 import ClickToComponentDemo from "./third-party-lib/click-to-component";
 import CountDemo from "./components/countDown";
 import WatermarkDemo from "./components/watermark/WatermarkDemo";
+import SlidInOverlayDemo from "./components/slideInOverlay/SlidInOverlayDemo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -98,6 +99,8 @@ const App: FC = () => {
         {currentPage === ComponentsType.Upload && <UploadDemo />}
         {/** Lazyload */}
         {currentPage === ComponentsType.Lazyload && <LazyloadDemo />}
+        {/** SlidInOverlay */}
+        {currentPage === ComponentsType.SlidInOverlay && <SlidInOverlayDemo />}
         {/**---------------------------------------------------- */}
 
         {/* Dnd基础拖拽示例 */}
