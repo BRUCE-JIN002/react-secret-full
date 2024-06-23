@@ -1,0 +1,114 @@
+$bg-linear-gradien-red-light: linear-gradient(135deg, #fc4838 0%, #f6346b 100%);
+$bg-linear-gradien-red-dark: linear-gradient(135deg, #fc4838 0%, #f6346b 100%);
+
+.constrol {
+  padding: 30px;
+  width: 500px;
+  border: 1px solid #ccc;
+  height: 200px;
+}
+
+.feel {
+  padding: 24px;
+}
+
+.model_top {
+  height: 40px;
+  border-radius: 5px 5px 0 0;
+  position: relative;
+  p {
+    height: 40px;
+    font-weight: bold;
+    line-height: 40px;
+    padding-left: 14px;
+  }
+  background-color: #eee;
+  .model_top_close {
+    position: absolute;
+    font-size: 16px;
+    cursor: pointer;
+    right: 24px;
+    top: 8px;
+  }
+}
+
+.model_bottom {
+  height: 50px;
+  padding-top: 10px;
+  .model_btn_box {
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.model_container {
+  .model_wrap {
+    position: absolute;
+    border-radius: 5px;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  transition: opacity 0.3s;
+  right: 0;
+  bottom: 0;
+}
+
+.mast {
+  background-color: #000;
+  z-index: 9999;
+}
+
+.searchbtn {
+  background: $bg-linear-gradien-red-light;
+  color: #fff;
+  min-width: 96px;
+  height: 36px;
+  border: none;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 20px !important;
+  &:focus {
+    background: $bg-linear-gradien-red-dark;
+    box-shadow: 0 2px 7px 0 #faa79b;
+  }
+  &:hover {
+    background: $bg-linear-gradien-red-light;
+    box-shadow: 0 2px 7px 0 #faa79b;
+  }
+  &:disabled {
+    background: #c0c6c6;
+    cursor: not-allowed;
+  }
+}
+
+.concellbtn {
+  background: #fff;
+  color: #303133;
+  width: 96px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e4e7ed;
+  border-radius: 18px;
+  cursor: pointer;
+  margin-left: 10px;
+  &:hover {
+    background: rgba(220, 223, 230, 0.1);
+    border-color: #e4e7ed;
+  }
+  &:focus {
+    background: rgba(220, 223, 230, 0.24);
+    border-color: #c0c4cc;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}

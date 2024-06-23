@@ -1,6 +1,6 @@
 // Import necessary dependencies
 import { renderHook } from "@testing-library/react";
-import { useEventListener } from "./useEventListener";
+import useEventListener from "./index";
 
 describe("useEventListener", () => {
   it("should add and remove event listener correctly", () => {

@@ -35,6 +35,7 @@ import ClickToComponentDemo from "./third-party-lib/click-to-component";
 import CountDemo from "./components/countDown";
 import WatermarkDemo from "./components/watermark/WatermarkDemo";
 import SlidInOverlayDemo from "./components/slideInOverlay/SlidInOverlayDemo";
+import ModalDemo from "./components/modal/ModalDemo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -101,6 +102,9 @@ const App: FC = () => {
         {currentPage === ComponentsType.Lazyload && <LazyloadDemo />}
         {/** SlidInOverlay */}
         {currentPage === ComponentsType.SlidInOverlay && <SlidInOverlayDemo />}
+        {/** Modal */}
+        {currentPage === ComponentsType.Modal && <ModalDemo />}
+
         {/**---------------------------------------------------- */}
 
         {/* Dnd基础拖拽示例 */}

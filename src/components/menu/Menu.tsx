@@ -41,6 +41,7 @@ export const enum ComponentsType {
   CountDown = "countDown",
   Watermark = "watermark",
   SlidInOverlay = "slidInOverlay",
+  Modal = "modal",
 }
 
 export const enum ThirdParyLibrary {
@@ -121,6 +122,7 @@ const items: MenuProps["items"] = [
     getItem("Upload 拖拽上传", ComponentsType.Upload),
     getItem("Lazyload 懒加载", ComponentsType.Lazyload),
     getItem("SlideInoverlay 转场动画", ComponentsType.SlidInOverlay),
+    getItem("Modal 模态框", ComponentsType.Modal),
   ]),
 
   { type: "divider" },
