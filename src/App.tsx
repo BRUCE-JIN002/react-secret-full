@@ -36,6 +36,7 @@ import CountDemo from "./components/countDown";
 import WatermarkDemo from "./components/watermark/WatermarkDemo";
 import SlidInOverlayDemo from "./components/slideInOverlay/SlidInOverlayDemo";
 import ModalDemo from "./components/modal/ModalDemo";
+import CheckCardDemo from "./components/checkCard/CheckCardDemo";
 
 type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -104,6 +105,8 @@ const App: FC = () => {
         {currentPage === ComponentsType.SlidInOverlay && <SlidInOverlayDemo />}
         {/** Modal */}
         {currentPage === ComponentsType.Modal && <ModalDemo />}
+        {/** CheckCard */}
+        {currentPage === ComponentsType.CheckCard && <CheckCardDemo />}
 
         {/**---------------------------------------------------- */}
 
