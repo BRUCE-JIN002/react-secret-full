@@ -114,7 +114,7 @@ function Test() {
             });
           }}
         >
-          Info
+          Infomation
         </Button>
       </AntConfigProvider>
       <AntConfigProvider
