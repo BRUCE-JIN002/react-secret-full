@@ -46,7 +46,7 @@ const Basic: React.FC = () => {
           type="primary"
           size="small"
           htmlType="submit"
-          className="w-full mt-8"
+          className="w-full mt-8 h-[32px]"
         >
           登录
         </Button>

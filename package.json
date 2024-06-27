@@ -72,6 +72,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@ctrl/tinycolor": "^4.1.0",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.0",
     "@types/react-lazyload": "^3.2.3",

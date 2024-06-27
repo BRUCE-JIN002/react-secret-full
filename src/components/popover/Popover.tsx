@@ -15,13 +15,13 @@ import "./styles.scss";
 
 type Alignment = "start" | "end";
 export type Side = "top" | "right" | "bottom" | "left";
-export type AlignedPlacement = `${Side}-${Alignment}`;
+export type AlignedPlacement = `${Side}-${Alignment}` | Side;
 
 interface PopoverProps extends PropsWithChildren {
   content: ReactNode;
   trigger?: "hover" | "click";
   showArrow?: boolean;
-  placement?: Side | AlignedPlacement;
+  placement?: AlignedPlacement;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
