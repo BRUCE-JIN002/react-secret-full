@@ -8,23 +8,23 @@ export interface Options {
 
 const useHovers = (ref: RefObject<HTMLElement>, options?: Options): boolean => {
   const { onEnter, onLeave, onChange } = options || {};
-  const [isEnter, setIsEnter] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   useEffect(() => {
     ref.current?.addEventListener("mouseenter", () => {
       onEnter?.();
-      setIsEnter(true);
+      setIsHover(true);
       onChange?.(true);
     });
 
     ref.current?.addEventListener("mouseleave", () => {
       onLeave?.();
-      setIsEnter(false);
+      setIsHover(false);
       onChange?.(false);
     });
   }, [ref]);
 
-  return isEnter;
+  return isHover;
 };
 
 export default useHovers;

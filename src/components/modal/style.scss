@@ -26,9 +26,20 @@ $bg-linear-gradien-red-dark: linear-gradient(135deg, #fc4838 0%, #f6346b 100%);
   .model_top_close {
     position: absolute;
     font-size: 16px;
+    padding: 0px 5px;
     cursor: pointer;
-    right: 24px;
+    right: 20px;
     top: 8px;
+    &:hover {
+      background-color: #e0e0e0;
+      border-radius: 4px;
+    }
+    .close_icon {
+      color: #8c8c8c;
+      &:hover {
+        color: #1d1d1d;
+      }
+    }
   }
 }
 
@@ -43,6 +54,14 @@ $bg-linear-gradien-red-dark: linear-gradient(135deg, #fc4838 0%, #f6346b 100%);
 }
 
 .model_container {
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  transition: opacity 0.3s;
+  right: 0;
+  bottom: 0;
+
   .model_wrap {
     position: absolute;
     border-radius: 5px;
@@ -51,13 +70,19 @@ $bg-linear-gradien-red-dark: linear-gradient(135deg, #fc4838 0%, #f6346b 100%);
     top: 50%;
     transform: translate(-50%, -50%);
   }
-  position: fixed;
-  z-index: 10000;
-  left: 0;
-  top: 0;
-  transition: opacity 0.3s;
-  right: 0;
-  bottom: 0;
+}
+
+.scaleAnimation {
+  animation: scaleAnimation 0.35s forwards;
+}
+
+@keyframes scaleAnimation {
+  0% {
+    transform: scale(0); /* 初始状态为scale 0 */
+  }
+  100% {
+    transform: scale(1); /* 最终状态为scale 1 */
+  }
 }
 
 .mast {

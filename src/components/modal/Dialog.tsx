@@ -58,7 +58,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
     <RenderChildren modelShow={modelShow} modelShowAync={modelShowAync}>
       <div style={{ display: modelShow ? "block" : "none" }}>
         <div
-          className="model_container"
+          className="model_container scaleAnimation"
           style={{ opacity: modelShowAync ? 1 : 0 }}
         >
           <div className="model_wrap">

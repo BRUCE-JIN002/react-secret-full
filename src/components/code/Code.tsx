@@ -15,7 +15,7 @@ import {
 import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
 import { Select, message } from "antd";
 import { useState } from "react";
-import { getRandomColor } from "../../common/utils";
+import { getRandomColor } from "../../common/utils/utils";
 import { useToggle } from "ahooks";
 
 const intialOption = [

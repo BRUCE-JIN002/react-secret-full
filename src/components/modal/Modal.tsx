@@ -10,6 +10,8 @@ import React, {
 import ReactDOM from "react-dom";
 import Dialog from "./Dialog";
 import { Button } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
+import classNames from "classnames";
 import "./style.scss";
 
 interface ModalProps extends PropsWithChildren {
@@ -33,7 +35,7 @@ class Modal extends React.PureComponent<ModalProps> {
   static hidden: () => void;
   /* 渲染底部按钮 */
   renderFooter = () => {
-    const { onOk, onCancel, cancelText, okText, footer, width } = this.props;
+    const { onOk, onCancel, cancelText, okText, footer } = this.props;
     /* 触发 onOk / onCancel 回调  */
     if (footer && React.isValidElement(footer)) return footer;
     return (
@@ -65,8 +67,11 @@ class Modal extends React.PureComponent<ModalProps> {
     return (
       <div className="model_top">
         <p>{title}</p>
-        <span className="model_top_close" onClick={() => onClose?.()}>
-          x
+        <span
+          className={classNames("model_top_close")}
+          onClick={() => onClose?.()}
+        >
+          <CloseOutlined className="close_icon" />
         </span>
       </div>
     );
