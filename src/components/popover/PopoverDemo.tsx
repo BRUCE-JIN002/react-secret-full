@@ -5,6 +5,10 @@ import { useSafeState } from "ahooks";
 import _ from "lodash";
 
 const directions: AlignedPlacement[] = [
+  "top",
+  "right",
+  "bottom",
+  "left",
   "top-start",
   "top-end",
   "right-start",
@@ -15,7 +19,7 @@ const directions: AlignedPlacement[] = [
   "left-end",
 ];
 
-const randomPosition = () => directions[_.random(0, 5)];
+const randomPosition = () => directions[_.random(0, 11)];
 
 const PopoverDemo = () => {
   const [position, setPosition] = useSafeState<AlignedPlacement>("top");

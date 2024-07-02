@@ -8,12 +8,8 @@ import { Button, Input } from "antd";
 /* 挂载方式调用modal */
 const ModalDemo: FC = () => {
   const [visible, setVisible] = useState(false);
-  const [nameShow, setNameShow] = useState(false);
   const [value, setValue] = useState("");
-  const handleClick = () => {
-    setVisible(!visible);
-    setNameShow(!nameShow);
-  };
+
   /* 防止 Model 的 PureComponent 失去作用 */
   const [handleClose, handleOk, handleCancel] = useMemo(() => {
     const Ok = () => {
@@ -51,17 +47,13 @@ const ModalDemo: FC = () => {
         type="primary"
         onClick={() => {
           setVisible(!visible);
-          setNameShow(false);
         }}
       >
         show model
       </Button>
-      <Button onClick={handleClick}> show model ( 显示作者 ) </Button>
-
       <Button type="dashed" onClick={() => handleStaticClick()}>
-        静态方式调用，显示modal
+        静态方式调用
       </Button>
-
       <Modal
         onCancel={handleCancel}
         onClose={handleClose}
@@ -77,7 +69,6 @@ const ModalDemo: FC = () => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          {nameShow && <p>author: i am not alien</p>}
         </div>
       </Modal>
     </div>

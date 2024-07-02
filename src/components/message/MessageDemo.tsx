@@ -20,6 +20,8 @@ function Test() {
           components: {
             Button: {
               colorPrimary: "#30b039",
+              colorPrimaryHover: "#30b03990",
+              colorPrimaryActive: "#30b039",
             },
           },
         }}
@@ -43,7 +45,9 @@ function Test() {
         theme={{
           components: {
             Button: {
-              colorPrimary: "red",
+              colorPrimary: "#ff000c",
+              colorPrimaryHover: "#ff000c90",
+              colorPrimaryActive: "#ff000c",
             },
           },
         }}
@@ -68,6 +72,8 @@ function Test() {
           components: {
             Button: {
               colorPrimary: "#ff9533",
+              colorPrimaryHover: "#ff953390",
+              colorPrimaryActive: "#ff9533",
             },
           },
         }}
