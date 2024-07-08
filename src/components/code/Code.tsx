@@ -12,11 +12,13 @@ import {
   solarizedDark,
   hopscotch,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
-import { Select, message } from "antd";
-import { useState } from "react";
+import { useCopyToClipboard } from "../../hooks/useCopyToclipboard/useCopyToclipboard";
+import { Input, Select, message } from "antd";
 import { getRandomColor } from "../../common/utils/utils";
-import { useToggle } from "ahooks";
+import { ConfigListItem, useCodeConfigStore } from "./store";
+import { HooksType } from "../../menu/Menu";
+import { useSafeState } from "ahooks";
+import _ from "lodash";
 
 const intialOption = [
   "anOldHope",
@@ -36,19 +38,32 @@ const getSelectOptions = () =>
   intialOption.map((theme) => ({ label: theme, value: theme }));
 
 interface CodeProps {
-  codeString: string;
+  id: HooksType;
   fileName?: string;
+  codeString: string;
   width?: number | string;
   onClick?: () => void;
 }
 
 export const Code: React.FC<CodeProps> = (props) => {
-  const { codeString, fileName, width = 900, onClick } = props;
+  const { codeString, width = 900, id, onClick } = props;
   const [, copy] = useCopyToClipboard();
   const [messageApi, contextHolder] = message.useMessage();
-  const [stateTheme, setTheme] = useState<string>("anOldHope");
-  const [stateColor, setColor] = useState<string>("#00b56d");
-  const [isFullScreen, setIsFullScreen] = useToggle<boolean>(false);
+  const { configList, updateConfig } = useCodeConfigStore();
+  const [isEdit, setIsEdit] = useSafeState(false);
+
+  const persistConfig = _.assign(
+    { id },
+    configList.find((l) => l.id === id)
+  );
+
+  const { skinColor, theme, expand, fileName }: ConfigListItem = {
+    skinColor: "#00b56d",
+    theme: "anOldHope",
+    expand: false,
+    fileName: props.fileName,
+    ...persistConfig,
+  };
 
   const handleCopy = (text: string) => () => {
     copy(text)
@@ -78,9 +93,9 @@ export const Code: React.FC<CodeProps> = (props) => {
         borderRadius: 8,
         paddingBottom: 8,
         color: "rgba(0,0,0, 0.75)",
-        backgroundColor: stateColor,
+        backgroundColor: skinColor,
         position: "relative",
-        width: isFullScreen ? "98%" : width,
+        width: expand ? "98%" : width,
         maxHeight: "calc(100vh - 10px)",
         transition: "all 0.3s ease-in-out",
       }}
@@ -96,7 +111,46 @@ export const Code: React.FC<CodeProps> = (props) => {
           margin: 4,
         }}
       >
-        <div style={{ marginRight: "auto" }}>{fileName}</div>
+        <div
+          onDoubleClick={() => setIsEdit(true)}
+          style={{ marginRight: "auto" }}
+        >
+          {isEdit ? (
+            <Input
+              autoFocus={true}
+              size="small"
+              value={fileName}
+              onChange={(e) => {
+                const nameValue =
+                  e.target.value !== "" ? e.target.value : undefined;
+                updateConfig({
+                  ...persistConfig,
+                  fileName: nameValue,
+                });
+              }}
+              onPressEnter={() => setIsEdit(false)}
+              onBlur={() => setIsEdit(false)}
+              style={{ height: 21 }}
+            />
+          ) : (
+            <div
+              style={{
+                marginLeft: 4,
+                fontSize: 14,
+                height: 18,
+                borderRadius: 4,
+                padding: "0 4px",
+                minWidth: 100,
+                boxShadow: fileName
+                  ? ""
+                  : `inset -5px -5px 10px rgba(0, 0, 0, 0.1), 
+                  inset 5px 5px 10px rgba(0, 0, 0, 0.1)`,
+              }}
+            >
+              {fileName}
+            </div>
+          )}
+        </div>
         {onClick && (
           <EyeInvisibleOutlined
             style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
@@ -104,32 +158,50 @@ export const Code: React.FC<CodeProps> = (props) => {
             onClick={onClick}
           />
         )}
-        {isFullScreen ? (
+        {expand ? (
           <CompressOutlined
             style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
             title="退出全屏"
-            onClick={() => setIsFullScreen.toggle()}
+            onClick={() =>
+              updateConfig({
+                ...persistConfig,
+                expand: false,
+              })
+            }
           />
         ) : (
           <ExpandOutlined
             style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
             title="全屏查看"
-            onClick={() => setIsFullScreen.toggle()}
+            onClick={() =>
+              updateConfig({
+                ...persistConfig,
+                expand: true,
+              })
+            }
           />
         )}
         <SkinOutlined
           style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
           title="换肤"
-          onClick={() => setColor(getRandomColor())}
+          onClick={() =>
+            updateConfig({
+              ...persistConfig,
+              skinColor: getRandomColor(),
+            })
+          }
         />
         <Select
           showSearch
           size="small"
-          defaultValue={stateTheme}
+          defaultValue={theme}
           placeholder="Select a person"
           optionFilterProp="children"
           onChange={(value) => {
-            setTheme(value);
+            updateConfig({
+              ...persistConfig,
+              theme: value,
+            });
           }}
           style={{
             border: "1px solid #00000060",
@@ -147,7 +219,7 @@ export const Code: React.FC<CodeProps> = (props) => {
       <div style={{ maxHeight: "calc(100vh - 50px)", overflow: "auto" }}>
         <SyntaxHighlighter
           language="javascript"
-          style={themeMap.get(stateTheme)}
+          style={themeMap.get(theme)}
           showLineNumbers={true}
           wrapLongLines={true}
         >

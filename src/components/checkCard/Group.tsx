@@ -8,7 +8,7 @@ import GroupContext from "./GroupContext";
 import styles from "./style";
 import { useRef, useEffect } from "react";
 import { useSafeState } from "ahooks";
-import useCss from "../../hooks/useCss";
+import useCss from "../../hooks/useCss/useCss";
 
 const Group: React.FC<GroupProps> = (props) => {
   const { multiple = false, style = {}, onChange, ...params } = props;

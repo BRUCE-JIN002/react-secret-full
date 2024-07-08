@@ -1,6 +1,6 @@
 import { useSafeState } from "ahooks";
 import { useEffect } from "react";
-import getTarget from "../common/utils/getTarget";
+import getTarget from "../../common/utils/getTarget";
 
 type Options = Pick<
   IntersectionObserverInit,

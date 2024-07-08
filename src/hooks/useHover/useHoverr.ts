@@ -1,5 +1,5 @@
 import { MutableRefObject } from "react";
-import useSafeState from "../useSafeState";
+import useSafeState from "../useSafeState/useSafeState";
 import useEventListener from "./useEventListener";
 import BasicTarget from "../../common/utils/BasicTarget";
 

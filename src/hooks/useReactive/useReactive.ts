@@ -1,5 +1,5 @@
 import { useCreation, useLatest } from "ahooks";
-import useUpdate from "./useUpdate";
+import useUpdate from "../useForceUpdate/useForceUpdate";
 
 const observer = <T extends Record<string, any>>(
   initialVal: T,

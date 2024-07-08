@@ -6,7 +6,7 @@ import {
   StylesStringProps,
 } from "./interface.d";
 import { useSafeState, useCreation } from "ahooks";
-import useCss from "../../hooks/useCss";
+import useCss from "../../hooks/useCss/useCss";
 import GroupContext from "./GroupContext";
 import Loading from "./loading";
 import styles from "./style";

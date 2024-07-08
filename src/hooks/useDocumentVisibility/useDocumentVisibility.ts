@@ -1,6 +1,6 @@
 import { useSafeState } from "ahooks";
-import isBrowser from "../common/utils/isBrowser";
-import useEventListener from "./useHover/useEventListener";
+import isBrowser from "../../common/utils/isBrowser";
+import useEventListener from "../useHover/useEventListener";
 
 type VisibilityType = "hidden" | "visible" | undefined;
 

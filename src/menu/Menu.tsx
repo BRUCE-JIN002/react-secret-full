@@ -7,14 +7,15 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
-import { useMenuStore } from "../../App";
+import { useMenuStore } from "../App";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 export const enum HooksType {
-  Hooks = "hookskey",
-  UseState = "useStatekey",
-  UseEffect = "useEffectkey",
+  UseGusture = "useGusture",
+  CustomHooks = "hookskey",
+  UseCookies = "useCookies",
+  UseCopyToClipboard = "useCopyToClipboard",
   UseLayoutEffect = "useLayoutEffectkey",
   UseReducer = "useReducerkey",
   UseReducerImmer = "useReducerImmerkey",
@@ -47,7 +48,6 @@ export const enum ComponentsType {
 
 export const enum ThirdParyLibrary {
   ThirdParyLib = "thirdParyLib",
-  TailwindCss = "tailwindCss",
   ReactSpring = "reactSpring",
   ReactSpring1 = "reactSpring1",
   ReactSpring2 = "reactSpring2",
@@ -83,9 +83,9 @@ const getItem = (
 };
 
 const items: MenuProps["items"] = [
-  getItem("Hooks使用", HooksType.Hooks, <MailOutlined />, [
-    getItem("useState", HooksType.UseState),
-    getItem("useEffect", HooksType.UseEffect),
+  getItem("自定义 Hooks", HooksType.CustomHooks, <MailOutlined />, [
+    getItem("useCookies", HooksType.UseCookies),
+    getItem("useCopyToClipboard", HooksType.UseCopyToClipboard),
     getItem("useLayoutEffect", HooksType.UseLayoutEffect),
     getItem("useReducer", HooksType.UseReducer),
     getItem("useReducer + immer", HooksType.UseReducerImmer),
@@ -130,7 +130,6 @@ const items: MenuProps["items"] = [
   { type: "divider" },
 
   getItem("三方库", ThirdParyLibrary.ThirdParyLib, <ProductOutlined />, [
-    getItem("Tailwind-css", ThirdParyLibrary.TailwindCss),
     getItem("React-spring", ThirdParyLibrary.ReactSpring, "", [
       getItem("单元素动画", ThirdParyLibrary.ReactSpring1),
       getItem("多元素动画", ThirdParyLibrary.ReactSpring2),
@@ -139,7 +138,7 @@ const items: MenuProps["items"] = [
     ]),
     getItem("React-dnd", ThirdParyLibrary.ReactDnd, "", [
       getItem("普通拖拽", ThirdParyLibrary.ReactDnd1),
-      getItem("进阶拖拽", ThirdParyLibrary.ReactDnd2),
+      getItem("拖拽排序", ThirdParyLibrary.ReactDnd2),
     ]),
     getItem("use-gestrue", ThirdParyLibrary.UseGesture),
     getItem("my-zustand", ThirdParyLibrary.Zustand),

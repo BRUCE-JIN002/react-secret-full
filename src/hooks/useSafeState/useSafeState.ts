@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import useUnmountedRef from "./useUnmountedRef";
+import useUnmountedRef from "../useUnmountedRef/useUnmountedRef";
 
 function useSafeState<S>(
   initialState: S | (() => S)

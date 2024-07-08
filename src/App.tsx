@@ -5,16 +5,14 @@ import MenuList, {
   HooksType,
   Projects,
   ThirdParyLibrary,
-} from "./components/menu/Menu";
+} from "./menu/Menu";
 import { StateCreator, create } from "zustand";
+import { persist } from "zustand/middleware";
+import { CodeDemo } from "./components/code/CodeDemo";
 import CalendarDemo from "./components/calendar/CalendarDemo";
 import IconDemo from "./components/Icon/IconDemo";
 import MyQRcode from "./components/qrcode/QrCode";
 import SpaceDemo from "./components/space/SpaceDemo";
-import { CodeDemo } from "./components/code/CodeDemo";
-import { UseReducerCode } from "./react-hooks/useReducer/UseReducerCode";
-import { UseContextCode } from "./react-hooks/useContext/UseContextCode";
-import { UseStateCode } from "./react-hooks/useState/UseStateCode";
 import DndPage2 from "./third-party-lib/react-dnd/react-dnd-2/DndPage2";
 import DndPage1 from "./third-party-lib/react-dnd/react-dnd-1/Page";
 import SpringBox1 from "./third-party-lib/react-spring/spring-1/SpringBox1";
@@ -27,7 +25,6 @@ import MessageDemo from "./components/message/MessageDemo";
 import TodoListDemo from "./ts-projects/dnd-todo-list/TodoListDemo";
 import OnBoardingDemo from "./components/onBoarding/Demo";
 import FormDemo from "./components/form/FormDemo";
-import { persist } from "zustand/middleware";
 import UploadDemo from "./components/upload/UploadDemo";
 import LazyloadDemo from "./components/lazyLoad/LazyloadDemo";
 import TestZustand from "./zustand/TestZustand";
@@ -37,8 +34,9 @@ import WatermarkDemo from "./components/watermark/WatermarkDemo";
 import SlidInOverlayDemo from "./components/slideInOverlay/SlidInOverlayDemo";
 import ModalDemo from "./components/modal/ModalDemo";
 import CheckCardDemo from "./components/checkCard/CheckCardDemo";
+import CustomHooks from "./menu-contents/CustomHooks";
 
-type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
+export type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
   currentPage?: MenuKey;
   updateCurrentPage: (v: MenuKey) => void;
@@ -65,14 +63,7 @@ const App: FC = () => {
         <MenuList />
       </div>
       <div className="content">
-        {/* useState */}
-        {currentPage === HooksType.UseState && <UseStateCode />}
-        {/* useReducer */}
-        {currentPage === HooksType.UseReducer && <UseReducerCode />}
-        {/* useContext */}
-        {currentPage === HooksType.UseContext && <UseContextCode />}
-        {/**---------------------------------------------------- */}
-
+        <CustomHooks currentPage={currentPage} />
         {/** 倒计时 */}
         {currentPage === ComponentsType.CountDown && <CountDemo />}
         {/** 迷你日历 */}
@@ -107,9 +98,7 @@ const App: FC = () => {
         {currentPage === ComponentsType.Modal && <ModalDemo />}
         {/** CheckCard */}
         {currentPage === ComponentsType.CheckCard && <CheckCardDemo />}
-
         {/**---------------------------------------------------- */}
-
         {/* Dnd基础拖拽示例 */}
         {currentPage === ThirdParyLibrary.ReactDnd1 && <DndPage1 />}
         {/* Dnd进阶拖拽示例 */}
@@ -131,7 +120,6 @@ const App: FC = () => {
           <ClickToComponentDemo />
         )}
         {/**---------------------------------------------------- */}
-
         {/* TodoList 综合实战 */}
         {currentPage === Projects.TodoList && <TodoListDemo />}
       </div>
