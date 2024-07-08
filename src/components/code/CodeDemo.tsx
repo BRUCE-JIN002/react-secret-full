@@ -2,7 +2,7 @@ import React from "react";
 import { Code } from "./Code";
 import { HooksType } from "../../menu/Menu";
 
-export const CodeDemo: React.FC = () => {
+const CodeDemo: React.FC = () => {
   return (
     <Code
       codeString={rowSpanCountfun}
@@ -11,6 +11,8 @@ export const CodeDemo: React.FC = () => {
     />
   );
 };
+
+export default CodeDemo;
 
 const rowSpanCountfun = `//数组属性相同值数量统计（可用于计算表格合并值rowSpan）
 const calcRowSpan = (objArr, field) => {
