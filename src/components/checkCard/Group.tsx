@@ -2,7 +2,7 @@ import {
   GroupProps,
   ValueType,
   GroupValueType,
-  SelectOptionProps,
+  SelectOptionProps
 } from "./interface";
 import GroupContext from "./GroupContext";
 import styles from "./style";
@@ -65,7 +65,7 @@ const Group: React.FC<GroupProps> = (props) => {
         loading: params.loading,
         selectOption,
         registerValue,
-        cancelValue,
+        cancelValue
       }}
     >
       <div className={useCss(styles["select-card-group"])} style={style}>

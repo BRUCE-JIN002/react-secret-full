@@ -3,7 +3,7 @@ import {
   AppstoreOutlined,
   MailOutlined,
   ProductOutlined,
-  SettingOutlined,
+  SettingOutlined
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
@@ -16,13 +16,34 @@ export const enum HooksType {
   CustomHooks = "hookskey",
   UseCookies = "useCookies",
   UseCopyToClipboard = "useCopyToClipboard",
-  UseLayoutEffect = "useLayoutEffectkey",
-  UseReducer = "useReducerkey",
-  UseReducerImmer = "useReducerImmerkey",
-  UseRef = "useRefkeys",
-  ForwardRefUseImperativeHandle = "forwardRefUseImperativeHandlekey",
-  UseContext = "useContextkey",
-  MemoUseMemoUseCallback = "MemoUseMemoUseCallback",
+  UseCountDown = "useCountDown",
+  UseCounter = "useCounter",
+  UseCreation = "useCreation",
+  UseCss = "UseCss",
+  UseDebounce = "useDebounce",
+  UseDebounceFn = "useDebounceFn",
+  UseDocumentVisibility = "useDocumentVisibility",
+  UseEventListener = "useEventListener",
+  UseForceUpdate = "useForceUpdate",
+  UseFullscreen = "useFullscreen",
+  UseHover = "useHover",
+  UseInViewport = "useInViewport",
+  UseIsomorphicEffect = "useIsomorphicEffect",
+  UseLatest = "useLatest",
+  UseLifecycle = "useLifecycle",
+  UseLockFn = "useLockFn",
+  UseMountedState = "useMountedState",
+  UseMutationObserver = "useMutationObserver",
+  UseNetwork = "useNetwork",
+  UseReactive = "useReactive",
+  UseSafaState = "useSafaState",
+  UseScrolling = "useScrolling",
+  UseSelection = "useSelection",
+  UseSize = "useSize",
+  UseTextSelection = "useTextSelection",
+  UseTimeout = "useTimeout",
+  UseUnmountedRef = "useUnmountedRef",
+  UseWhyDidYouUpdate = "useWhyDidYouUpdate"
 }
 
 export const enum ComponentsType {
@@ -43,7 +64,7 @@ export const enum ComponentsType {
   Watermark = "watermark",
   SlidInOverlay = "slidInOverlay",
   Modal = "modal",
-  CheckCard = "checkCard",
+  CheckCard = "checkCard"
 }
 
 export const enum ThirdParyLibrary {
@@ -58,12 +79,12 @@ export const enum ThirdParyLibrary {
   ReactDnd2 = "ReactDnd2",
   UseGesture = "useGesture",
   Zustand = "zustand",
-  ToComponent = "toComponent",
+  ToComponent = "toComponent"
 }
 
 export const enum Projects {
   Comprehesive = "comprehesive",
-  TodoList = "todolist",
+  TodoList = "todolist"
 }
 
 const getItem = (
@@ -78,7 +99,7 @@ const getItem = (
     icon,
     children,
     label,
-    type,
+    type
   } as MenuItem;
 };
 
@@ -86,23 +107,34 @@ const items: MenuProps["items"] = [
   getItem("自定义 Hooks", HooksType.CustomHooks, <MailOutlined />, [
     getItem("useCookies", HooksType.UseCookies),
     getItem("useCopyToClipboard", HooksType.UseCopyToClipboard),
-    getItem("useLayoutEffect", HooksType.UseLayoutEffect),
-    getItem("useReducer", HooksType.UseReducer),
-    getItem("useReducer + immer", HooksType.UseReducerImmer),
-    getItem("useRef", HooksType.UseRef),
-    getItem(
-      <span title="forwardRef + useImperativeHandle">
-        forwardRef + useImperativeHandle
-      </span>,
-      HooksType.ForwardRefUseImperativeHandle
-    ),
-    getItem("useContext", HooksType.UseContext),
-    getItem(
-      <span title="memo + useMemo + useCallback">
-        memo + useMemo + useCallback
-      </span>,
-      HooksType.MemoUseMemoUseCallback
-    ),
+    getItem("useCountdown", HooksType.UseCountDown),
+    getItem("useCounter", HooksType.UseCounter),
+    getItem("useCreation", HooksType.UseCreation),
+    getItem("useCss", HooksType.UseCss),
+    getItem("useDebounce", HooksType.UseDebounce),
+    getItem("useDebounceFn", HooksType.UseDebounceFn),
+    getItem("useDocumentVisibility", HooksType.UseDocumentVisibility),
+    getItem("useEventListener", HooksType.UseEventListener),
+    getItem("useForceUpdate", HooksType.UseForceUpdate),
+    getItem("useFullscreen", HooksType.UseFullscreen),
+    getItem("useHover", HooksType.UseHover),
+    getItem("useInViewport", HooksType.UseInViewport),
+    getItem("useIsomorphicEffect", HooksType.UseIsomorphicEffect),
+    getItem("useLatest", HooksType.UseLatest),
+    getItem("useLifecycle", HooksType.UseLifecycle),
+    getItem("useLockFn", HooksType.UseLockFn),
+    getItem("useMountedState", HooksType.UseMountedState),
+    getItem("useMutationObserver", HooksType.UseMutationObserver),
+    getItem("useNetwork", HooksType.UseNetwork),
+    getItem("useReactive", HooksType.UseReactive),
+    getItem("useSafaState", HooksType.UseSafaState),
+    getItem("useScrolling", HooksType.UseScrolling),
+    getItem("useSelection", HooksType.UseSelection),
+    getItem("useSize", HooksType.UseSize),
+    getItem("useTextSelection", HooksType.UseTextSelection),
+    getItem("useTimeout", HooksType.UseTimeout),
+    getItem("useUnmountedRef", HooksType.UseUnmountedRef),
+    getItem("useWhyDidYouUpdate", HooksType.UseWhyDidYouUpdate)
   ]),
 
   { type: "divider" },
@@ -124,7 +156,7 @@ const items: MenuProps["items"] = [
     getItem("Lazyload 懒加载", ComponentsType.Lazyload),
     getItem("SlideInoverlay 转场动画", ComponentsType.SlidInOverlay),
     getItem("Modal 模态框", ComponentsType.Modal),
-    getItem("CheckCard 多选卡片", ComponentsType.CheckCard),
+    getItem("CheckCard 多选卡片", ComponentsType.CheckCard)
   ]),
 
   { type: "divider" },
@@ -134,22 +166,22 @@ const items: MenuProps["items"] = [
       getItem("单元素动画", ThirdParyLibrary.ReactSpring1),
       getItem("多元素动画", ThirdParyLibrary.ReactSpring2),
       getItem("复杂动画", ThirdParyLibrary.ReactSpring3),
-      getItem("综合应用", ThirdParyLibrary.ReactSprings),
+      getItem("综合应用", ThirdParyLibrary.ReactSprings)
     ]),
     getItem("React-dnd", ThirdParyLibrary.ReactDnd, "", [
       getItem("普通拖拽", ThirdParyLibrary.ReactDnd1),
-      getItem("拖拽排序", ThirdParyLibrary.ReactDnd2),
+      getItem("拖拽排序", ThirdParyLibrary.ReactDnd2)
     ]),
     getItem("use-gestrue", ThirdParyLibrary.UseGesture),
     getItem("my-zustand", ThirdParyLibrary.Zustand),
-    getItem("click-to-component", ThirdParyLibrary.ToComponent),
+    getItem("click-to-component", ThirdParyLibrary.ToComponent)
   ]),
 
   { type: "divider" },
 
   getItem("综合项目", Projects.Comprehesive, <SettingOutlined />, [
-    getItem("TodoList", Projects.TodoList),
-  ]),
+    getItem("TodoList", Projects.TodoList)
+  ])
 ];
 
 const MenuList: React.FC = () => {
@@ -161,8 +193,9 @@ const MenuList: React.FC = () => {
       onClick={(e) => updateCurrentPage(e.key as ComponentsType | HooksType)}
       defaultSelectedKeys={[currentPage as ComponentsType.MinCalendar]}
       defaultOpenKeys={[
+        HooksType.CustomHooks,
         ComponentsType.ComponentsDemo,
-        ThirdParyLibrary.ThirdParyLib,
+        ThirdParyLibrary.ThirdParyLib
       ]}
       mode="inline"
       items={items}

@@ -5,7 +5,7 @@ import CountDemo from "../components/countDown";
 import MinCalendarDemo from "../components/miniCalendar/Demo";
 import CalendarDemo from "../components/calendar/CalendarDemo";
 import IconDemo from "../components/Icon/IconDemo";
-import MyQRcode from "../components/qrcode/QrCode";
+import MyQRcode from "../components/QRCode/QrCode";
 import WatermarkDemo from "../components/watermark/WatermarkDemo";
 import SpaceDemo from "../components/space/SpaceDemo";
 import CodeDemo from "../components/code/CodeDemo";

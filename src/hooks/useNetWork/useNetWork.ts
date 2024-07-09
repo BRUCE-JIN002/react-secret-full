@@ -25,7 +25,7 @@ const getConnection = (): NetWorkStates | undefined => {
       type: nav.connection?.type,
       saveData: nav.connection?.saveData,
       downlink: nav.connection?.downlink,
-      effectiveType: nav.connection?.effectiveType,
+      effectiveType: nav.connection?.effectiveType
     };
   }
 };
@@ -33,20 +33,20 @@ const getConnection = (): NetWorkStates | undefined => {
 const useNetWork = (): NetWorkStates => {
   const [netStatus, setNetStatus] = useSafeState(() => ({
     online: navigator?.onLine,
-    ...getConnection(),
+    ...getConnection()
   }));
 
   useEventListener("online", () => {
     setNetStatus((s) => ({
       ...s,
-      online: true,
+      online: true
     }));
   });
 
   useEventListener("offline", () => {
     setNetStatus((s) => ({
       ...s,
-      online: false,
+      online: false
     }));
   });
 

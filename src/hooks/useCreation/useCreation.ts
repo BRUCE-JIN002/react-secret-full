@@ -18,7 +18,7 @@ const useCreation = <T>(fn: () => T, deps: DependencyList) => {
   const { current } = useRef({
     deps,
     obj: undefined as undefined | T,
-    initialized: false,
+    initialized: false
   });
 
   if (current.initialized === false || !depsAreSame(current.deps, deps)) {
