@@ -39,14 +39,13 @@ const CalendarDemo: React.FC = (props) => {
               {isRoutingInspection(date) && (
                 <div>
                   <Badge
-                    color={"red"}
+                    color="red"
                     status="processing"
                     text={
                       <span style={{ color: "#f50", fontSize: 12 }}>
                         今天巡检了吗？
                       </span>
                     }
-                    style={{ fontSize: 12 }}
                   />
                 </div>
               )}

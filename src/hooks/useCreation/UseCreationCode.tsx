@@ -6,7 +6,7 @@ const UseCreationCode: React.FC = () => {
     <Code
       codeString={useCreationCodeString}
       fileName="useCreation.ts"
-      id={HooksType.UseCounter}
+      id={HooksType.UseCreation}
     />
   );
 };
