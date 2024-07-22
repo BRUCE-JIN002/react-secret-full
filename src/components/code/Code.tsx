@@ -53,8 +53,8 @@ export const Code: React.FC<CodeProps> = (props) => {
   const [isEdit, setIsEdit] = useSafeState(false);
 
   const persistConfig = _.assign(
-    { id },
-    configList.find((l) => l.id === id)
+    configList.find((l) => l.id === id),
+    { id }
   );
 
   const { skinColor, theme, expand, fileName }: ConfigListItem = {
