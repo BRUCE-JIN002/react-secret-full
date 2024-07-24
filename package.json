@@ -52,7 +52,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "server": "node ./server.js"
+    "server": "node ./server.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -r https://github.com/BRUCE-JIN002/BRUCE-JIN002.github.io.git -b main"
   },
   "eslintConfig": {
     "extends": [
@@ -83,6 +85,7 @@
     "@use-gesture/react": "^10.3.1",
     "autoprefixer": "^10.4.19",
     "click-to-react-component": "^1.1.0",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3"
   }
