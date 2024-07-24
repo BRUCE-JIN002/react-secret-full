@@ -34,7 +34,13 @@ const Index: React.FC = () => {
         defaultChecked
         disabled
       />
-      <h1>额外操作</h1>
+      <h1>加载状态、额外操作</h1>
+      <CheckCard
+        avatar={avatarSrc}
+        title="多选卡片"
+        description="大家好，欢迎来到我的组建乐园"
+        loading
+      />
       <CheckCard
         avatar={avatarSrc}
         extra={
@@ -49,14 +55,7 @@ const Index: React.FC = () => {
           </Button>
         }
         title="多选卡片"
-        description="大家好，欢迎来到我的组建乐园，让我们一起开始学习吧"
-      />
-      <h1>加载状态</h1>
-      <CheckCard
-        avatar={avatarSrc}
-        title="多选卡片"
-        description="大家好，欢迎来到我的组建乐园"
-        loading
+        description="大家好，欢迎来到我的组建乐园，让我们一起开始吧"
       />
       <h1>Group基本使用</h1>
       <CheckCard.Group

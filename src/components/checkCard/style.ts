@@ -3,7 +3,7 @@ import { StylesProps } from "./interface";
 const styles: StylesProps = {};
 
 styles["check-card"] = {
-  width: "320px",
+  width: "200px",
   position: "relative",
   display: " inline-block",
   color: "rgba(42, 46, 54, 0.9)",

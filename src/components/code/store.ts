@@ -8,6 +8,7 @@ export interface ConfigListItem {
   expand?: boolean;
   skinColor?: string;
   theme?: string;
+  collapse?: boolean;
 }
 
 type State = {

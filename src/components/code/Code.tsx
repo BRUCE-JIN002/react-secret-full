@@ -1,4 +1,6 @@
 import {
+  CaretDownOutlined,
+  CaretRightOutlined,
   CompressOutlined,
   CopyOutlined,
   ExpandOutlined,
@@ -19,6 +21,7 @@ import { ConfigListItem, useCodeConfigStore } from "./store";
 import { HooksType } from "../../menu/Menu";
 import { useSafeState } from "ahooks";
 import _ from "lodash";
+import classNames from "classnames";
 
 const intialOption = [
   "anOldHope",
@@ -57,11 +60,12 @@ export const Code: React.FC<CodeProps> = (props) => {
     { id }
   );
 
-  const { skinColor, theme, expand, fileName }: ConfigListItem = {
+  const { skinColor, theme, expand, fileName, collapse }: ConfigListItem = {
     skinColor: "#00b56d",
     theme: "anOldHope",
     expand: false,
     fileName: props.fileName,
+    collapse: true,
     ...persistConfig,
   };
 
@@ -91,7 +95,7 @@ export const Code: React.FC<CodeProps> = (props) => {
       style={{
         border: "1px solid #00000050",
         borderRadius: 8,
-        paddingBottom: 8,
+        paddingBottom: collapse ? 8 : 0,
         color: "rgba(0,0,0, 0.75)",
         backgroundColor: skinColor,
         position: "relative",
@@ -101,16 +105,24 @@ export const Code: React.FC<CodeProps> = (props) => {
       }}
     >
       {contextHolder}
-      <div
-        style={{
-          display: "flex",
-          height: 16,
-          fontSize: 12,
-          alignItems: "center",
-          gap: 8,
-          margin: 4,
-        }}
-      >
+      <div className="flex items-center h-4 text-[12px] gap-2 m-[4px]">
+        <div
+          className={classNames(
+            "flex justify-center items-center text-[12px] py-1 px-[2px] hover:bg-[#ccc] rounded-sm cursor-pointer"
+          )}
+          onClick={() => {
+            updateConfig({
+              ...persistConfig,
+              collapse: !persistConfig.collapse,
+            });
+          }}
+        >
+          {collapse ? (
+            <CaretDownOutlined title="收起" />
+          ) : (
+            <CaretRightOutlined title="展开" />
+          )}
+        </div>
         <div
           onDoubleClick={() => setIsEdit(true)}
           style={{ marginRight: "auto" }}
@@ -135,17 +147,12 @@ export const Code: React.FC<CodeProps> = (props) => {
           ) : (
             <div
               style={{
-                marginLeft: 4,
-                fontSize: 14,
-                height: 18,
-                borderRadius: 4,
-                padding: "0 4px",
-                minWidth: 100,
                 boxShadow: fileName
                   ? ""
                   : `inset -5px -5px 10px rgba(0, 0, 0, 0.1), 
                   inset 5px 5px 10px rgba(0, 0, 0, 0.1)`,
               }}
+              className="text-sm h-[18px] rounded min-w-24"
             >
               {fileName}
             </div>
@@ -216,16 +223,18 @@ export const Code: React.FC<CodeProps> = (props) => {
           <CopyOutlined />
         </span>
       </div>
-      <div style={{ maxHeight: "calc(100vh - 50px)", overflow: "auto" }}>
-        <SyntaxHighlighter
-          language="javascript"
-          style={themeMap.get(theme)}
-          showLineNumbers={true}
-          wrapLongLines={true}
-        >
-          {codeString}
-        </SyntaxHighlighter>
-      </div>
+      {collapse && (
+        <div style={{ maxHeight: "calc(100vh - 50px)", overflow: "auto" }}>
+          <SyntaxHighlighter
+            language="javascript"
+            style={themeMap.get(theme)}
+            showLineNumbers={true}
+            wrapLongLines={true}
+          >
+            {codeString}
+          </SyntaxHighlighter>
+        </div>
+      )}
     </div>
   );
 };

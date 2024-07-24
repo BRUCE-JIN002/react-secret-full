@@ -1,21 +1,45 @@
 import { useState } from "react";
 import SlideInOverlay from "./SlideInOverlay";
 import { Button, message } from "antd";
-import facai from "../../assets/image/facai.png";
 
 const SlidInOverlayDemo = () => {
   const [show, setShow] = useState(false);
+  const [from, setFrom] = useState<"bottom" | "right">("bottom");
   const [messageApi, contextHolder] = message.useMessage();
 
   return (
     <>
       {contextHolder}
-      <Button type="primary" onClick={() => setShow(true)}>
-        开启
-      </Button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 20,
+        }}
+      >
+        <Button
+          type="primary"
+          onClick={() => {
+            setFrom("bottom");
+            setShow(true);
+          }}
+        >
+          Bottom
+        </Button>
+        {contextHolder}
+        <Button
+          type="primary"
+          onClick={() => {
+            setFrom("right");
+            setShow(true);
+          }}
+        >
+          Right
+        </Button>
+      </div>
       <SlideInOverlay
         isVisible={show}
-        from="bottom"
+        from={from}
         duration={350}
         style={{
           boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
@@ -40,7 +64,7 @@ const SlidInOverlayDemo = () => {
             position: "absolute",
             top: 0,
             width: "100%",
-            background: "rgba(255, 255, 255, 0.15)",
+            background: "rgba(115, 210, 114, 0.15)",
             backdropFilter: "blur(5px)",
           }}
         >
@@ -48,7 +72,6 @@ const SlidInOverlayDemo = () => {
             关闭
           </Button>
         </div>
-        <img style={{ height: "100%", width: "100%" }} src={facai} alt="" />
       </SlideInOverlay>
     </>
   );

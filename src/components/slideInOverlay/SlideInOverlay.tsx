@@ -105,7 +105,7 @@ const SlideInOverlay: FC<SlideInOverlayProps> = (props) => {
                 transform: props.x.to((x) => (x === 0 ? "none" : translate(x))),
                 opacity: props.opacity,
               }}
-              width={490}
+              width={300}
             >
               {children}
             </Overlay>
