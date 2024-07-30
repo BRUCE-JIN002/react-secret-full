@@ -108,7 +108,7 @@ export const Code: React.FC<CodeProps> = (props) => {
       <div className="flex items-center h-4 text-[12px] gap-2 m-[4px]">
         <div
           className={classNames(
-            "flex justify-center items-center text-[12px] py-1 px-[2px] hover:bg-[#ccc] rounded-sm cursor-pointer"
+            "flex justify-center items-center text-[12px] py-1 px-[2px] hover:bg-[#fff] rounded-sm cursor-pointer"
           )}
           onClick={() => {
             updateConfig({
