@@ -14,37 +14,36 @@ export interface CardItem {
 export interface CardProps {
   data: CardItem;
   index: number;
-  swapIndex: Function;
+  swap: Function;
 }
 
 const Card: React.FC<CardProps> = (props) => {
-  const { data, swapIndex, index } = props;
+  const { data, swap, index } = props;
   const ref = useRef(null);
 
   const [{ dragging }, drag] = useDrag({
     type: "card",
     item: {
       id: data.id,
-      index: index,
+      index: index
     },
     collect: (monitor) => {
       return {
-        dragging: monitor.isDragging(),
+        dragging: monitor.isDragging()
       };
-    },
+    }
   });
 
   const [, drop] = useDrop({
     accept: "card",
     hover: (item: DragData) => {
-      swapIndex(index, item.index);
+      swap(index, item.index);
       item.index = index;
-    },
+    }
   });
 
   drag(ref);
   drop(ref);
-
   return (
     <div ref={ref} className={dragging ? "card dragging" : "card"}>
       <span>{data.content}</span>

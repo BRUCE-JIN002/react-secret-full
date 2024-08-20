@@ -14,7 +14,7 @@ const SlidInOverlayDemo = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: 20,
+          gap: 20
         }}
       >
         <Button
@@ -42,20 +42,20 @@ const SlidInOverlayDemo = () => {
         from={from}
         duration={350}
         style={{
-          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)"
         }}
         onEnter={() => {
           messageApi.open({
             type: "success",
             content: "onEnter回调执行!",
-            duration: 1.5,
+            duration: 1.5
           });
         }}
         onLeave={() => {
           messageApi.open({
             type: "success",
             content: "onLeave回调执行!",
-            duration: 1.5,
+            duration: 1.5
           });
         }}
       >
@@ -65,7 +65,7 @@ const SlidInOverlayDemo = () => {
             top: 0,
             width: "100%",
             background: "rgba(115, 210, 114, 0.15)",
-            backdropFilter: "blur(5px)",
+            backdropFilter: "blur(5px)"
           }}
         >
           <Button size="small" type="text" onClick={() => setShow(false)}>

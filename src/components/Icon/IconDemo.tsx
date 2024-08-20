@@ -37,7 +37,7 @@ const IconFontCodesList: string[] = [
   "icon-fangdajing1",
   "icon-rengongfuwu",
   "icon-liwu",
-  "icon-shouhoufuwu",
+  "icon-shouhoufuwu"
 ];
 
 const ColoredIconFontCodeSet: string[] = [
@@ -53,19 +53,19 @@ const ColoredIconFontCodeSet: string[] = [
   "icon-a-045_shezhi-12",
   "icon-a-045_tianqi",
   "icon-a-045_wenjian",
-  "icon-a-045_zhaopian",
+  "icon-a-045_zhaopian"
 ];
 
 const enum Size {
   Small = 16,
   Default = 20,
-  Large = 28,
+  Large = 28
 }
 
 const optionsWithDisabled = [
   { label: "小", value: Size.Small },
   { label: "中", value: Size.Default },
-  { label: "大", value: Size.Large },
+  { label: "大", value: Size.Large }
 ];
 
 const IconDemo: React.FC = () => {
@@ -75,7 +75,7 @@ const IconDemo: React.FC = () => {
     "gold",
     "blue",
     "green",
-    "magenta",
+    "magenta"
   ]);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const IconDemo: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         gap: 25,
-        border: "1px solid #e0e0e0",
+        border: "1px solid #e0e0e0"
       }}
     >
       <Radio.Group
