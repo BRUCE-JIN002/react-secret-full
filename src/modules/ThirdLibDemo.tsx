@@ -10,6 +10,8 @@ import SpringBox3 from "../third-party-lib/react-spring/spring-3/SpringBox3";
 import Springs from "../third-party-lib/react-spring/springs/Springs";
 import Viewpager from "../third-party-lib/use-gestrue/GestureDemo";
 import TestZustand from "../zustand/TestZustand";
+import FlowBase from "../third-party-lib/react-flow/base/FlowBase";
+import AudioPlayer from "../third-party-lib/react-flow/audio-player/AudioPlayer";
 
 interface ThirdLibProps {
   currentPage?: MenuKey;
@@ -38,6 +40,10 @@ const ThirdLibDemo: FC<ThirdLibProps> = (props) => {
       {currentPage === ThirdParyLibrary.Zustand && <TestZustand />}
       {/** clickToComponent */}
       {currentPage === ThirdParyLibrary.ToComponent && <ClickToComponentDemo />}
+      {/** reactFlowBase */}
+      {currentPage === ThirdParyLibrary.ReactFlowBase && <FlowBase />}
+      {/* AudioPlayer */}
+      {currentPage === ThirdParyLibrary.ReactFlowAudioPlay && <AudioPlayer />}
     </>
   );
 };

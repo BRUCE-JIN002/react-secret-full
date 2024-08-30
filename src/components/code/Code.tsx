@@ -5,14 +5,14 @@ import {
   CopyOutlined,
   ExpandOutlined,
   EyeInvisibleOutlined,
-  SkinOutlined,
+  SkinOutlined
 } from "@ant-design/icons";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import {
   anOldHope,
   gradientDark,
   solarizedDark,
-  hopscotch,
+  hopscotch
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { useCopyToClipboard } from "../../hooks/useCopyToclipboard/useCopyToclipboard";
 import { Input, Select, message } from "antd";
@@ -27,14 +27,14 @@ const intialOption = [
   "anOldHope",
   "gradientDark",
   "solarizedDark",
-  "hopscotch",
+  "hopscotch"
 ];
 
 const themeMap = new Map<string, Record<string, React.CSSProperties>>([
   ["anOldHope", anOldHope],
   ["hopscotch", hopscotch],
   ["gradientDark", gradientDark],
-  ["solarizedDark", solarizedDark],
+  ["solarizedDark", solarizedDark]
 ]);
 
 const getSelectOptions = () =>
@@ -66,7 +66,7 @@ export const Code: React.FC<CodeProps> = (props) => {
     expand: false,
     fileName: props.fileName,
     collapse: true,
-    ...persistConfig,
+    ...persistConfig
   };
 
   const handleCopy = (text: string) => () => {
@@ -74,13 +74,13 @@ export const Code: React.FC<CodeProps> = (props) => {
       .then(() => {
         messageApi.open({
           type: "success",
-          content: "复制成功！",
+          content: "复制成功！"
         });
       })
       .catch(() => {
         messageApi.open({
           type: "error",
-          content: "复制失败！",
+          content: "复制失败！"
         });
       });
   };
@@ -101,7 +101,7 @@ export const Code: React.FC<CodeProps> = (props) => {
         position: "relative",
         width: expand ? "98%" : width,
         maxHeight: "calc(100vh - 10px)",
-        transition: "all 0.3s ease-in-out",
+        transition: "all 0.3s ease-in-out"
       }}
     >
       {contextHolder}
@@ -113,7 +113,7 @@ export const Code: React.FC<CodeProps> = (props) => {
           onClick={() => {
             updateConfig({
               ...persistConfig,
-              collapse: !persistConfig.collapse,
+              collapse: !persistConfig.collapse
             });
           }}
         >
@@ -137,7 +137,7 @@ export const Code: React.FC<CodeProps> = (props) => {
                   e.target.value !== "" ? e.target.value : undefined;
                 updateConfig({
                   ...persistConfig,
-                  fileName: nameValue,
+                  fileName: nameValue
                 });
               }}
               onPressEnter={() => setIsEdit(false)}
@@ -150,7 +150,7 @@ export const Code: React.FC<CodeProps> = (props) => {
                 boxShadow: fileName
                   ? ""
                   : `inset -5px -5px 10px rgba(0, 0, 0, 0.1), 
-                  inset 5px 5px 10px rgba(0, 0, 0, 0.1)`,
+                  inset 5px 5px 10px rgba(0, 0, 0, 0.1)`
               }}
               className="text-sm h-[18px] rounded min-w-24"
             >
@@ -172,7 +172,7 @@ export const Code: React.FC<CodeProps> = (props) => {
             onClick={() =>
               updateConfig({
                 ...persistConfig,
-                expand: false,
+                expand: false
               })
             }
           />
@@ -183,7 +183,7 @@ export const Code: React.FC<CodeProps> = (props) => {
             onClick={() =>
               updateConfig({
                 ...persistConfig,
-                expand: true,
+                expand: true
               })
             }
           />
@@ -194,7 +194,7 @@ export const Code: React.FC<CodeProps> = (props) => {
           onClick={() =>
             updateConfig({
               ...persistConfig,
-              skinColor: getRandomColor(),
+              skinColor: getRandomColor()
             })
           }
         />
@@ -207,13 +207,13 @@ export const Code: React.FC<CodeProps> = (props) => {
           onChange={(value) => {
             updateConfig({
               ...persistConfig,
-              theme: value,
+              theme: value
             });
           }}
           style={{
             border: "1px solid #00000060",
             borderRadius: 4,
-            height: 21,
+            height: 21
           }}
           filterOption={filterOption}
           options={getSelectOptions()}
@@ -226,7 +226,7 @@ export const Code: React.FC<CodeProps> = (props) => {
       {collapse && (
         <div style={{ maxHeight: "calc(100vh - 50px)", overflow: "auto" }}>
           <SyntaxHighlighter
-            language="javascript"
+            language="typescript"
             style={themeMap.get(theme)}
             showLineNumbers={true}
             wrapLongLines={true}
