@@ -82,7 +82,8 @@ export const enum ThirdParyLibrary {
   ToComponent = "toComponent",
   ReactFlow = "reactFlow",
   ReactFlowBase = "reactFlowBase",
-  ReactFlowAudioPlay = "reactFlowAudioPlay"
+  ReactFlowAudioPlay = "reactFlowAudioPlay",
+  AudioContext = "audioContext"
 }
 
 export const enum Projects {
@@ -181,7 +182,8 @@ const items: MenuProps["items"] = [
     getItem("react-flow", ThirdParyLibrary.ReactFlow, "", [
       getItem("基础使用", ThirdParyLibrary.ReactFlowBase),
       getItem("音频播放", ThirdParyLibrary.ReactFlowAudioPlay)
-    ])
+    ]),
+    getItem("online-pinao", ThirdParyLibrary.AudioContext)
   ]),
 
   { type: "divider" },
