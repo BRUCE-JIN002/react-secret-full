@@ -1,5 +1,5 @@
 import { animated, useSprings } from "@react-spring/web";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDrag } from "@use-gesture/react";
 import "./styles.scss";
 import { useBoolean } from "ahooks";
@@ -25,7 +25,7 @@ const header = (onToggle: () => void): JSX.Element => (
 const Viewpager: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const width = ref.current?.clientWidth ?? window.innerWidth;
-  const [activIndex, setActiveIndex] = React.useState(0);
+  const [activeIndex, setActiveIndex] = React.useState(0);
   const [stateShowCode, setShowCode] = useBoolean(false);
 
   const [props, api] = useSprings(pages.length, (i) => ({
@@ -36,7 +36,7 @@ const Viewpager: React.FC = () => {
   const bind = useDrag(
     ({ active, movement: [mx], direction: [xDir], cancel }) => {
       if (active && Math.abs(mx) > width / pages.length) {
-        let newIndex = activIndex + (xDir > 0 ? -1 : 1);
+        let newIndex = activeIndex + (xDir > 0 ? -1 : 1);
         if (newIndex < 0) {
           return;
         }
@@ -47,12 +47,30 @@ const Viewpager: React.FC = () => {
         cancel();
       }
       api.start((i) => {
-        const x = (i - activIndex) * width + (active ? mx : 0);
+        const x = (i - activeIndex) * width + (active ? mx : 0);
         const scale = active ? 1 - Math.abs(mx) / width / 1.2 : 1;
         return { x, scale };
       });
     }
   );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % pages.length;
+        api.start((i) => {
+          const x = (i - nextIndex) * width;
+          return {
+            x,
+            immediate: prevIndex === pages.length - 1 && nextIndex === 0
+          };
+        });
+        return nextIndex;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [api, width]);
 
   return (
     <>
@@ -80,7 +98,7 @@ const Viewpager: React.FC = () => {
             {new Array(pages.length).fill(0).map((_, index) => (
               <div
                 key={index}
-                className={classNames(activIndex === index ? "active" : "")}
+                className={classNames(activeIndex === index ? "active" : "")}
                 onClick={() => {
                   setActiveIndex(index);
                   api.start((i) => {
