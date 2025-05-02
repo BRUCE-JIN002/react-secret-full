@@ -20,10 +20,10 @@ export default function LazyloadDemo() {
     };
     getImgData();
   }, []);
+
   return (
     <div className="flex justify-center flex-col items-center">
       {nodeList.map((node) => node)}
-
       <MyLazyload
         width={350}
         height={200}
@@ -32,9 +32,9 @@ export default function LazyloadDemo() {
           <Skeleton.Image active={true} style={{ height: 250, width: 350 }} />
         }
       >
-        {imgUrl ? (
+        {imgUrl && (
           <img style={{ height: "100%", width: "100%" }} src={imgUrl} alt="" />
-        ) : null}
+        )}
       </MyLazyload>
     </div>
   );

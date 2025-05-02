@@ -21,7 +21,7 @@ const MyLazyload: FC<MyLazyloadProps> = (props) => {
     onContentVisible,
     placeholder,
     height,
-    children,
+    children
   } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ const MyLazyload: FC<MyLazyloadProps> = (props) => {
   useMount(() => {
     const options = {
       rootMargin: typeof offset === "number" ? `${offset}px` : offset ?? "0px",
-      threshold: 0,
+      threshold: 0
     };
 
     elementObserver.current = new IntersectionObserver(

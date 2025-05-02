@@ -8,7 +8,7 @@ import {
   offset,
   arrow,
   FloatingArrow,
-  flip,
+  flip
 } from "@floating-ui/react";
 import { useRef, useState } from "react";
 import "./styles.scss";
@@ -34,11 +34,11 @@ const Popover: React.FC<PopoverProps> = (props) => {
     onOpenChange,
     content,
     children,
-    showArrow = true,
+    showArrow = false,
     trigger = "hover",
     placement = "top",
     className,
-    style,
+    style
   } = props;
 
   const arrowRef = useRef(null);
@@ -55,10 +55,10 @@ const Popover: React.FC<PopoverProps> = (props) => {
     middleware: [
       offset(10),
       arrow({
-        element: arrowRef,
+        element: arrowRef
       }),
-      flip(),
-    ],
+      flip()
+    ]
   });
 
   const hover = useHover(context);
@@ -69,7 +69,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
     interaction,
-    dismiss,
+    dismiss
   ]);
 
   return (

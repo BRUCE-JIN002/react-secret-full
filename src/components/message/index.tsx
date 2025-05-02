@@ -9,7 +9,7 @@ import {
   CloseCircleFilled,
   ExclamationCircleFilled,
   LoadingOutlined,
-  WarningFilled,
+  WarningFilled
 } from "@ant-design/icons";
 
 export type Position = "top" | "bottom";
@@ -37,7 +37,7 @@ const MessageItem: React.FC<MessageProps> = (item) => {
   const { onMouseEnter, onMouseLeave } = useTimer({
     id: item.id!,
     duration: item.duration,
-    remove: item.onClose!,
+    remove: item.onClose!
   });
   return (
     <div
@@ -63,7 +63,7 @@ export const MessageProvider = forwardRef<MessageRef, {}>((props, ref) => {
       add,
       update,
       remove,
-      clearAll,
+      clearAll
     };
   }
 

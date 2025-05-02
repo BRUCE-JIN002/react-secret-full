@@ -8,14 +8,14 @@ import {
   useEffect,
   useLayoutEffect,
   useMemo,
-  useRef,
+  useRef
 } from "react";
 
 /**
  * The context of the cache component.
  * @interface KeepAliveContext
- * @property {boolean} active - The active state of the cache component.
- * @property {() => void} destroy - A function to destroy the cache component.
+ * @property { boolean } active - The active state of the cache component.
+ * @property { voidFunction } destroy - A function to destroy the cache component.
  */
 export interface KeepAliveContext {
   active: boolean;
@@ -24,7 +24,7 @@ export interface KeepAliveContext {
 
 export const CacheComponentContext = createContext<KeepAliveContext>({
   active: false,
-  destroy: () => {},
+  destroy: () => {}
 });
 
 const useCacheComponentContext = () => {
@@ -104,7 +104,7 @@ export const useLayoutEffectOnActive = (
   deps: DependencyList
 ): void => {
   const { active } = useCacheComponentContext(); // 假设这个Hook返回一个对象，其中包含active状态
-  const isMount = useRef<boolean>(false);
+  const isMount = useRef(false);
   useLayoutEffect(() => {
     if (skipMount && !isMount.current) {
       isMount.current = true;
