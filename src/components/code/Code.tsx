@@ -1,3 +1,9 @@
+import { useSafeState } from "ahooks";
+import { ConfigProvider, Input, message, Select } from "antd";
+import classNames from "classnames";
+import _ from "lodash";
+import { useState } from "react";
+
 import {
   CaretDownOutlined,
   CaretRightOutlined,
@@ -5,37 +11,17 @@ import {
   CopyOutlined,
   ExpandOutlined,
   EyeInvisibleOutlined,
+  PicRightOutlined,
   SkinOutlined
 } from "@ant-design/icons";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import {
-  anOldHope,
-  gradientDark,
-  solarizedDark,
-  hopscotch
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { useCopyToClipboard } from "../../hooks/useCopyToclipboard/useCopyToclipboard";
-import { Input, Select, message } from "antd";
+import MonacoEditor, { OnMount } from "@monaco-editor/react";
+
 import { getRandomColor } from "../../common/utils/utils";
-import { ConfigListItem, useCodeConfigStore } from "./store";
+import { useCopyToClipboard } from "../../hooks/useCopyToclipboard/useCopyToclipboard";
 import { HooksType } from "../../menu/Menu";
-import { useSafeState } from "ahooks";
-import _ from "lodash";
-import classNames from "classnames";
+import { ConfigListItem, useCodeConfigStore } from "./store";
 
-const intialOption = [
-  "anOldHope",
-  "gradientDark",
-  "solarizedDark",
-  "hopscotch"
-];
-
-const themeMap = new Map<string, Record<string, React.CSSProperties>>([
-  ["anOldHope", anOldHope],
-  ["hopscotch", hopscotch],
-  ["gradientDark", gradientDark],
-  ["solarizedDark", solarizedDark]
-]);
+const intialOption = ["vs-light", "vs-dark", "hc-black"];
 
 const getSelectOptions = () =>
   intialOption.map((theme) => ({ label: theme, value: theme }));
@@ -54,6 +40,9 @@ export const Code: React.FC<CodeProps> = (props) => {
   const [messageApi, contextHolder] = message.useMessage();
   const { configList, updateConfig } = useCodeConfigStore();
   const [isEdit, setIsEdit] = useSafeState(false);
+  const [randomColor, setRandomColor] = useState<string | undefined>(
+    () => configList.find((l) => l.id === id)?.skinColor
+  );
 
   const persistConfig = _.assign(
     configList.find((l) => l.id === id),
@@ -62,7 +51,7 @@ export const Code: React.FC<CodeProps> = (props) => {
 
   const { skinColor, theme, expand, fileName, collapse }: ConfigListItem = {
     skinColor: "#00b56d",
-    theme: "anOldHope",
+    theme: "vs-dark",
     expand: false,
     fileName: props.fileName,
     collapse: true,
@@ -90,6 +79,12 @@ export const Code: React.FC<CodeProps> = (props) => {
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
+  const handleEditorMount: OnMount = (editor, monaco) => {
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
+      editor.getAction("editor.action.formatDocument")?.run();
+    });
+  };
+
   return (
     <div
       style={{
@@ -105,10 +100,10 @@ export const Code: React.FC<CodeProps> = (props) => {
       }}
     >
       {contextHolder}
-      <div className="flex items-center h-4 text-[12px] gap-2 m-[4px]">
+      <div className="flex items-center h-4 text-[12px] gap-3 m-[4px]">
         <div
           className={classNames(
-            "flex justify-center items-center text-[12px] py-1 px-[2px] hover:bg-[#fff] rounded-sm cursor-pointer"
+            "flex justify-center items-center text-[12px] py-1 px-[2px] rounded-sm cursor-pointer"
           )}
           onClick={() => {
             updateConfig({
@@ -188,52 +183,95 @@ export const Code: React.FC<CodeProps> = (props) => {
             }
           />
         )}
+        <PicRightOutlined
+          style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+          title="缩略图"
+          onClick={() => {
+            updateConfig({
+              ...persistConfig,
+              minimap: !persistConfig.minimap
+            });
+          }}
+        />
         <SkinOutlined
           style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
           title="换肤"
-          onClick={() =>
+          onClick={() => {
+            const color = getRandomColor();
+            setRandomColor(color);
             updateConfig({
               ...persistConfig,
-              skinColor: getRandomColor()
-            })
-          }
-        />
-        <Select
-          showSearch
-          size="small"
-          defaultValue={theme}
-          placeholder="Select a person"
-          optionFilterProp="children"
-          onChange={(value) => {
-            updateConfig({
-              ...persistConfig,
-              theme: value
+              skinColor: color
             });
           }}
-          style={{
-            border: "1px solid #00000060",
-            borderRadius: 4,
-            height: 21
-          }}
-          filterOption={filterOption}
-          options={getSelectOptions()}
         />
+        <ConfigProvider
+          theme={{
+            components: {
+              Select: {
+                selectorBg: randomColor,
+                activeBorderColor: randomColor,
+                hoverBorderColor: randomColor,
+                colorBorder: randomColor,
+                optionActiveBg: `${randomColor}50`,
+                optionSelectedBg: randomColor,
+                optionHeight: 10,
+                optionPadding: 2
+              }
+            }
+          }}
+        >
+          <Select
+            showSearch
+            size="small"
+            defaultValue={theme}
+            placeholder="Select a theme"
+            optionFilterProp="children"
+            listItemHeight={10}
+            onChange={(value) => {
+              updateConfig({
+                ...persistConfig,
+                theme: value
+              });
+            }}
+            style={{
+              border: "1px solid #00000060",
+              borderRadius: 4,
+              height: 18,
+              backgroundColor: randomColor
+            }}
+            filterOption={filterOption}
+            options={getSelectOptions()}
+          />
+        </ConfigProvider>
         <span onClick={handleCopy(codeString)}>
-          <span style={{ margin: "0px 8px", cursor: "pointer" }}>复制代码</span>
-          <CopyOutlined />
+          <span style={{ margin: "0px 5px", cursor: "pointer" }}>复制代码</span>
+          <CopyOutlined style={{ marginRight: 8 }} />
         </span>
       </div>
       {collapse && (
-        <div style={{ maxHeight: "calc(100vh - 50px)", overflow: "auto" }}>
-          <SyntaxHighlighter
-            language="typescript"
-            style={themeMap.get(theme)}
-            showLineNumbers={true}
-            wrapLongLines={true}
-          >
-            {codeString}
-          </SyntaxHighlighter>
-        </div>
+        <MonacoEditor
+          width={"100%"}
+          height={"90vh"}
+          language={"typescript"}
+          onMount={handleEditorMount}
+          value={codeString}
+          theme={theme}
+          options={{
+            fontSize: 14,
+            scrollBeyondLastLine: false,
+            readOnly: true,
+            minimap: {
+              enabled: persistConfig.minimap,
+              size: "proportional"
+            },
+            overviewRulerBorder: false,
+            scrollbar: {
+              verticalScrollbarSize: 6,
+              horizontalScrollbarSize: 6
+            }
+          }}
+        />
       )}
     </div>
   );
