@@ -26,9 +26,9 @@ code {
   left: 0px;
   bottom: 0px;
   width: 256px;
-  border: 1px solid #efefef;
   overflow-x: hidden;
   overflow-y: auto;
+  background: #001529;
 }
 
 .content {

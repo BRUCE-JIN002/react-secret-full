@@ -210,6 +210,7 @@ const MenuList: React.FC = () => {
         ThirdParyLibrary.ThirdParyLib
       ]}
       mode="inline"
+      theme="dark"
       items={items}
       style={{ width: 256 }}
     />
