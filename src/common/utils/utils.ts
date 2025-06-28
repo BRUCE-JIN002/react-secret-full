@@ -6,7 +6,7 @@ export const getRandomColor = () =>
 getRandomColor();
 
 /** 是否是发薪日 */
-export const isSalaryDay = (day: Dayjs) => {
+export const isPayDay = (day: Dayjs) => {
   if (day.date() === 10 && day.day() !== 0 && day.day() !== 6) {
     return true;
   } else if (
@@ -27,14 +27,8 @@ export const isMyBorithday = (date: Dayjs) => {
 };
 
 /** 是否需要巡检 */
-export const isRoutingInspection = (date: Dayjs) => {
-  if (
-    date.format("YYYY-MM-DD") === dayjs(new Date()).format("YYYY-MM-DD") &&
-    date.day() !== 6
-  ) {
-    return true;
-  }
-  return false;
+export const isStudyDay = (date: Dayjs) => {
+  return date.isSame(dayjs(), "day");
 };
 
 /** 是否是周末 */

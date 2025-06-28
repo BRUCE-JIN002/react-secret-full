@@ -20,7 +20,7 @@ const CalendarLocale: CalendarType = {
     September: "September",
     October: "October",
     November: "November",
-    December: "December",
+    December: "December"
   },
   week: {
     monday: "Monday",
@@ -29,8 +29,14 @@ const CalendarLocale: CalendarType = {
     thursday: "Thursday",
     friday: "Friday",
     saturday: "Saturday",
-    sunday: "Sunday",
+    sunday: "Sunday"
   },
+  selfCustomized: {
+    payday: "Pay day",
+    dayoff: "Day off",
+    birthday: "Bruce kim's bithday",
+    studyday: "Did you study today?"
+  }
 };
 
 export default CalendarLocale;

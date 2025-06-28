@@ -20,7 +20,7 @@ const CalendarLocale: CalendarType = {
     September: "九月",
     October: "十月",
     November: "十一月",
-    December: "十二月",
+    December: "十二月"
   },
   week: {
     monday: "周一",
@@ -29,8 +29,14 @@ const CalendarLocale: CalendarType = {
     thursday: "周四",
     friday: "周五",
     saturday: "周六",
-    sunday: "周日",
+    sunday: "周日"
   },
+  selfCustomized: {
+    payday: "发薪日",
+    dayoff: "休",
+    birthday: "金显祥的生日",
+    studyday: "今天学习了吗？"
+  }
 };
 
 export default CalendarLocale;

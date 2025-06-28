@@ -1,75 +1,81 @@
-import { GiftFilled } from "@ant-design/icons";
+import { DollarOutlined, GiftFilled } from "@ant-design/icons";
 import { Badge, FloatButton } from "antd";
 import React, { useState } from "react";
 import {
   isMyBorithday,
-  isRoutingInspection,
-  isSalaryDay,
-  isWeekends,
+  isStudyDay,
+  isPayDay,
+  isWeekends
 } from "../../common/utils/utils";
 import dayjs, { Dayjs } from "dayjs";
 import Calendar from "./Calendar";
 import { useToggle } from "ahooks";
+import allLocales from "./locale";
 
 export const enum LocaleType {
   CN = "zh-CN",
-  EN = "en-US",
+  EN = "en-US"
 }
 
 const CalendarDemo: React.FC = (props) => {
   const [stateLocale, setLocale] = useToggle(LocaleType.CN, LocaleType.EN);
   const [stateDate, setDate] = useState<Dayjs>(dayjs(new Date()));
+  const calendarLocales = allLocales[stateLocale];
 
   return (
     <>
       <Calendar
         value={stateDate}
         locale={stateLocale}
-        onChange={(value) => {
-          setDate(value);
-        }}
+        onChange={(value) => setDate(value)}
         dateInnerContent={(date) => {
           return (
             <div
               style={{
-                fontSize: 14,
-                fontWeight: "bold",
+                fontSize: 12,
+                fontWeight: "bold"
               }}
             >
-              {isRoutingInspection(date) && (
+              {isWeekends(date) && (
                 <div>
                   <Badge
-                    color="red"
-                    status="processing"
+                    color="green"
                     text={
-                      <span style={{ color: "#f50", fontSize: 12 }}>
-                        今天巡检了吗？
+                      <span style={{ color: "yellowgreen", fontSize: 10 }}>
+                        {calendarLocales.selfCustomized.dayoff}
                       </span>
                     }
                   />
                 </div>
               )}
-              {isSalaryDay(date) && (
+              {isStudyDay(date) && (
                 <div>
                   <Badge
-                    color={"orange"}
-                    text={<span style={{ color: "orange" }}>发薪日</span>}
+                    color="red"
+                    status="processing"
+                    text={
+                      <span style={{ color: "#f50", fontSize: 10 }}>
+                        {calendarLocales.selfCustomized.studyday}
+                      </span>
+                    }
                   />
                 </div>
               )}
-              {isWeekends(date) && (
+              {isPayDay(date) && (
                 <div>
-                  <Badge
-                    color={"green"}
-                    text={<span style={{ color: "yellowgreen" }}>休</span>}
-                  />
+                  <div style={{ color: "orange", marginTop: 5 }}>
+                    <DollarOutlined />
+                    <span style={{ fontSize: 10, marginLeft: 3 }}>
+                      {calendarLocales.selfCustomized.payday}
+                    </span>
+                  </div>
                 </div>
               )}
               {isMyBorithday(date) && (
                 <div style={{ color: "magenta", marginTop: 5 }}>
                   <GiftFilled />
-                  <span style={{ fontSize: 12, marginLeft: 3 }}>
-                    金显祥的生日
+                  <span style={{ fontSize: 10, marginLeft: 3 }}>
+                    {calendarLocales.selfCustomized.birthday}
                   </span>
                 </div>
               )}

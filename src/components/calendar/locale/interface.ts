@@ -29,4 +29,10 @@ export interface CalendarType {
     saturday: string;
     sunday: string;
   } & Record<string, any>;
+  selfCustomized: {
+    dayoff: string;
+    payday: string;
+    birthday: string;
+    studyday: string;
+  } & Record<string, any>;
 }

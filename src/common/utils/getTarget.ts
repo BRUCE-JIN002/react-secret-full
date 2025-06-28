@@ -14,4 +14,5 @@ const getTarget = <T extends TargetType>(target: BasicTarget<T>) => {
 
   return targetElement;
 };
+
 export default getTarget;

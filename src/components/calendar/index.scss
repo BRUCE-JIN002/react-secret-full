@@ -37,6 +37,10 @@
       border: 1px solid #eee;
       color: #948e87;
       overflow: hidden;
+      &:hover {
+        background: rgba(7, 156, 249, 0.1);
+        color: #7d7d7f;
+      }
       &-current {
         color: #000;
       }
