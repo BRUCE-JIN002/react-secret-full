@@ -41,7 +41,7 @@ const CalendarDemo: React.FC = (props) => {
                   <Badge
                     color="green"
                     text={
-                      <span style={{ color: "yellowgreen", fontSize: 10 }}>
+                      <span style={{ color: "yellowgreen" }}>
                         {calendarLocales.selfCustomized.dayoff}
                       </span>
                     }
@@ -54,7 +54,7 @@ const CalendarDemo: React.FC = (props) => {
                     color="red"
                     status="processing"
                     text={
-                      <span style={{ color: "#f50", fontSize: 10 }}>
+                      <span style={{ color: "#f50", fontSize: 12 }}>
                         {calendarLocales.selfCustomized.studyday}
                       </span>
                     }
@@ -65,7 +65,7 @@ const CalendarDemo: React.FC = (props) => {
                 <div>
                   <div style={{ color: "orange", marginTop: 5 }}>
                     <DollarOutlined />
-                    <span style={{ fontSize: 10, marginLeft: 3 }}>
+                    <span style={{ fontSize: 12, marginLeft: 3 }}>
                       {calendarLocales.selfCustomized.payday}
                     </span>
                   </div>
@@ -74,7 +74,7 @@ const CalendarDemo: React.FC = (props) => {
               {isMyBorithday(date) && (
                 <div style={{ color: "magenta", marginTop: 5 }}>
                   <GiftFilled />
-                  <span style={{ fontSize: 10, marginLeft: 3 }}>
+                  <span style={{ fontSize: 12, marginLeft: 3 }}>
                     {calendarLocales.selfCustomized.birthday}
                   </span>
                 </div>
