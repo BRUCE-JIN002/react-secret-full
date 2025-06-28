@@ -253,7 +253,9 @@ export const Code: React.FC<CodeProps> = (props) => {
         <MonacoEditor
           width={"100%"}
           height={"90vh"}
-          language={"typescript"}
+          language={
+            persistConfig.fileName?.endsWith("js") ? "javascript" : "typescript"
+          }
           onMount={handleEditorMount}
           value={codeString}
           theme={theme}
