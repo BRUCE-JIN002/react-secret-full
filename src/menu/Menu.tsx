@@ -43,7 +43,9 @@ export const enum HooksType {
   UseTextSelection = "useTextSelection",
   UseTimeout = "useTimeout",
   UseUnmountedRef = "useUnmountedRef",
-  UseWhyDidYouUpdate = "useWhyDidYouUpdate"
+  UseWhyDidYouUpdate = "useWhyDidYouUpdate",
+  UseScrollDetect = "useScrollDetect",
+  UseStepProgress = "useStepProgress"
 }
 
 export const enum ComponentsType {
@@ -138,7 +140,9 @@ const items: MenuProps["items"] = [
     getItem("useTextSelection", HooksType.UseTextSelection),
     getItem("useTimeout", HooksType.UseTimeout),
     getItem("useUnmountedRef", HooksType.UseUnmountedRef),
-    getItem("useWhyDidYouUpdate", HooksType.UseWhyDidYouUpdate)
+    getItem("useWhyDidYouUpdate", HooksType.UseWhyDidYouUpdate),
+    getItem("useScrollDetection", HooksType.UseScrollDetect),
+    getItem("useStepProgress", HooksType.UseStepProgress)
   ]),
 
   { type: "divider" },

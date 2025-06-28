@@ -31,6 +31,8 @@ import UseTextSelectionCode from "../hooks/useTextSelection/UseTextSelectionCode
 import UseTimeoutCode from "../hooks/useTimeout/UseTimeoutCode";
 import UseUnmountedRefCode from "../hooks/useUnmountedRef/UseUnmountedRefCode";
 import UseWhyDidYouUpdateCode from "../hooks/useWhyDidYouUpdate/UseWhyDidYouUpdateCode";
+import UseScrollDetectCode from "../hooks/useScrollDetect/useScrollDetectCode";
+import UseStepProgressCode from "../hooks/useStepProgress/useStepProgressCode";
 interface Iprops {
   currentPage?: MenuKey;
 }
@@ -77,6 +79,8 @@ const CustomHooks: FC<Iprops> = (props) => {
       {currentPage === HooksType.UseTextSelection && <UseTextSelectionCode />}
       {currentPage === HooksType.UseTimeout && <UseTimeoutCode />}
       {currentPage === HooksType.UseUnmountedRef && <UseUnmountedRefCode />}
+      {currentPage === HooksType.UseScrollDetect && <UseScrollDetectCode />}
+      {currentPage === HooksType.UseStepProgress && <UseStepProgressCode />}
       {currentPage === HooksType.UseWhyDidYouUpdate && (
         <UseWhyDidYouUpdateCode />
       )}
