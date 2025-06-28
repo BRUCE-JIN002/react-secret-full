@@ -29,6 +29,37 @@ code {
   overflow-x: hidden;
   overflow-y: auto;
   background: #001529;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &.inlineMode {
+    width: 80px;
+  }
+}
+
+.menuWrapper {
+  position: absolute;
+  inset: 0;
+  bottom: 24px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.collapseButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #000f16;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
 }
 
 .content {
@@ -42,6 +73,10 @@ code {
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+
+  &.collapseContent {
+    left: 256px;
+  }
 }
 
 ::-webkit-scrollbar {

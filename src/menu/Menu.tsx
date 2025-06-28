@@ -90,22 +90,21 @@ export const enum ThirdParyLibrary {
 
 export const enum Projects {
   Comprehesive = "comprehesive",
-  TodoList = "todolist"
+  TodoList = "todolist",
+  Collapse = "collapse"
 }
 
 const getItem = (
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: "group"
+  children?: MenuItem[]
 ): MenuItem => {
   return {
     key,
     icon,
     children,
-    label,
-    type
+    label
   } as MenuItem;
 };
 
@@ -200,19 +199,16 @@ const items: MenuProps["items"] = [
 const MenuList: React.FC = () => {
   const updateCurrentPage = useMenuStore((state) => state.updateCurrentPage);
   const currentPage = useMenuStore((state) => state.currentPage);
+  const collapse = useMenuStore((state) => state.collapse);
 
   return (
     <Menu
       onClick={(e) => updateCurrentPage(e.key as ComponentsType | HooksType)}
       defaultSelectedKeys={[currentPage as ComponentsType.MinCalendar]}
-      defaultOpenKeys={[
-        ComponentsType.ComponentsDemo,
-        ThirdParyLibrary.ThirdParyLib
-      ]}
       mode="inline"
       theme="dark"
       items={items}
-      style={{ width: 256 }}
+      inlineCollapsed={collapse}
     />
   );
 };
