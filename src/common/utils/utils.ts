@@ -19,7 +19,7 @@ export const isPayDay = (day: Dayjs) => {
 };
 
 /** 是否是我的生日 */
-export const isMyBorithday = (date: Dayjs) => {
+export const isMyBirthday = (date: Dayjs) => {
   if (date.date() === 28 && date.month() === 9) {
     return true;
   }

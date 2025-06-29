@@ -75,7 +75,7 @@ code {
   overflow-y: auto;
 
   &.collapseContent {
-    left: 256px;
+    left: 80px;
   }
 }
 

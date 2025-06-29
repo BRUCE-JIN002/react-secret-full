@@ -2,10 +2,10 @@ import { DollarOutlined, GiftFilled } from "@ant-design/icons";
 import { Badge, FloatButton } from "antd";
 import React, { useState } from "react";
 import {
-  isMyBorithday,
   isStudyDay,
   isPayDay,
-  isWeekends
+  isWeekends,
+  isMyBirthday
 } from "../../common/utils/utils";
 import dayjs, { Dayjs } from "dayjs";
 import Calendar from "./Calendar";
@@ -28,6 +28,7 @@ const CalendarDemo: React.FC = (props) => {
         value={stateDate}
         locale={stateLocale}
         onChange={(value) => setDate(value)}
+        style={{ borderRadius: 20 }}
         dateInnerContent={(date) => {
           return (
             <div
@@ -71,7 +72,7 @@ const CalendarDemo: React.FC = (props) => {
                   </div>
                 </div>
               )}
-              {isMyBorithday(date) && (
+              {isMyBirthday(date) && (
                 <div style={{ color: "magenta", marginTop: 5 }}>
                   <GiftFilled />
                   <span style={{ fontSize: 12, marginLeft: 3 }}>
