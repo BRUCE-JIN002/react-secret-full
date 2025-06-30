@@ -1,4 +1,4 @@
-import { useSafeState } from "ahooks";
+import { useBoolean, useSafeState } from "ahooks";
 import { ConfigProvider, Input, message, Select } from "antd";
 import classNames from "classnames";
 import _ from "lodash";
@@ -11,8 +11,10 @@ import {
   CopyOutlined,
   ExpandOutlined,
   EyeInvisibleOutlined,
+  LockOutlined,
   PicRightOutlined,
-  SkinOutlined
+  SkinOutlined,
+  UnlockOutlined
 } from "@ant-design/icons";
 import MonacoEditor, { OnMount } from "@monaco-editor/react";
 
@@ -40,6 +42,7 @@ export const Code: React.FC<CodeProps> = (props) => {
   const [messageApi, contextHolder] = message.useMessage();
   const { configList, updateConfig } = useCodeConfigStore();
   const [isEdit, setIsEdit] = useSafeState(false);
+  const [isEditable, setIsEditable] = useBoolean(false);
   const [randomColor, setRandomColor] = useState<string | undefined>(
     () => configList.find((l) => l.id === id)?.skinColor
   );
@@ -153,6 +156,19 @@ export const Code: React.FC<CodeProps> = (props) => {
             </div>
           )}
         </div>
+        {isEditable ? (
+          <UnlockOutlined
+            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+            onClick={() => setIsEditable.toggle()}
+            title="编辑模式"
+          />
+        ) : (
+          <LockOutlined
+            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
+            onClick={() => setIsEditable.toggle()}
+            title="只读模式"
+          />
+        )}
         {onClick && (
           <EyeInvisibleOutlined
             style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
@@ -262,7 +278,7 @@ export const Code: React.FC<CodeProps> = (props) => {
           options={{
             fontSize: 14,
             scrollBeyondLastLine: false,
-            readOnly: true,
+            readOnly: !isEditable,
             minimap: {
               enabled: persistConfig.minimap,
               size: "proportional"
