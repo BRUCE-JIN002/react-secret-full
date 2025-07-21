@@ -62,10 +62,23 @@ code {
   padding: 8px;
 }
 
+.nav {
+  position: absolute;
+  left: 256px;
+  top: 0;
+  right: 0px;
+  height: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-y: auto;
+  border-bottom: 1px solid #ededed;
+}
+
 .content {
   position: absolute;
   left: 256px;
-  top: 0px;
+  top: 20px;
   right: 0px;
   bottom: 0px;
   display: flex;

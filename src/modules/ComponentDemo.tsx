@@ -17,7 +17,7 @@ import LazyloadDemo from "../components/lazyLoad/LazyloadDemo";
 import SlidInOverlayDemo from "../components/slideInOverlay/SlidInOverlayDemo";
 import ModalDemo from "../components/modal/ModalDemo";
 import CheckCardDemo from "../components/checkCard/CheckCardDemo";
-import MyQRcode from "../components/qrcode/QrCode";
+import MyQRcode from "../components/QRCode/QrCode";
 
 interface IComponentProps {
   currentPage?: MenuKey;

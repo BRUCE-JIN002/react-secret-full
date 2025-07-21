@@ -74,6 +74,7 @@ const App: FC = () => {
               )}
             </div>
           </div>
+          <div className="nav">demo</div>
           <div
             className={classNames("content", collapse ? "collapseContent" : "")}
           >
