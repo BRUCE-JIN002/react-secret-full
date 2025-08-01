@@ -66,7 +66,8 @@ export const enum ComponentsType {
   Watermark = "watermark",
   SlidInOverlay = "slidInOverlay",
   Modal = "modal",
-  CheckCard = "checkCard"
+  CheckCard = "checkCard",
+  Tab = "tab"
 }
 
 export const enum ThirdParyLibrary {
@@ -163,7 +164,8 @@ const items: MenuProps["items"] = [
     getItem("Lazyload 懒加载", ComponentsType.Lazyload),
     getItem("SlideInoverlay 转场动画", ComponentsType.SlidInOverlay),
     getItem("Modal 模态框", ComponentsType.Modal),
-    getItem("CheckCard 多选卡片", ComponentsType.CheckCard)
+    getItem("CheckCard 多选卡片", ComponentsType.CheckCard),
+    getItem("Tab 标签页", ComponentsType.Tab)
   ]),
 
   { type: "divider" },

@@ -18,6 +18,7 @@ import SlidInOverlayDemo from "../components/slideInOverlay/SlidInOverlayDemo";
 import ModalDemo from "../components/modal/ModalDemo";
 import CheckCardDemo from "../components/checkCard/CheckCardDemo";
 import MyQRcode from "../components/QRCode/QrCode";
+import TabDemo from "../components/Tab";
 
 interface IComponentProps {
   currentPage?: MenuKey;
@@ -62,6 +63,8 @@ const ComponentDemo: FC<IComponentProps> = (props) => {
       {currentPage === ComponentsType.Modal && <ModalDemo />}
       {/** CheckCard */}
       {currentPage === ComponentsType.CheckCard && <CheckCardDemo />}
+      {/** Tab */}
+      {currentPage === ComponentsType.Tab && <TabDemo />}
     </>
   );
 };

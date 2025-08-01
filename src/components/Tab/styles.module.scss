@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+
+    .headerItem {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #3ac7f6;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      min-width: 64px;
+
+      &.hightlight {
+        background-color: rgb(239, 137, 154);
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #b4babc;
+  }
+}
