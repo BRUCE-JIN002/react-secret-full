@@ -135,57 +135,5 @@ export const TabItem = ({ children }: TabItemProps) => {
 
 TabItem.displayName = "tabItem";
 
-Tab.displayName = "tab";
-
-const TabDemo = () => {
-  return (
-    <div style={{ padding: "20px" }}>
-      <h3>默认样式</h3>
-      <Tab defaultActive="react" onChange={(type: string) => console.log(type)}>
-        <TabItem name="react" label="React" icon="⚛️">
-          <div style={{ padding: "20px" }}>
-            <h4>React</h4>
-            <p>React 是一个用于构建用户界面的 JavaScript 库。</p>
-          </div>
-        </TabItem>
-        <TabItem name="vue" label="Vue" icon="💚">
-          <div style={{ padding: "20px" }}>
-            <h4>Vue</h4>
-            <p>Vue.js 是一套用于构建用户界面的渐进式框架。</p>
-          </div>
-        </TabItem>
-        <TabItem name="angular" label="Angular" icon="🅰️">
-          <div style={{ padding: "20px" }}>
-            <h4>Angular</h4>
-            <p>Angular 是一个应用设计框架与开发平台。</p>
-          </div>
-        </TabItem>
-        <TabItem name="disabled" label="禁用" disabled>
-          <div>这个标签页被禁用了</div>
-        </TabItem>
-      </Tab>
-
-      <h3 style={{ marginTop: "40px" }}>小尺寸</h3>
-      <Tab size="small" defaultActive="tab1">
-        <TabItem name="tab1" label="标签一">
-          <div style={{ padding: "16px" }}>小尺寸标签页内容</div>
-        </TabItem>
-        <TabItem name="tab2" label="标签二">
-          <div style={{ padding: "16px" }}>另一个标签页</div>
-        </TabItem>
-      </Tab>
-
-      <h3 style={{ marginTop: "40px" }}>卡片样式</h3>
-      <Tab type="card" defaultActive="card1">
-        <TabItem name="card1" label="卡片一">
-          <div style={{ padding: "20px" }}>卡片样式的标签页</div>
-        </TabItem>
-        <TabItem name="card2" label="卡片二">
-          <div style={{ padding: "20px" }}>另一个卡片</div>
-        </TabItem>
-      </Tab>
-    </div>
-  );
-};
-
-export default TabDemo;
+export { Tab };
+export type { TabProps, TabItemProps };
