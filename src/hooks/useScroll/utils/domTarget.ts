@@ -1,6 +1,6 @@
-import { isFunction } from "./index";
 import isBrowser from "./isBrowser";
 import type { RefObject } from "react";
+import { isFunction } from ".";
 
 type TargetValue<T> = T | undefined | null;
 

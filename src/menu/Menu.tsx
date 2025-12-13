@@ -3,7 +3,7 @@ import {
   AppstoreOutlined,
   MailOutlined,
   ProductOutlined,
-  SettingOutlined
+  SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
@@ -44,8 +44,8 @@ export const enum HooksType {
   UseTimeout = "useTimeout",
   UseUnmountedRef = "useUnmountedRef",
   UseWhyDidYouUpdate = "useWhyDidYouUpdate",
-  UseScrollDetect = "useScrollDetect",
-  UseStepProgress = "useStepProgress"
+  UseScroll = "useScroll",
+  UseStepProgress = "useStepProgress",
 }
 
 export const enum ComponentsType {
@@ -67,7 +67,7 @@ export const enum ComponentsType {
   SlidInOverlay = "slidInOverlay",
   Modal = "modal",
   CheckCard = "checkCard",
-  Tab = "tab"
+  Tab = "tab",
 }
 
 export const enum ThirdParyLibrary {
@@ -86,13 +86,13 @@ export const enum ThirdParyLibrary {
   ReactFlow = "reactFlow",
   ReactFlowBase = "reactFlowBase",
   ReactFlowAudioPlay = "reactFlowAudioPlay",
-  AudioContext = "audioContext"
+  AudioContext = "audioContext",
 }
 
 export const enum Projects {
   Comprehesive = "comprehesive",
   TodoList = "todolist",
-  Collapse = "collapse"
+  Collapse = "collapse",
 }
 
 const getItem = (
@@ -105,7 +105,7 @@ const getItem = (
     key,
     icon,
     children,
-    label
+    label,
   } as MenuItem;
 };
 
@@ -141,8 +141,8 @@ const items: MenuProps["items"] = [
     getItem("useTimeout", HooksType.UseTimeout),
     getItem("useUnmountedRef", HooksType.UseUnmountedRef),
     getItem("useWhyDidYouUpdate", HooksType.UseWhyDidYouUpdate),
-    getItem("useScrollDetection", HooksType.UseScrollDetect),
-    getItem("useStepProgress", HooksType.UseStepProgress)
+    getItem("useScroll", HooksType.UseScroll),
+    getItem("useStepProgress", HooksType.UseStepProgress),
   ]),
 
   { type: "divider" },
@@ -165,7 +165,7 @@ const items: MenuProps["items"] = [
     getItem("SlideInoverlay 转场动画", ComponentsType.SlidInOverlay),
     getItem("Modal 模态框", ComponentsType.Modal),
     getItem("CheckCard 多选卡片", ComponentsType.CheckCard),
-    getItem("Tab 标签页", ComponentsType.Tab)
+    getItem("Tab 标签页", ComponentsType.Tab),
   ]),
 
   { type: "divider" },
@@ -175,27 +175,27 @@ const items: MenuProps["items"] = [
       getItem("单元素动画", ThirdParyLibrary.ReactSpring1),
       getItem("多元素动画", ThirdParyLibrary.ReactSpring2),
       getItem("复杂动画", ThirdParyLibrary.ReactSpring3),
-      getItem("综合应用", ThirdParyLibrary.ReactSprings)
+      getItem("综合应用", ThirdParyLibrary.ReactSprings),
     ]),
     getItem("react-dnd", ThirdParyLibrary.ReactDnd, "", [
       getItem("普通拖拽", ThirdParyLibrary.ReactDnd1),
-      getItem("拖拽排序", ThirdParyLibrary.ReactDnd2)
+      getItem("拖拽排序", ThirdParyLibrary.ReactDnd2),
     ]),
     getItem("use-gestrue", ThirdParyLibrary.UseGesture),
     getItem("my-zustand", ThirdParyLibrary.Zustand),
     getItem("click-to-component", ThirdParyLibrary.ToComponent),
     getItem("react-flow", ThirdParyLibrary.ReactFlow, "", [
       getItem("基础使用", ThirdParyLibrary.ReactFlowBase),
-      getItem("音频播放", ThirdParyLibrary.ReactFlowAudioPlay)
+      getItem("音频播放", ThirdParyLibrary.ReactFlowAudioPlay),
     ]),
-    getItem("online-pinao", ThirdParyLibrary.AudioContext)
+    getItem("online-pinao", ThirdParyLibrary.AudioContext),
   ]),
 
   { type: "divider" },
 
   getItem("综合项目", Projects.Comprehesive, <SettingOutlined />, [
-    getItem("TodoList", Projects.TodoList)
-  ])
+    getItem("TodoList", Projects.TodoList),
+  ]),
 ];
 
 const MenuList: React.FC = () => {

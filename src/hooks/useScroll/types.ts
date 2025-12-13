@@ -1,3 +1,7 @@
+import type { BasicTarget } from "./utils/domTarget";
+
+export type Target = BasicTarget<HTMLElement | Document>;
+
 export type ScrollDetectionOptions = {
   scrollThreshold?: number;
   debounceDelay?: number;
@@ -36,10 +40,34 @@ export type ScrollState = {
   hasHorizontalScroll: boolean;
 };
 
+export type ScrollEventCallback = (
+  currentPosition: number,
+  direction: "x" | "y"
+) => void;
+
+export type ScrollEventListener = {
+  position: number;
+  direction: "x" | "y";
+  callback: ScrollEventCallback;
+  triggered: boolean; // 标记是否已经触发过
+};
+
 export type ScrollMethods = {
   scrollToTop: (options?: ScrollOptions) => void;
   scrollToBottom: (options?: ScrollOptions) => void;
   scrollToLeft: (options?: ScrollOptions) => void;
   scrollToRight: (options?: ScrollOptions) => void;
   scrollTo: (target: number | targetPosition, options?: ScrollOptions) => void;
+  // 滚动事件监听方法
+  addEventListener: (
+    position: number,
+    direction: "x" | "y",
+    callback: ScrollEventCallback
+  ) => () => void;
+  removeEventListener: (
+    position: number,
+    direction: "x" | "y",
+    callback?: ScrollEventCallback
+  ) => void;
+  clearAllEventListeners: () => void;
 };

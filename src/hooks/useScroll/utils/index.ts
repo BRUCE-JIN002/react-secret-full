@@ -1,9 +1,27 @@
-import { CubicBezierPoint, ScrollAnimationType } from "./types";
+import { CubicBezierPoint, ScrollAnimationType } from "../types";
+
+export const isObject = (value: unknown): value is Record<any, any> =>
+  value !== null && typeof value === "object";
+
+export const isFunction = (value: unknown): value is (...args: any) => any =>
+  typeof value === "function";
+
+export const isString = (value: unknown): value is string =>
+  typeof value === "string";
+
+export const isBoolean = (value: unknown): value is boolean =>
+  typeof value === "boolean";
+
+export const isNumber = (value: unknown): value is number =>
+  typeof value === "number";
+
+export const isUndef = (value: unknown): value is undefined =>
+  typeof value === "undefined";
 
 // 百分比转换逻辑
 export const parseScrollValue = (
   value: number | string | undefined,
-  container: HTMLElement,
+  container: HTMLElement | Document,
   direction: "x" | "y"
 ): number | undefined => {
   if (value === undefined) return undefined;
@@ -15,10 +33,33 @@ export const parseScrollValue = (
     const percentage = parseFloat(value);
     if (isNaN(percentage)) return 0;
 
-    const maxScroll =
-      direction === "x"
-        ? container.scrollWidth - container.clientWidth
-        : container.scrollHeight - container.clientHeight;
+    let maxScroll: number;
+
+    if (container === document) {
+      // 处理 Document 类型
+      const scrollHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      );
+      const scrollWidth = Math.max(
+        document.documentElement.scrollWidth,
+        document.body.scrollWidth
+      );
+      const clientHeight = window.innerHeight;
+      const clientWidth = window.innerWidth;
+
+      maxScroll =
+        direction === "x"
+          ? scrollWidth - clientWidth
+          : scrollHeight - clientHeight;
+    } else {
+      // 处理 HTMLElement 类型
+      const element = container as HTMLElement;
+      maxScroll =
+        direction === "x"
+          ? element.scrollWidth - element.clientWidth
+          : element.scrollHeight - element.clientHeight;
+    }
 
     numericValue = (maxScroll * percentage) / 100;
   } else {

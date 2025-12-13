@@ -65,7 +65,6 @@ code {
 .content {
   position: absolute;
   left: 256px;
-  top: 20px;
   right: 0px;
   bottom: 0px;
   display: flex;
