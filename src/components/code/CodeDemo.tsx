@@ -6,7 +6,7 @@ const CodeDemo: React.FC = () => {
   return (
     <Code
       codeString={rowSpanCountfun}
-      fileName="calRowSpan.js"
+      fileName="zustand.js"
       id={HooksType.CustomHooks}
     />
   );
@@ -14,25 +14,63 @@ const CodeDemo: React.FC = () => {
 
 export default CodeDemo;
 
-const rowSpanCountfun = `//数组属性相同值数量统计（可用于计算表格合并值rowSpan）
-const calcRowSpan = (objArr, field) => {
-  //按指定属性排序
-  const sortedArr = objArr.sort((a, b) => a[field] - b[field]);
+const rowSpanCountfun = `import { useSyncExternalStore } from "react";
 
-  for (let i = 0; i < sortedArr.length - 1; i++) {
-    let step = 1;
-    while (
-      sortedArr[i + step] !== undefined &&
-      sortedArr[i + step][field] !== undefined &&
-      sortedArr[i][field] === sortedArr[i + step][field]
-    ) {
-      step++;
+const createStore = (createState) => {
+  let state;
+  const listeners = new Set();
+
+  const setState = (partial, replace) => {
+    const nextState = typeof partial === "function" ? partial(state) : partial;
+
+    if (!Object.is(nextState, state)) {
+      const previousState = state;
+
+      if (!replace) {
+        state =
+          typeof nextState !== "object" || nextState === null
+            ? nextState
+            : Object.assign({}, state, nextState);
+      } else {
+        state = nextState;
+      }
+      listeners.forEach((listener) => listener(state, previousState));
     }
-    for (let j = i; j < i + step; j++) {
-      sortedArr[j].count = j === i ? (step === 1 ? 0 : step) : 0;
-    }
-    i += step - 1;
+  };
+
+  const getState = () => state;
+
+  const subscribe = (listener) => {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  };
+
+  const destroy = () => {
+    listeners.clear();
+  };
+
+  const api = { setState, getState, subscribe, destroy };
+
+  state = createState(setState, getState, api);
+
+  return api;
+};
+
+function useStore(api, selector) {
+  function getState() {
+    return selector(api.getState());
   }
 
-  return sortedArr;
-}`;
+  return useSyncExternalStore(api.subscribe, getState);
+}
+
+export const create = (createState) => {
+  const api = createStore(createState);
+
+  const useBoundStore = (selector) => useStore(api, selector);
+
+  Object.assign(useBoundStore, api);
+
+  return useBoundStore;
+};
+`;
