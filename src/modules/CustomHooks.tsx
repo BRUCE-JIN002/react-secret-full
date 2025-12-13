@@ -24,7 +24,7 @@ import UseMountedStateCode from "../hooks/useMountedState/UseMountedStateCode";
 import UseNetworkCode from "../hooks/useNetWork/UseNetworkCode";
 import UseReactiveCode from "../hooks/useReactive/UseReactiveCode";
 import UseSafeStateCode from "../hooks/useSafeState/UseSafeStateCode";
-import UseScrollingCode from "../hooks/useScrolling/UseScrollingCode";
+import UseScrollingCode from "../hooks/useScrolling/Demo";
 import UseSelectionCode from "../hooks/useSelection/UseSelectionCode";
 import UseSizeCode from "../hooks/useSize/UseSizeCode";
 import UseTextSelectionCode from "../hooks/useTextSelection/UseTextSelectionCode";
