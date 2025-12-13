@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ComponentsType } from "../menu/Menu";
 import { MenuKey } from "../App";
-import CountDemo from "../components/countDown";
+import CountDownDemo from "../components/countDown";
 import MinCalendarDemo from "../components/miniCalendar/Demo";
 import CalendarDemo from "../components/calendar/CalendarDemo";
 import IconDemo from "../components/Icon/IconDemo";
@@ -30,7 +30,7 @@ const ComponentDemo: FC<IComponentProps> = (props) => {
   return (
     <>
       {/** 倒计时 */}
-      {currentPage === ComponentsType.CountDown && <CountDemo />}
+      {currentPage === ComponentsType.CountDown && <CountDownDemo />}
       {/** 迷你日历 */}
       {currentPage === ComponentsType.MinCalendar && <MinCalendarDemo />}
       {/* 日历组件 */}

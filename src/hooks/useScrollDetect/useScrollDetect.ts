@@ -48,12 +48,12 @@ type ScrollDetectionOptions = {
 
 const DEFAULT_OPTIONS: Required<ScrollDetectionOptions> = {
   scrollThreshold: 1,
-  debounceDelay: 100
+  debounceDelay: 100,
 };
 
 const DEFAULT_SCROLL_OPTIONS: Required<ScrollOptions> = {
   duration: 300,
-  animation: "smooth"
+  animation: "smooth",
 };
 
 export function useScrollDetection(
@@ -62,7 +62,7 @@ export function useScrollDetection(
 ): ScrollDetectionResult & ScrollMethods {
   const { scrollThreshold, debounceDelay } = {
     ...DEFAULT_OPTIONS,
-    ...options
+    ...options,
   };
 
   const [state, setState] = useState<ScrollDetectionResult>({
@@ -73,7 +73,7 @@ export function useScrollDetection(
     isLeft: true,
     isRight: false,
     distanceToTop: 0,
-    distanceToLeft: 0
+    distanceToLeft: 0,
   });
 
   // 百分比转换逻辑
@@ -122,7 +122,7 @@ export function useScrollDetection(
 
       const { duration, animation } = {
         ...DEFAULT_SCROLL_OPTIONS,
-        ...scrollOptions
+        ...scrollOptions,
       };
       const startTime =
         window.performance && performance.now ? performance.now() : Date.now();
@@ -271,7 +271,7 @@ export function useScrollDetection(
         clientHeight,
         clientWidth,
         scrollHeight,
-        scrollWidth
+        scrollWidth,
       } = container;
 
       const newState: ScrollDetectionResult = {
@@ -282,7 +282,7 @@ export function useScrollDetection(
         isLeft: scrollLeft <= scrollThreshold,
         isRight: scrollLeft + clientWidth >= scrollWidth - scrollThreshold,
         distanceToTop: scrollTop,
-        distanceToLeft: scrollLeft
+        distanceToLeft: scrollLeft,
       };
 
       setState((prev) =>
@@ -315,7 +315,7 @@ export function useScrollDetection(
     scrollToBottom,
     scrollToLeft,
     scrollToRight,
-    scrollTo
+    scrollTo,
   };
 }
 
@@ -333,7 +333,7 @@ const getEasingFunction = (type: ScrollAnimationType) => {
     ease: cubicBezier(0.25, 0.1, 0.25, 1),
     "ease-in": cubicBezier(0.42, 0, 1, 1),
     "ease-out": cubicBezier(0, 0, 0.58, 1),
-    "ease-in-out": cubicBezier(0.42, 0, 0.58, 1)
+    "ease-in-out": cubicBezier(0.42, 0, 0.58, 1),
   };
   return easings[type];
 };
@@ -366,7 +366,7 @@ const cubicBezier = (p1x: number, p1y: number, p2x: number, p2y: number) => {
   };
 };
 
-// 优化的防抖函数
+// 防抖函数
 const debounceRAF = <T extends (...args: never[]) => void>(
   fn: T,
   delay: number
