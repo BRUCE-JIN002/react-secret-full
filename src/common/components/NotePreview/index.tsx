@@ -9,7 +9,7 @@ interface NotePreviewProps {
 
 // 内联样式
 const notePreviewStyles: React.CSSProperties = {
-  width: "100vw",
+  width: "100%",
   height: "100vh",
   overflow: "hidden",
   padding: "0",
@@ -221,6 +221,10 @@ const addMarkdownStyles = () => {
     /* 自定义滚动条样式 */
     .markdown-content::-webkit-scrollbar {
       width: 8px;
+    }
+
+    .markdown-content::-webkit-scrollbar {
+      height: 0;
     }
     
     .markdown-content::-webkit-scrollbar-track {

@@ -93,72 +93,39 @@ function Test() {
           Warning
         </Button>
       </AntConfigProvider>
-      <AntConfigProvider
-        theme={{
-          components: {
-            Button: {
-              colorPrimary: `linear-gradient(135deg, ${colors1.join(", ")})`,
-              colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(
-                colors1
-              ).join(", ")})`,
-              colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(
-                colors1
-              ).join(", ")})`,
-              lineWidth: 0,
-            },
-          },
+      <Button
+        type="primary"
+        size="large"
+        onClick={() => {
+          message.add({
+            content: "This is an info message !",
+            position: "top",
+            type: "info",
+          });
         }}
       >
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => {
-            message.add({
-              content: "This is an info message !",
-              position: "top",
-              type: "info",
+        Infomation
+      </Button>
+      <Button
+        type="primary"
+        size="large"
+        ghost
+        onClick={() => {
+          const id = message.add({
+            content: "Loading...",
+            position: "top",
+            type: "loading",
+          });
+          setTimeout(() => {
+            message.update(id, {
+              type: "success",
+              content: "Loaded!",
             });
-          }}
-        >
-          Infomation
-        </Button>
-      </AntConfigProvider>
-      <AntConfigProvider
-        theme={{
-          components: {
-            Button: {
-              colorPrimary: `linear-gradient(90deg,  ${colors2.join(", ")})`,
-              colorPrimaryHover: `linear-gradient(90deg, ${getHoverColors(
-                colors2
-              ).join(", ")})`,
-              colorPrimaryActive: `linear-gradient(90deg, ${getActiveColors(
-                colors2
-              ).join(", ")})`,
-              lineWidth: 0,
-            },
-          },
+          }, 1000);
         }}
       >
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => {
-            const id = message.add({
-              content: "Loading...",
-              position: "top",
-              type: "loading",
-            });
-            setTimeout(() => {
-              message.update(id, {
-                type: "success",
-                content: "Loaded!",
-              });
-            }, 1000);
-          }}
-        >
-          Loading
-        </Button>
-      </AntConfigProvider>
+        Loading
+      </Button>
     </Space>
   );
 }

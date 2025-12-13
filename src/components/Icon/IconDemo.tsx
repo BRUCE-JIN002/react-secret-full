@@ -37,7 +37,7 @@ const IconFontCodesList: string[] = [
   "icon-fangdajing1",
   "icon-rengongfuwu",
   "icon-liwu",
-  "icon-shouhoufuwu"
+  "icon-shouhoufuwu",
 ];
 
 const ColoredIconFontCodeSet: string[] = [
@@ -53,19 +53,19 @@ const ColoredIconFontCodeSet: string[] = [
   "icon-a-045_shezhi-12",
   "icon-a-045_tianqi",
   "icon-a-045_wenjian",
-  "icon-a-045_zhaopian"
+  "icon-a-045_zhaopian",
 ];
 
 const enum Size {
   Small = 16,
   Default = 20,
-  Large = 28
+  Large = 28,
 }
 
 const optionsWithDisabled = [
   { label: "小", value: Size.Small },
   { label: "中", value: Size.Default },
-  { label: "大", value: Size.Large }
+  { label: "大", value: Size.Large },
 ];
 
 const IconDemo: React.FC = () => {
@@ -75,7 +75,7 @@ const IconDemo: React.FC = () => {
     "gold",
     "blue",
     "green",
-    "magenta"
+    "magenta",
   ]);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const IconDemo: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         gap: 25,
-        border: "1px solid #e0e0e0"
+        border: "1px solid #e0e0e0",
       }}
     >
       <Radio.Group
@@ -114,11 +114,11 @@ const IconDemo: React.FC = () => {
       />
       <div className="layout">
         <ConfigProvider space={{ size: stateSize }}>
-          <Divider orientation="left">
+          <Divider orientation="horizontal" titlePlacement="start">
             <span>通过Antd封装svg图标</span>
           </Divider>
           <div>
-            <Space direction="horizontal" wrap>
+            <Space orientation="horizontal" wrap>
               {stateColorSet.map((color, index) => (
                 <HeartOutlined
                   key={`${color}-${index}`}
@@ -127,11 +127,11 @@ const IconDemo: React.FC = () => {
               ))}
             </Space>
           </div>
-          <Divider orientation="left">
+          <Divider orientation="horizontal" titlePlacement="start">
             <span>通过svg封装图标</span>
           </Divider>
           <div>
-            <Space direction="horizontal" wrap>
+            <Space orientation="horizontal" wrap>
               <IconAdd spin={true} style={{ fontSize: stateSize }} />
               <IconEmail style={{ fontSize: stateSize }} />
               <IconEmail style={{ color: "blue", fontSize: stateSize }} />
@@ -141,11 +141,11 @@ const IconDemo: React.FC = () => {
               />
             </Space>
           </div>
-          <Divider orientation="left">
+          <Divider orientation="horizontal" titlePlacement="start">
             <span>封装IconFont单色图标</span>
           </Divider>
           <div>
-            <Space direction="horizontal" wrap>
+            <Space orientation="horizontal" wrap>
               {IconFontCodesList.map((icon) => (
                 <span title={icon} key={icon}>
                   <IconFont type={`${icon}`} size={`${stateSize}px`} />
@@ -153,11 +153,11 @@ const IconDemo: React.FC = () => {
               ))}
             </Space>
           </div>
-          <Divider orientation="left">
+          <Divider orientation="horizontal" titlePlacement="start">
             <span>封装IconFont彩色图标</span>
           </Divider>
           <div>
-            <Space direction="horizontal" wrap>
+            <Space orientation="horizontal" wrap>
               {ColoredIconFontCodeSet.map((icon) => (
                 <span title={icon} key={icon}>
                   <IconFont type={`${icon}`} size={`${stateSize * 1.2}px`} />

@@ -4,7 +4,7 @@ import MenuList, {
   ComponentsType,
   HooksType,
   Projects,
-  ThirdParyLibrary
+  ThirdParyLibrary,
 } from "./menu/Menu";
 import { StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -15,6 +15,8 @@ import ComprehensiveDemo from "./modules/ComprehensiveDemo";
 import { Spin } from "antd";
 import classNames from "classnames";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Splitter } from "antd";
+import { Code } from "./components/code/Code";
 
 export type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -28,13 +30,13 @@ const stateCreator: StateCreator<PageState> = (set) => ({
   collapse: true,
   currentPage: ComponentsType.MinCalendar,
   updateCurrentPage: (value: MenuKey) => set(() => ({ currentPage: value })),
-  toggleCollapse: () => set((state) => ({ collapse: !state.collapse }))
+  toggleCollapse: () => set((state) => ({ collapse: !state.collapse })),
 });
 
 export const useMenuStore = create<PageState>()(
   persist(stateCreator, {
     name: "menuList",
-    version: 1
+    version: 1,
   })
 );
 
@@ -59,7 +61,7 @@ const App: FC = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
         >
           <div className={classNames("menu", collapse ? "inlineMode" : "")}>
@@ -77,10 +79,30 @@ const App: FC = () => {
           <div
             className={classNames("content", collapse ? "collapseContent" : "")}
           >
-            <CustomHooks currentPage={currentPage} />
-            <ComponentDemo currentPage={currentPage} />
-            <ThirdLibDemo currentPage={currentPage} />
-            <ComprehensiveDemo currentPage={currentPage} />
+            <Splitter
+              style={{
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <Splitter.Panel defaultSize="65%" min="40%" max="100%">
+                <div className="contentLeft">
+                  <CustomHooks currentPage={currentPage} />
+                  <ComponentDemo currentPage={currentPage} />
+                  <ThirdLibDemo currentPage={currentPage} />
+                  <ComprehensiveDemo currentPage={currentPage} />
+                </div>
+              </Splitter.Panel>
+              {currentPage?.startsWith("use") && (
+                <Splitter.Panel defaultSize="35%" min="0%">
+                  <Code
+                    codeString={"useDebounceFnCodeString"}
+                    fileName="useDebounceFn.ts"
+                    id={HooksType.UseDebounceFn}
+                  />
+                </Splitter.Panel>
+              )}
+            </Splitter>
           </div>
         </div>
       </Suspense>

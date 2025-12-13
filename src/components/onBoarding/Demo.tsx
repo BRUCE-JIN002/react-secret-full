@@ -59,6 +59,14 @@ const OnBoardingDemo: React.FC = () => {
           <Button type="primary" danger ghost id="btn-group3">
             Danger
           </Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              reDisplay();
+            }}
+          >
+            重新演示
+          </Button>
         </Flex>
 
         {reStart === false && (
@@ -132,13 +140,6 @@ const OnBoardingDemo: React.FC = () => {
           />
         )}
       </Flex>
-      <FloatButton
-        type="primary"
-        description="重新演示"
-        onClick={() => {
-          reDisplay();
-        }}
-      />
     </>
   );
 };

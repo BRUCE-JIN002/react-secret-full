@@ -14,7 +14,7 @@
     "sync-readme": "node scripts/sync-readme.js"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.3.1",
+    "@ant-design/icons": "^6.1.0",
     "@floating-ui/react": "^0.26.13",
     "@monaco-editor/react": "^4.7.0",
     "@react-spring/web": "^9.7.3",
@@ -27,7 +27,7 @@
     "@types/react-dom": "^18.2.20",
     "@xyflow/react": "^12.2.0",
     "ahooks": "^3.7.10",
-    "antd": "^5.26.2",
+    "antd": "^6.1.0",
     "async-validator": "^4.2.5",
     "axios": "^1.7.1",
     "chinese-days": "^1.2.4",

@@ -1,12 +1,9 @@
 import { useBoolean, useSafeState } from "ahooks";
 import { ConfigProvider, Input, message, Select } from "antd";
-import classNames from "classnames";
 import _ from "lodash";
 import { useState } from "react";
 
 import {
-  CaretDownOutlined,
-  CaretRightOutlined,
   CompressOutlined,
   CopyOutlined,
   ExpandOutlined,
@@ -14,7 +11,7 @@ import {
   LockOutlined,
   PicRightOutlined,
   SkinOutlined,
-  UnlockOutlined
+  UnlockOutlined,
 } from "@ant-design/icons";
 import MonacoEditor, { OnMount } from "@monaco-editor/react";
 
@@ -32,12 +29,11 @@ interface CodeProps {
   id: HooksType;
   fileName?: string;
   codeString: string;
-  width?: number | string;
   onClick?: () => void;
 }
 
 export const Code: React.FC<CodeProps> = (props) => {
-  const { codeString, width = 900, id, onClick } = props;
+  const { codeString, id, onClick } = props;
   const [, copy] = useCopyToClipboard();
   const [messageApi, contextHolder] = message.useMessage();
   const { configList, updateConfig } = useCodeConfigStore();
@@ -52,13 +48,12 @@ export const Code: React.FC<CodeProps> = (props) => {
     { id }
   );
 
-  const { skinColor, theme, expand, fileName, collapse }: ConfigListItem = {
+  const { skinColor, theme, expand, fileName }: ConfigListItem = {
     skinColor: "#00b56d",
     theme: "vs-dark",
     expand: false,
     fileName: props.fileName,
-    collapse: true,
-    ...persistConfig
+    ...persistConfig,
   };
 
   const handleCopy = (text: string) => () => {
@@ -66,13 +61,13 @@ export const Code: React.FC<CodeProps> = (props) => {
       .then(() => {
         messageApi.open({
           type: "success",
-          content: "复制成功！"
+          content: "复制成功！",
         });
       })
       .catch(() => {
         messageApi.open({
           type: "error",
-          content: "复制失败！"
+          content: "复制失败！",
         });
       });
   };
@@ -92,35 +87,17 @@ export const Code: React.FC<CodeProps> = (props) => {
     <div
       style={{
         border: "1px solid #00000050",
-        borderRadius: 8,
-        paddingBottom: collapse ? 8 : 0,
+        borderRight: "none",
         color: "rgba(0,0,0, 0.75)",
         backgroundColor: skinColor,
         position: "relative",
-        width: expand ? "98%" : width,
-        maxHeight: "calc(100vh - 10px)",
-        transition: "all 0.3s ease-in-out"
+        width: "100%",
+        transition: "all 0.3s ease",
+        marginRight: "-2px",
       }}
     >
       {contextHolder}
       <div className="flex items-center h-4 text-[12px] gap-3 m-[4px]">
-        <div
-          className={classNames(
-            "flex justify-center items-center text-[12px] py-1 px-[2px] rounded-sm cursor-pointer"
-          )}
-          onClick={() => {
-            updateConfig({
-              ...persistConfig,
-              collapse: !persistConfig.collapse
-            });
-          }}
-        >
-          {collapse ? (
-            <CaretDownOutlined title="收起" />
-          ) : (
-            <CaretRightOutlined title="展开" />
-          )}
-        </div>
         <div
           onDoubleClick={() => setIsEdit(true)}
           style={{ marginRight: "auto" }}
@@ -135,7 +112,7 @@ export const Code: React.FC<CodeProps> = (props) => {
                   e.target.value !== "" ? e.target.value : undefined;
                 updateConfig({
                   ...persistConfig,
-                  fileName: nameValue
+                  fileName: nameValue,
                 });
               }}
               onPressEnter={() => setIsEdit(false)}
@@ -148,7 +125,7 @@ export const Code: React.FC<CodeProps> = (props) => {
                 boxShadow: fileName
                   ? ""
                   : `inset -5px -5px 10px rgba(0, 0, 0, 0.1), 
-                  inset 5px 5px 10px rgba(0, 0, 0, 0.1)`
+                  inset 5px 5px 10px rgba(0, 0, 0, 0.1)`,
               }}
               className="text-sm h-[18px] rounded min-w-24"
             >
@@ -183,7 +160,7 @@ export const Code: React.FC<CodeProps> = (props) => {
             onClick={() =>
               updateConfig({
                 ...persistConfig,
-                expand: false
+                expand: false,
               })
             }
           />
@@ -194,7 +171,7 @@ export const Code: React.FC<CodeProps> = (props) => {
             onClick={() =>
               updateConfig({
                 ...persistConfig,
-                expand: true
+                expand: true,
               })
             }
           />
@@ -205,7 +182,7 @@ export const Code: React.FC<CodeProps> = (props) => {
           onClick={() => {
             updateConfig({
               ...persistConfig,
-              minimap: !persistConfig.minimap
+              minimap: !persistConfig.minimap,
             });
           }}
         />
@@ -217,7 +194,7 @@ export const Code: React.FC<CodeProps> = (props) => {
             setRandomColor(color);
             updateConfig({
               ...persistConfig,
-              skinColor: color
+              skinColor: color,
             });
           }}
         />
@@ -232,9 +209,9 @@ export const Code: React.FC<CodeProps> = (props) => {
                 optionActiveBg: `${randomColor}50`,
                 optionSelectedBg: randomColor,
                 optionHeight: 10,
-                optionPadding: 2
-              }
-            }
+                optionPadding: 2,
+              },
+            },
           }}
         >
           <Select
@@ -247,14 +224,14 @@ export const Code: React.FC<CodeProps> = (props) => {
             onChange={(value) => {
               updateConfig({
                 ...persistConfig,
-                theme: value
+                theme: value,
               });
             }}
             style={{
               border: "1px solid #00000060",
               borderRadius: 4,
               height: 18,
-              backgroundColor: randomColor
+              backgroundColor: randomColor,
             }}
             filterOption={filterOption}
             options={getSelectOptions()}
@@ -265,32 +242,30 @@ export const Code: React.FC<CodeProps> = (props) => {
           <CopyOutlined style={{ marginRight: 8 }} />
         </span>
       </div>
-      {collapse && (
-        <MonacoEditor
-          width={"100%"}
-          height={"90vh"}
-          language={
-            persistConfig.fileName?.endsWith("js") ? "javascript" : "typescript"
-          }
-          onMount={handleEditorMount}
-          value={codeString}
-          theme={theme}
-          options={{
-            fontSize: 14,
-            scrollBeyondLastLine: false,
-            readOnly: !isEditable,
-            minimap: {
-              enabled: persistConfig.minimap,
-              size: "proportional"
-            },
-            overviewRulerBorder: false,
-            scrollbar: {
-              verticalScrollbarSize: 6,
-              horizontalScrollbarSize: 6
-            }
-          }}
-        />
-      )}
+      <MonacoEditor
+        width={"100%"}
+        height={"calc(100vh - 24px)"}
+        language={
+          persistConfig.fileName?.endsWith("js") ? "javascript" : "typescript"
+        }
+        onMount={handleEditorMount}
+        value={codeString}
+        theme={theme}
+        options={{
+          fontSize: 14,
+          scrollBeyondLastLine: false,
+          readOnly: !isEditable,
+          minimap: {
+            enabled: persistConfig.minimap,
+            size: "proportional",
+          },
+          overviewRulerBorder: false,
+          scrollbar: {
+            verticalScrollbarSize: 6,
+            horizontalScrollbarSize: 6,
+          },
+        }}
+      />
     </div>
   );
 };

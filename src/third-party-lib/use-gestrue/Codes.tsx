@@ -11,7 +11,6 @@ const ViewpagerCode: React.FC<CodeProps> = (props) => {
   return (
     <Code
       codeString={CodeString}
-      width={1000}
       fileName="App.tsx"
       onClick={props.onToggle}
       id={HooksType.UseGusture}

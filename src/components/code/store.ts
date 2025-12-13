@@ -8,7 +8,6 @@ export interface ConfigListItem {
   expand?: boolean;
   skinColor?: string;
   theme?: string;
-  collapse?: boolean;
   minimap?: boolean;
 }
 
@@ -28,22 +27,22 @@ const stateCreator: StateCreator<State & Action> = (set) => ({
         state.configList.findIndex((cur) => cur.id === item.id) > -1;
       if (!exist) {
         return {
-          configList: [...state.configList, item]
+          configList: [...state.configList, item],
         };
       }
       const newlist = [...state.configList];
       const index = newlist.findIndex((cur) => cur.id === item.id);
       newlist.splice(index, 1, item);
       return {
-        configList: newlist
+        configList: newlist,
       };
     });
-  }
+  },
 });
 
 export const useCodeConfigStore = create<State & Action>()(
   persist(stateCreator, {
     name: "codeConfigList",
-    version: 1.1
+    version: 1.1,
   })
 );

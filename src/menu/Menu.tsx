@@ -12,8 +12,8 @@ import { useMenuStore } from "../App";
 type MenuItem = Required<MenuProps>["items"][number];
 
 export const enum HooksType {
-  UseGusture = "useGusture",
   CustomHooks = "hookskey",
+  UseGusture = "useGusture",
   UseCookies = "useCookies",
   UseCopyToClipboard = "useCopyToClipboard",
   UseCountDown = "useCountDown",

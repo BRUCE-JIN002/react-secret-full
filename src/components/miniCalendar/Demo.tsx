@@ -17,16 +17,20 @@ const MinCalendarDemo: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      <p>受控组件：</p>
-      <MiniCalendar
-        value={new Date()}
-        onChange={(date) => {
-          console.log("日期:", date.toLocaleDateString());
-        }}
-      />
-      <p>非受控组件：</p>
-      <MiniCalendar ref={canlendarRef} value={new Date()} />
+    <div style={{ display: "flex", gap: 50 }}>
+      <div className="flex flex-col items-center gap-4">
+        <h1>受控组件：</h1>
+        <MiniCalendar
+          value={new Date()}
+          onChange={(date) => {
+            console.log("日期:", date.toLocaleDateString());
+          }}
+        />
+      </div>
+      <div className="flex flex-col items-center gap-4">
+        <h1>非受控组件：</h1>
+        <MiniCalendar ref={canlendarRef} value={new Date()} />
+      </div>
     </div>
   );
 };

@@ -81,6 +81,13 @@ code {
   &.collapseContent {
     left: 80px;
   }
+
+  .contentLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }
 
 ::-webkit-scrollbar {
