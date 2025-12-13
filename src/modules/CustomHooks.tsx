@@ -24,15 +24,15 @@ import UseMountedStateCode from "../hooks/useMountedState/UseMountedStateCode";
 import UseNetworkCode from "../hooks/useNetWork/UseNetworkCode";
 import UseReactiveCode from "../hooks/useReactive/UseReactiveCode";
 import UseSafeStateCode from "../hooks/useSafeState/UseSafeStateCode";
-import UseScrollingCode from "../hooks/useScrolling/Demo";
+import UseScrollingDoc from "../hooks/useScrolling/Doc";
 import UseSelectionCode from "../hooks/useSelection/UseSelectionCode";
 import UseSizeCode from "../hooks/useSize/UseSizeCode";
 import UseTextSelectionCode from "../hooks/useTextSelection/UseTextSelectionCode";
 import UseTimeoutCode from "../hooks/useTimeout/UseTimeoutCode";
 import UseUnmountedRefCode from "../hooks/useUnmountedRef/UseUnmountedRefCode";
 import UseWhyDidYouUpdateCode from "../hooks/useWhyDidYouUpdate/UseWhyDidYouUpdateCode";
-import UseScrollCode from "../hooks/useScroll/Demo";
-import UseStepProgressCode from "../hooks/useStepProgress/useStepProgressCode";
+import UseScrollCode from "../hooks/useScroll/Doc";
+import UseStepProgressCode from "../hooks/useStepProgress/Doc";
 interface Iprops {
   currentPage?: MenuKey;
 }
@@ -73,7 +73,7 @@ const CustomHooks: FC<Iprops> = (props) => {
       {currentPage === HooksType.UseNetwork && <UseNetworkCode />}
       {currentPage === HooksType.UseReactive && <UseReactiveCode />}
       {currentPage === HooksType.UseSafaState && <UseSafeStateCode />}
-      {currentPage === HooksType.UseScrolling && <UseScrollingCode />}
+      {currentPage === HooksType.UseScrolling && <UseScrollingDoc />}
       {currentPage === HooksType.UseSelection && <UseSelectionCode />}
       {currentPage === HooksType.UseSize && <UseSizeCode />}
       {currentPage === HooksType.UseTextSelection && <UseTextSelectionCode />}

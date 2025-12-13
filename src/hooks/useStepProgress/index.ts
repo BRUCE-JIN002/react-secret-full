@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
-interface ProgressOptions {
+export interface ProgressOptions {
   /** 目标进度，即接口请求成功数量率 */
   percentage: number;
   /** 进度完成的回调 */
@@ -12,7 +12,7 @@ interface ProgressOptions {
 const useStepProgress = ({
   percentage,
   minTime = 1000,
-  onFinish
+  onFinish,
 }: ProgressOptions) => {
   const [progress, setProgress] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
