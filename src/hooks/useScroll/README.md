@@ -1,4 +1,4 @@
-# useScrollDetection Hook
+# useScroll
 
 一个功能强大的 React Hook，用于检测滚动状态和管理滚动事件监听器。
 
@@ -14,15 +14,15 @@
 ## 基本用法
 
 ```typescript
-import { useScrollDetection } from "./useScrollDetection";
+import { useScroll } from "./useScroll";
 
 function MyComponent() {
   // 监听窗口滚动（默认）
-  const [scrollState, scrollMethods] = useScrollDetection();
+  const [scrollState, scrollMethods] = useScroll();
 
   // 监听特定容器滚动
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerState, containerMethods] = useScrollDetection(containerRef);
+  const [containerState, containerMethods] = useScroll(containerRef);
 
   return (
     <div>
@@ -78,14 +78,14 @@ scrollMethods.clearAllEventListeners();
 
 ## API 参考
 
-### useScrollDetection(target?, options?)
+### useScroll(target?, options?)
 
 #### 参数
 
 | 参数      | 类型                                   | 默认值     | 描述     |
 | --------- | -------------------------------------- | ---------- | -------- |
 | `target`  | `BasicTarget<HTMLElement \| Document>` | `document` | 滚动目标 |
-| `options` | `ScrollDetectionOptions`               | `{}`       | 配置选项 |
+| `options` | `ScrollOptions`                        | `{}`       | 配置选项 |
 
 **target 支持的类型：**
 
@@ -251,7 +251,7 @@ scrollMethods.scrollToTop({
 ### Hook 调用
 
 ```typescript
-const [scrollState, scrollMethods] = useScrollDetection(target?, options?)
+const [scrollState, scrollMethods] = useScroll(target?, options?)
 ```
 
 ### 快速参考

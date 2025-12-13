@@ -1,5 +1,9 @@
+/* Tailwind CSS directives */
+/* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind base;
+/* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind components;
+/* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
 
 body {
@@ -64,6 +68,7 @@ code {
 
 .content {
   position: absolute;
+  top: 0;
   left: 256px;
   right: 0px;
   bottom: 0px;
