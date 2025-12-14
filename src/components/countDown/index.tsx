@@ -1,4 +1,4 @@
-import useCountDown from "../../hooks/useCountDown/useCountDown";
+import useCountDown from "../../hooks/useCountDown";
 
 const CountDownDemo = () => {
   const [, formattedRes] = useCountDown({

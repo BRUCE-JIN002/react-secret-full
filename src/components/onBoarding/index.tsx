@@ -12,7 +12,7 @@ import { useMount } from "ahooks";
 import classNames from "classnames";
 import { CloseOutlined } from "@ant-design/icons";
 import "./index.scss";
-import useUpdate from "../../hooks/useForceUpdate/useForceUpdate";
+import useUpdate from "../../hooks/useForceUpdate";
 
 export interface OnBoardingStepConfig {
   placement?: TooltipPlacement;

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import useMutateObserver from "../../hooks/useMutateObserver/useMutateOberver";
+import useMutateObserver from "../../hooks/useMutateObserver";
 
 interface MutationObserverProps {
   options?: MutationObserverInit;

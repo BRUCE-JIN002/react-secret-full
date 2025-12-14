@@ -19,7 +19,7 @@ export const enum HooksType {
   UseCountDown = "useCountDown",
   UseCounter = "useCounter",
   UseCreation = "useCreation",
-  UseCss = "UseCss",
+  UseCss = "useCss",
   UseDebounce = "useDebounce",
   UseDebounceFn = "useDebounceFn",
   UseDocumentVisibility = "useDocumentVisibility",

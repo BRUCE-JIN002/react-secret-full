@@ -26,7 +26,7 @@ export const isMyBirthday = (date: Dayjs) => {
   return false;
 };
 
-/** 是否需要巡检 */
+/** 学习提示 */
 export const isStudyDay = (date: Dayjs) => {
   return date.isSame(dayjs(), "day");
 };

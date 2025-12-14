@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useLatest from "../useLatest/useLatest";
+import useLatest from "../useLatest/";
 
 const useEventListener = (
   event: string,

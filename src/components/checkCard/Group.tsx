@@ -2,13 +2,13 @@ import {
   GroupProps,
   ValueType,
   GroupValueType,
-  SelectOptionProps
+  SelectOptionProps,
 } from "./interface";
 import GroupContext from "./GroupContext";
 import styles from "./style";
 import { useRef, useEffect } from "react";
 import { useSafeState } from "ahooks";
-import useCss from "../../hooks/useCss/useCss";
+import useCss from "../../hooks/useCss";
 
 const Group: React.FC<GroupProps> = (props) => {
   const { multiple = false, style = {}, onChange, ...params } = props;
@@ -65,7 +65,7 @@ const Group: React.FC<GroupProps> = (props) => {
         loading: params.loading,
         selectOption,
         registerValue,
-        cancelValue
+        cancelValue,
       }}
     >
       <div className={useCss(styles["select-card-group"])} style={style}>

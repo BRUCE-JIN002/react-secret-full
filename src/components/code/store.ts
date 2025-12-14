@@ -5,7 +5,6 @@ import { HooksType } from "../../menu/Menu";
 export interface ConfigListItem {
   id?: HooksType;
   fileName?: string;
-  expand?: boolean;
   skinColor?: string;
   theme?: string;
   minimap?: boolean;

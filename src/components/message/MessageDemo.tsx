@@ -1,14 +1,6 @@
 import { Button, Space, ConfigProvider as AntConfigProvider } from "antd";
 import { ConfigProvider } from "./ConfigProvider";
 import { useMessage } from "./useMessage";
-import { TinyColor } from "@ctrl/tinycolor";
-
-const colors1 = ["#6253E1", "#04BEFE"];
-const colors2 = ["#fc6076", "#ff9a44", "#ef9d43", "#e75516"];
-const getHoverColors = (colors: string[]) =>
-  colors.map((color) => new TinyColor(color).lighten(5).toString());
-const getActiveColors = (colors: string[]) =>
-  colors.map((color) => new TinyColor(color).darken(5).toString());
 
 function Test() {
   const message = useMessage();

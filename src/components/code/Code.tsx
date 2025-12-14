@@ -4,9 +4,7 @@ import _ from "lodash";
 import { useState } from "react";
 
 import {
-  CompressOutlined,
   CopyOutlined,
-  ExpandOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
   PicRightOutlined,
@@ -16,7 +14,7 @@ import {
 import MonacoEditor, { OnMount } from "@monaco-editor/react";
 
 import { getRandomColor } from "../../common/utils/utils";
-import { useCopyToClipboard } from "../../hooks/useCopyToclipboard/useCopyToclipboard";
+import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
 import { HooksType } from "../../menu/Menu";
 import { ConfigListItem, useCodeConfigStore } from "./store";
 
@@ -48,10 +46,9 @@ export const Code: React.FC<CodeProps> = (props) => {
     { id }
   );
 
-  const { skinColor, theme, expand, fileName }: ConfigListItem = {
+  const { skinColor, theme, fileName }: ConfigListItem = {
     skinColor: "#00b56d",
     theme: "vs-dark",
-    expand: false,
     fileName: props.fileName,
     ...persistConfig,
   };
@@ -93,7 +90,6 @@ export const Code: React.FC<CodeProps> = (props) => {
         position: "relative",
         width: "100%",
         transition: "all 0.3s ease",
-        marginRight: "-2px",
       }}
     >
       {contextHolder}
@@ -151,29 +147,6 @@ export const Code: React.FC<CodeProps> = (props) => {
             style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
             title="收起代码"
             onClick={onClick}
-          />
-        )}
-        {expand ? (
-          <CompressOutlined
-            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-            title="退出全屏"
-            onClick={() =>
-              updateConfig({
-                ...persistConfig,
-                expand: false,
-              })
-            }
-          />
-        ) : (
-          <ExpandOutlined
-            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-            title="全屏查看"
-            onClick={() =>
-              updateConfig({
-                ...persistConfig,
-                expand: true,
-              })
-            }
           />
         )}
         <PicRightOutlined

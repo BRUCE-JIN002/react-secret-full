@@ -3,10 +3,10 @@ import { Avatar } from "antd";
 import {
   CheckCardProps,
   StylesBooleanProps,
-  StylesStringProps
+  StylesStringProps,
 } from "./interface.d";
 import { useSafeState, useCreation } from "ahooks";
-import useCss from "../../hooks/useCss/useCss";
+import useCss from "../../hooks/useCss";
 import GroupContext from "./GroupContext";
 import Loading from "./loading";
 import styles from "./style";
@@ -64,7 +64,7 @@ const CheckCard = (props: CheckCardProps) => {
     "check-card-extra": useCss(styles["check-card-extra"]),
     "check-card-description": useCss(styles["check-card-description"]),
     "check-card-content": useCss(styles["check-card-content"]),
-    "check-card-detail": useCss(styles["check-card-detail"])
+    "check-card-detail": useCss(styles["check-card-detail"]),
   };
 
   const dataMemo = useCreation(() => {

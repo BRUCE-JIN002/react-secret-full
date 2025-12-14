@@ -1,4 +1,4 @@
-import useCss from "../../hooks/useCss/useCss";
+import useCss from "../../hooks/useCss";
 import { Col, Row } from "antd";
 import styles from "./style";
 
