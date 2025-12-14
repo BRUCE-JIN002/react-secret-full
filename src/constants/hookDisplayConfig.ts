@@ -1,3 +1,4 @@
+import React from "react";
 import { HooksType } from "../menu/Menu";
 
 // 导入文档
@@ -69,6 +70,9 @@ import { useTimeoutCodeString } from "../hooks/useTimeout/code";
 import { useUnmountedRefCodeString } from "../hooks/useUnmountedRef/code";
 import { useWhyDidYouUpdateCodeString } from "../hooks/useWhyDidYouUpdate/code";
 import { useProgressiveComputeCodeString } from "../hooks/useProgressiveCompute/code";
+
+// 导入代码示例
+import ProgressiveComputeDemo from "../hooks/useProgressiveCompute/demo/index";
 
 export const hookMap: Record<
   HooksType,
@@ -241,6 +245,6 @@ export const hookMap: Record<
   [HooksType.UseProgressiveCompute]: {
     doc: useProgressiveCompute,
     code: useProgressiveComputeCodeString,
-    demo: null,
+    demo: React.createElement(ProgressiveComputeDemo),
   },
 };

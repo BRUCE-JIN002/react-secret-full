@@ -34,7 +34,7 @@ const CustomHooks: FC<Iprops> = (props) => {
         </Radio.Group>
       </div>
 
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-auto max-h-full">
         {current === "doc" ? (
           <NotePreview>{rendererConfig.doc}</NotePreview>
         ) : (
