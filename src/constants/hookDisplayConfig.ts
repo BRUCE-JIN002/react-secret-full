@@ -73,6 +73,7 @@ import { useProgressiveComputeCodeString } from "../hooks/useProgressiveCompute/
 
 // 导入代码示例
 import ProgressiveComputeDemo from "../hooks/useProgressiveCompute/demo/index";
+import UseScrollDemo from "../hooks/useScroll/demo/index";
 
 export const hookMap: Record<
   HooksType,
@@ -235,7 +236,7 @@ export const hookMap: Record<
   [HooksType.UseScroll]: {
     doc: useScrollReadme,
     code: useScrollCodeString,
-    demo: null,
+    demo: React.createElement(UseScrollDemo),
   },
   [HooksType.UseStepProgress]: {
     doc: useStepProgressReadme,
