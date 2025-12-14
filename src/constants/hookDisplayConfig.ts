@@ -33,6 +33,7 @@ import { readmeContent as useTextSelectionReadme } from "../hooks/useTextSelecti
 import { readmeContent as useTimeoutReadme } from "../hooks/useTimeout/readme-content";
 import { readmeContent as useUnmountedRefReadme } from "../hooks/useUnmountedRef/readme-content";
 import { readmeContent as useWhyDidYouUpdateReadme } from "../hooks/useWhyDidYouUpdate/readme-content";
+import { readmeContent as useProgressiveCompute } from "../hooks/useProgressiveCompute/readme-content";
 
 // 导入代码片段
 import { useCookiesCodeString } from "../hooks/useCookies/code";
@@ -67,6 +68,7 @@ import { useTextSelectionCodeString } from "../hooks/useTextSelection/code";
 import { useTimeoutCodeString } from "../hooks/useTimeout/code";
 import { useUnmountedRefCodeString } from "../hooks/useUnmountedRef/code";
 import { useWhyDidYouUpdateCodeString } from "../hooks/useWhyDidYouUpdate/code";
+import { useProgressiveComputeCodeString } from "../hooks/useProgressiveCompute/code";
 
 export const hookMap: Record<
   HooksType,
@@ -234,6 +236,11 @@ export const hookMap: Record<
   [HooksType.UseStepProgress]: {
     doc: useStepProgressReadme,
     code: useStepProgressCodeString,
+    demo: null,
+  },
+  [HooksType.UseProgressiveCompute]: {
+    doc: useProgressiveCompute,
+    code: useProgressiveComputeCodeString,
     demo: null,
   },
 };

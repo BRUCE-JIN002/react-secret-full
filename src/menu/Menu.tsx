@@ -51,6 +51,7 @@ export const enum HooksType {
   UseWhyDidYouUpdate = "useWhyDidYouUpdate",
   UseScroll = "useScroll",
   UseStepProgress = "useStepProgress",
+  UseProgressiveCompute = "useProgressiveCompute",
 }
 
 export const enum ComponentsType {
@@ -148,6 +149,7 @@ const items: MenuProps["items"] = [
     getItem("useWhyDidYouUpdate", HooksType.UseWhyDidYouUpdate),
     getItem("useScroll", HooksType.UseScroll),
     getItem("useStepProgress", HooksType.UseStepProgress),
+    getItem("useProgressiveCompute", HooksType.UseProgressiveCompute),
   ]),
 
   { type: "divider" },
