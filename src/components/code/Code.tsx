@@ -1,5 +1,5 @@
 import { useBoolean, useSafeState } from "ahooks";
-import { ConfigProvider, Input, message, Select } from "antd";
+import { Input, message, Select } from "antd";
 import _ from "lodash";
 import { useState } from "react";
 
@@ -24,7 +24,7 @@ const getSelectOptions = () =>
   intialOption.map((theme) => ({ label: theme, value: theme }));
 
 interface CodeProps {
-  id: HooksType;
+  id: HooksType | string;
   fileName?: string;
   codeString: string;
   onClick?: () => void;
@@ -171,45 +171,28 @@ export const Code: React.FC<CodeProps> = (props) => {
             });
           }}
         />
-        <ConfigProvider
-          theme={{
-            components: {
-              Select: {
-                selectorBg: randomColor,
-                activeBorderColor: randomColor,
-                hoverBorderColor: randomColor,
-                colorBorder: randomColor,
-                optionActiveBg: `${randomColor}50`,
-                optionSelectedBg: randomColor,
-                optionHeight: 10,
-                optionPadding: 2,
-              },
-            },
+        <Select
+          showSearch
+          size="small"
+          defaultValue={theme}
+          placeholder="Select a theme"
+          optionFilterProp="children"
+          listItemHeight={10}
+          onChange={(value) => {
+            updateConfig({
+              ...persistConfig,
+              theme: value,
+            });
           }}
-        >
-          <Select
-            showSearch
-            size="small"
-            defaultValue={theme}
-            placeholder="Select a theme"
-            optionFilterProp="children"
-            listItemHeight={10}
-            onChange={(value) => {
-              updateConfig({
-                ...persistConfig,
-                theme: value,
-              });
-            }}
-            style={{
-              border: "1px solid #00000060",
-              borderRadius: 4,
-              height: 18,
-              backgroundColor: randomColor,
-            }}
-            filterOption={filterOption}
-            options={getSelectOptions()}
-          />
-        </ConfigProvider>
+          style={{
+            border: "1px solid #00000060",
+            borderRadius: 4,
+            height: 18,
+            backgroundColor: randomColor,
+          }}
+          filterOption={filterOption}
+          options={getSelectOptions()}
+        />
         <span onClick={handleCopy(codeString)}>
           <span style={{ margin: "0px 5px", cursor: "pointer" }}>复制代码</span>
           <CopyOutlined style={{ marginRight: 8 }} />

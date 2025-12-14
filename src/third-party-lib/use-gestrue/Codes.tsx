@@ -1,7 +1,6 @@
 import React from "react";
 import { Code } from "../../components/code/Code";
 import { CodeString } from "./codeString";
-import { HooksType } from "../../menu/Menu";
 
 interface CodeProps {
   onToggle: () => void;
@@ -13,7 +12,7 @@ const ViewpagerCode: React.FC<CodeProps> = (props) => {
       codeString={CodeString}
       fileName="App.tsx"
       onClick={props.onToggle}
-      id={HooksType.UseGusture}
+      id={"useGusture"}
     />
   );
 };

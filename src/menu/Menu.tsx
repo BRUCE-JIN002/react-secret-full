@@ -11,9 +11,14 @@ import { useMenuStore } from "../App";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
+export const enum ModuleType {
+  CustomHooks = "customHooks",
+  Components = "components",
+  ThirdParyLibrary = "thirdParyLibrary",
+  Projects = "projects",
+}
+
 export const enum HooksType {
-  CustomHooks = "hookskey",
-  UseGusture = "useGusture",
   UseCookies = "useCookies",
   UseCopyToClipboard = "useCopyToClipboard",
   UseCountDown = "useCountDown",
@@ -80,7 +85,7 @@ export const enum ThirdParyLibrary {
   ReactDnd = "ReactDnd",
   ReactDnd1 = "ReactDnd1",
   ReactDnd2 = "ReactDnd2",
-  UseGesture = "useGesture",
+  UseGesture = "UseGesture",
   Zustand = "zustand",
   ToComponent = "toComponent",
   ReactFlow = "reactFlow",
@@ -110,7 +115,7 @@ const getItem = (
 };
 
 const items: MenuProps["items"] = [
-  getItem("自定义 Hooks", HooksType.CustomHooks, <MailOutlined />, [
+  getItem("自定义 Hooks", ModuleType.CustomHooks, <MailOutlined />, [
     getItem("useCookies", HooksType.UseCookies),
     getItem("useCopyToClipboard", HooksType.UseCopyToClipboard),
     getItem("useCountdown", HooksType.UseCountDown),
@@ -147,7 +152,7 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
-  getItem("组件示例", ComponentsType.ComponentsDemo, <AppstoreOutlined />, [
+  getItem("组件示例", ModuleType.Components, <AppstoreOutlined />, [
     getItem("倒计时", ComponentsType.CountDown),
     getItem("MinCalendar 迷你日历", ComponentsType.MinCalendar),
     getItem("Calendar 日历", ComponentsType.Calendar),
@@ -170,7 +175,7 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
-  getItem("三方库", ThirdParyLibrary.ThirdParyLib, <ProductOutlined />, [
+  getItem("三方库", ModuleType.ThirdParyLibrary, <ProductOutlined />, [
     getItem("react-spring", ThirdParyLibrary.ReactSpring, "", [
       getItem("单元素动画", ThirdParyLibrary.ReactSpring1),
       getItem("多元素动画", ThirdParyLibrary.ReactSpring2),
@@ -193,7 +198,7 @@ const items: MenuProps["items"] = [
 
   { type: "divider" },
 
-  getItem("综合项目", Projects.Comprehesive, <SettingOutlined />, [
+  getItem("综合项目", ModuleType.Projects, <SettingOutlined />, [
     getItem("TodoList", Projects.TodoList),
   ]),
 ];

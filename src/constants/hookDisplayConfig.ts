@@ -1,6 +1,6 @@
 import { HooksType } from "../menu/Menu";
 
-// Import readme content
+// 导入文档
 import { readmeContent as useCookiesReadme } from "../hooks/useCookies/readme-content";
 import { readmeContent as useCopyToClipboardReadme } from "../hooks/useCopyToclipboard/readme-content";
 import { readmeContent as useCountDownReadme } from "../hooks/useCountDown/readme-content";
@@ -34,7 +34,7 @@ import { readmeContent as useTimeoutReadme } from "../hooks/useTimeout/readme-co
 import { readmeContent as useUnmountedRefReadme } from "../hooks/useUnmountedRef/readme-content";
 import { readmeContent as useWhyDidYouUpdateReadme } from "../hooks/useWhyDidYouUpdate/readme-content";
 
-// Import code strings
+// 导入代码片段
 import { useCookiesCodeString } from "../hooks/useCookies/code";
 import { useCopyToClipboardCodeString } from "../hooks/useCopyToclipboard/code";
 import { useCountdownCodeString } from "../hooks/useCountDown/code";
@@ -76,16 +76,6 @@ export const hookMap: Record<
     demo: React.ReactNode;
   }
 > = {
-  [HooksType.CustomHooks]: {
-    doc: "# Custom Hooks\n\n自定义 React Hooks 集合",
-    code: "// Custom Hooks Collection",
-    demo: null,
-  },
-  [HooksType.UseGusture]: {
-    doc: "# useGesture\n\n手势识别 Hook",
-    code: "// useGesture implementation",
-    demo: null,
-  },
   [HooksType.UseCookies]: {
     doc: useCookiesReadme,
     code: useCookiesCodeString,

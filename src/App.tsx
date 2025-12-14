@@ -17,6 +17,7 @@ import classNames from "classnames";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Splitter } from "antd";
 import { Code } from "./components/code/Code";
+import { hookMap } from "./constants/hookDisplayConfig";
 
 export type MenuKey = ComponentsType | HooksType | ThirdParyLibrary | Projects;
 export interface PageState {
@@ -44,6 +45,9 @@ const App: FC = () => {
   const collapse = useMenuStore((state) => state.collapse);
   const currentPage = useMenuStore((state) => state.currentPage);
   const toggleCollapse = useMenuStore((state) => state.toggleCollapse);
+
+  const isHookPage = currentPage && currentPage in hookMap;
+  const rendererConfig = isHookPage ? hookMap[currentPage as HooksType] : null;
 
   return (
     <ErrorBoundary
@@ -96,9 +100,9 @@ const App: FC = () => {
               {currentPage?.startsWith("use") && (
                 <Splitter.Panel defaultSize="35%" min="0%">
                   <Code
-                    codeString={"useDebounceFnCodeString"}
-                    fileName="useDebounceFn.ts"
-                    id={HooksType.UseDebounceFn}
+                    codeString={rendererConfig?.code ?? ""}
+                    fileName="code.ts"
+                    id={currentPage}
                   />
                 </Splitter.Panel>
               )}

@@ -1,14 +1,9 @@
 import React from "react";
 import { Code } from "./Code";
-import { HooksType } from "../../menu/Menu";
 
 const CodeDemo: React.FC = () => {
   return (
-    <Code
-      codeString={rowSpanCountfun}
-      fileName="zustand.js"
-      id={HooksType.CustomHooks}
-    />
+    <Code codeString={rowSpanCountfun} fileName="zustand.js" id={"zustand"} />
   );
 };
 
