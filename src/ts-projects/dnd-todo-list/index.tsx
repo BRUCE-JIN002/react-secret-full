@@ -13,11 +13,11 @@ export const TodoList: FC<TodoListProps> = (props) => {
     <DndProvider backend={HTML5Backend}>
       <div
         className={classNames(
-          "w-1000 h-600 m-auto mt-100 p-10",
+          "w-full min-h-[400px] m-auto p-4",
           "rounded-lg",
-          "flex justify-between items-start"
+          "flex flex-wrap gap-6 justify-between items-start"
         )}
-        style={{ boxShadow: "5px 5px 50px 5px #e0e0e0" }}
+        style={{ border: "1px solid #e3e7ed", background: "#f8fafc" }}
       >
         <div
           className={classNames("flex-2 h-full mr-10 overflow-auto rounded-lg")}

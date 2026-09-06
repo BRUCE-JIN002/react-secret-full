@@ -47,23 +47,22 @@ const SpaceDemo: React.FC = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        position: "absolute",
-        inset: 0,
+        position: "relative",
+        gap: 28,
+        width: "100%",
       }}
     >
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          gap: 50,
+          flexDirection: "row",
+          flexWrap: "wrap",
+          gap: 20,
           justifyContent: "center",
           alignItems: "self-start",
-          position: "absolute",
-          width: 190,
-          right: 0,
-          top: 0,
-          bottom: 0,
-          borderLeft: "1px solid #efefef",
+          position: "relative",
+          width: "100%",
+          borderBottom: "1px solid #efefef",
           padding: 8,
           backgroundColor: "#fff",
         }}

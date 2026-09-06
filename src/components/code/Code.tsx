@@ -1,227 +1,79 @@
-import { useBoolean, useSafeState } from "ahooks";
-import { Input, message, Select } from "antd";
-import _ from "lodash";
-import { useState } from "react";
-
-import {
-  CopyOutlined,
-  EyeInvisibleOutlined,
-  LockOutlined,
-  PicRightOutlined,
-  SkinOutlined,
-  UnlockOutlined,
-} from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { Button, Input, message, Select, Tooltip } from "antd";
+import { CopyOutlined, EyeInvisibleOutlined, LockOutlined, PicRightOutlined, UnlockOutlined } from "@ant-design/icons";
 import MonacoEditor, { OnMount } from "@monaco-editor/react";
-
-import { getRandomColor } from "../../common/utils/utils";
 import { useCopyToClipboard } from "../../hooks/useCopyToclipboard";
-import { HooksType } from "../../menu/Menu";
-import { ConfigListItem, useCodeConfigStore } from "./store";
-
-const intialOption = ["vs-light", "vs-dark", "hc-black"];
-
-const getSelectOptions = () =>
-  intialOption.map((theme) => ({ label: theme, value: theme }));
+import { useCodeConfigStore } from "./store";
 
 interface CodeProps {
-  id: HooksType | string;
+  id: string;
   fileName?: string;
   codeString: string;
   onClick?: () => void;
 }
 
-export const Code: React.FC<CodeProps> = (props) => {
-  const { codeString, id, onClick } = props;
+export const Code: React.FC<CodeProps> = ({ codeString, id, fileName: initialFileName, onClick }) => {
   const [, copy] = useCopyToClipboard();
   const [messageApi, contextHolder] = message.useMessage();
   const { configList, updateConfig } = useCodeConfigStore();
-  const [isEdit, setIsEdit] = useSafeState(false);
-  const [isEditable, setIsEditable] = useBoolean(false);
-  const [randomColor, setRandomColor] = useState<string | undefined>(
-    () => configList.find((l) => l.id === id)?.skinColor
-  );
+  const [renaming, setRenaming] = useState(false);
+  const [editable, setEditable] = useState(false);
+  const [value, setValue] = useState(codeString);
+  const config = configList.find((item) => item.id === id);
+  const fileName = config?.fileName || initialFileName || "example.ts";
+  const theme = config?.theme || "vs-light";
 
-  const persistConfig = _.assign(
-    configList.find((l) => l.id === id),
-    { id }
-  );
+  useEffect(() => {
+    setValue(codeString);
+    setEditable(false);
+    setRenaming(false);
+  }, [codeString, id]);
 
-  const { skinColor, theme, fileName }: ConfigListItem = {
-    skinColor: "#00b56d",
-    theme: "vs-dark",
-    fileName: props.fileName,
-    ...persistConfig,
-  };
-
-  const handleCopy = (text: string) => () => {
-    copy(text)
-      .then(() => {
-        messageApi.open({
-          type: "success",
-          content: "复制成功！",
-        });
-      })
-      .catch(() => {
-        messageApi.open({
-          type: "error",
-          content: "复制失败！",
-        });
-      });
-  };
-
-  const filterOption = (
-    input: string,
-    option?: { label: string; value: string }
-  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-
-  const handleEditorMount: OnMount = (editor, monaco) => {
+  const handleMount: OnMount = (editor, monaco) => {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
       editor.getAction("editor.action.formatDocument")?.run();
     });
   };
 
+  const copyCode = async () => {
+    try {
+      await copy(value);
+      messageApi.success("代码已复制");
+    } catch {
+      messageApi.error("复制失败，请手动选择代码复制");
+    }
+  };
+
   return (
-    <div
-      style={{
-        border: "1px solid #00000050",
-        borderRight: "none",
-        color: "rgba(0,0,0, 0.75)",
-        backgroundColor: skinColor,
-        position: "relative",
-        width: "100%",
-        transition: "all 0.3s ease",
-      }}
-    >
+    <div className="code-panel">
       {contextHolder}
-      <div className="flex items-center h-4 text-[12px] gap-3 m-[4px]">
-        <div
-          onDoubleClick={() => setIsEdit(true)}
-          style={{ marginRight: "auto" }}
-        >
-          {isEdit ? (
-            <Input
-              autoFocus={true}
-              size="small"
-              value={fileName}
-              onChange={(e) => {
-                const nameValue =
-                  e.target.value !== "" ? e.target.value : undefined;
-                updateConfig({
-                  ...persistConfig,
-                  fileName: nameValue,
-                });
-              }}
-              onPressEnter={() => setIsEdit(false)}
-              onBlur={() => setIsEdit(false)}
-              style={{ height: 21 }}
-            />
-          ) : (
-            <div
-              style={{
-                boxShadow: fileName
-                  ? ""
-                  : `inset -5px -5px 10px rgba(0, 0, 0, 0.1), 
-                  inset 5px 5px 10px rgba(0, 0, 0, 0.1)`,
-              }}
-              className="text-sm h-[18px] rounded min-w-24"
-            >
-              {fileName}
-            </div>
-          )}
+      <div className="code-toolbar">
+        {renaming ? <Input autoFocus size="small" aria-label="代码文件名" value={fileName} onChange={(event) => updateConfig({ ...config, id, fileName: event.target.value })} onPressEnter={() => setRenaming(false)} onBlur={() => setRenaming(false)} /> : <button className="code-filename" title="双击修改文件名" onDoubleClick={() => setRenaming(true)}>{fileName}</button>}
+        <div className="code-actions">
+          <Tooltip title={editable ? "切换为只读" : "编辑代码（仅本次预览）"}>
+            <Button type="text" size="small" aria-label={editable ? "切换为只读" : "编辑代码"} icon={editable ? <UnlockOutlined /> : <LockOutlined />} onClick={() => setEditable(!editable)} />
+          </Tooltip>
+          <Tooltip title="切换缩略图">
+            <Button type="text" size="small" aria-label="切换缩略图" icon={<PicRightOutlined />} onClick={() => updateConfig({ ...config, id, minimap: !config?.minimap })} />
+          </Tooltip>
+          {onClick && <Button type="text" size="small" aria-label="收起代码" icon={<EyeInvisibleOutlined />} onClick={onClick} />}
+          <Select aria-label="编辑器主题" size="small" value={theme} onChange={(nextTheme) => updateConfig({ ...config, id, theme: nextTheme })} options={[{ label: "浅色", value: "vs-light" }, { label: "深色", value: "vs-dark" }, { label: "高对比", value: "hc-black" }]} />
+          <Tooltip title="复制代码">
+            <Button type="text" size="small" aria-label="复制代码" icon={<CopyOutlined />} onClick={copyCode} />
+          </Tooltip>
         </div>
-        {isEditable ? (
-          <UnlockOutlined
-            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-            onClick={() => setIsEditable.toggle()}
-            title="编辑模式"
-          />
-        ) : (
-          <LockOutlined
-            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-            onClick={() => setIsEditable.toggle()}
-            title="只读模式"
-          />
-        )}
-        {onClick && (
-          <EyeInvisibleOutlined
-            style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-            title="收起代码"
-            onClick={onClick}
-          />
-        )}
-        <PicRightOutlined
-          style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-          title="缩略图"
-          onClick={() => {
-            updateConfig({
-              ...persistConfig,
-              minimap: !persistConfig.minimap,
-            });
-          }}
-        />
-        <SkinOutlined
-          style={{ fontSize: 14, marginTop: 2, cursor: "pointer" }}
-          title="换肤"
-          onClick={() => {
-            const color = getRandomColor();
-            setRandomColor(color);
-            updateConfig({
-              ...persistConfig,
-              skinColor: color,
-            });
-          }}
-        />
-        <Select
-          showSearch
-          size="small"
-          defaultValue={theme}
-          placeholder="Select a theme"
-          optionFilterProp="children"
-          listItemHeight={10}
-          onChange={(value) => {
-            updateConfig({
-              ...persistConfig,
-              theme: value,
-            });
-          }}
-          style={{
-            border: "1px solid #00000060",
-            borderRadius: 4,
-            height: 18,
-            backgroundColor: randomColor,
-          }}
-          filterOption={filterOption}
-          options={getSelectOptions()}
-        />
-        <span onClick={handleCopy(codeString)}>
-          <span style={{ margin: "0px 5px", cursor: "pointer" }}>复制代码</span>
-          <CopyOutlined style={{ marginRight: 8 }} />
-        </span>
       </div>
-      <MonacoEditor
-        width={"100%"}
-        height={"calc(100vh - 24px)"}
-        language={
-          persistConfig.fileName?.endsWith("js") ? "javascript" : "typescript"
-        }
-        onMount={handleEditorMount}
-        value={codeString}
-        theme={theme}
-        options={{
-          fontSize: 14,
-          scrollBeyondLastLine: false,
-          readOnly: !isEditable,
-          minimap: {
-            enabled: persistConfig.minimap,
-            size: "proportional",
-          },
-          overviewRulerBorder: false,
-          scrollbar: {
-            verticalScrollbarSize: 6,
-            horizontalScrollbarSize: 6,
-          },
-        }}
-      />
+      <div className="code-editor">
+        <MonacoEditor width="100%" height="100%" language={fileName.endsWith(".js") ? "javascript" : "typescript"} onMount={handleMount} value={value} onChange={(nextValue) => setValue(nextValue || "")} theme={theme}
+          loading={<div className="code-fallback">
+            <p>正在连接编辑器资源 · 可先阅读或复制源码</p>
+            <pre>
+              <code>{value}</code>
+            </pre>
+          </div>}
+          options={{ fontSize: 12, lineHeight: 21, padding: { top: 16 }, scrollBeyondLastLine: false, readOnly: !editable, minimap: { enabled: config?.minimap || false }, overviewRulerBorder: false, automaticLayout: true, scrollbar: { verticalScrollbarSize: 6, horizontalScrollbarSize: 6 } }}
+        />
+      </div>
     </div>
   );
 };

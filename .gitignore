@@ -22,3 +22,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Generated documentation site
+/site/.vitepress/cache
+/site/public/playground
+/site/hooks
+/site/components
+/site/ecosystem
+/site/projects
+/site/.vitepress/catalog.json
+/src/playground/registry.ts
+
+# Local AI service configuration
+.env.local

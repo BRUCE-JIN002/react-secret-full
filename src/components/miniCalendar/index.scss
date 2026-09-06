@@ -1,34 +1,11 @@
 .calendar {
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  padding: 10px;
-  width: 300px;
-  aspect-ratio: 1.5;
-  background-color: azure;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
-}
-
-.days {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.empty,
-.day {
-  width: calc(100% / 7);
-  text-align: center;
-  line-height: 30px;
-}
-
-.day:hover,
-.selected {
-  border-radius: 15px;
-  background-color: #38b3ff;
-  cursor: pointer;
+  border: 1px solid #dfe5ec; border-radius: 8px; padding: 16px; width: 100%; background: #fff; box-shadow: 0 2px 5px #22345004;
+  .header { display:flex; justify-content:space-between; align-items:center; height:36px; margin-bottom:14px; font-size:13px; font-weight:600; }
+  .header button { width:28px; height:28px; border:1px solid #e4e8ee; border-radius:5px; background:#fff; color:#697586; }
+  .header button:hover { background:#f1f5fb; color:#2563eb; }
+  .days { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .empty,.day { text-align:center; line-height:30px; font-size:12px; border:0; background:transparent; color:#48566b; border-radius:5px; }
+  button.day:hover { background:#edf3ff; color:#2563eb; }
+  .day.selected { background:#2563eb; color:white; font-weight:600; }
+  .days>div.day { color:#98a2b3; font-size:11px; }
 }

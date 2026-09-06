@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bruce-jin002.github.io/sitemap.xml

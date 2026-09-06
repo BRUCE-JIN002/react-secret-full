@@ -1,0 +1,28 @@
+name: react-secret
+services:
+  web:
+    image: react-secret-web:${RELEASE_ID:?Release ID is required}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${WEB_PORT:-18080}:8080"
+    mem_limit: 192m
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+  ai:
+    image: react-secret-ai:${RELEASE_ID:?Release ID is required}
+    restart: unless-stopped
+    env_file:
+      - ${AI_ENV_PATH:-/etc/react-secret/ai.env}
+    environment:
+      AI_HOST: 0.0.0.0
+      AI_PORT: "5180"
+    ports:
+      - "127.0.0.1:${AI_HOST_PORT:-15180}:5180"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}

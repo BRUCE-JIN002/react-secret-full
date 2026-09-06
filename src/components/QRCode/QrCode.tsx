@@ -29,8 +29,9 @@ const MyQRcode: React.FC = () => {
       style={{
         height: "100%",
         width: "100%",
-        position: "absolute",
-        inset: 0,
+        position: "relative",
+        flexWrap: "wrap",
+        gap: 24,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -40,22 +41,19 @@ const MyQRcode: React.FC = () => {
         errorLevel="H"
         size={size}
         iconSize={size / 4}
-        value="WIFI:T:WPA;P:pnkzcv7s;S:ChinaNet-FaxU;H:false;"
-        color="#07c941"
+        value="https://react.dev"
+        color="#253c62"
       />
       <div
         style={{
-          position: "absolute",
-          right: 0,
-          top: 0,
-          bottom: 0,
+          position: "relative",
           display: "flex",
           alignItems: "center",
-          borderLeft: "1px solid #efefef",
+
           padding: "0px 8px",
           width: 190,
           backgroundColor: "#fff",
-          zIndex: 99,
+
         }}
       >
         <span style={{ fontSize: 14 }}>大小：</span>
@@ -65,6 +63,7 @@ const MyQRcode: React.FC = () => {
             type="primary"
             onClick={decline}
             disabled={size <= 200}
+            aria-label="缩小二维码"
             icon={<MinusOutlined />}
             style={{ width: 45 }}
           />
@@ -73,6 +72,7 @@ const MyQRcode: React.FC = () => {
             size="small"
             onClick={increase}
             disabled={size >= 600}
+            aria-label="放大二维码"
             icon={<PlusOutlined />}
             style={{ width: 45 }}
           />

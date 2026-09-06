@@ -68,27 +68,17 @@ const MiniCalendar: React.ForwardRefRenderFunction<
     const firstDay = firstDayOfMonth(date.getFullYear(), date.getMonth());
 
     for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className="empty"></div>);
+      days.push(<div key={`empty-${i}`} className="empty">
+      </div>);
     }
 
     for (let i = 1; i <= daysCount; i++) {
-      const clickHandler = onChange?.bind(
-        null,
-        new Date(date.getFullYear(), date.getMonth(), i)
-      );
-      if (i === date.getDate()) {
-        days.push(
-          <div key={i} className="day selected" onClick={clickHandler}>
-            {i}
-          </div>
-        );
-      } else {
-        days.push(
-          <div key={i} className="day" onClick={clickHandler}>
-            {i}
-          </div>
-        );
-      }
+      const selected = i === date.getDate();
+      days.push(<button type="button" key={i} className={`day${selected ? " selected" : ""}`} aria-label={`${date.getFullYear()}年${date.getMonth() + 1}月${i}日`} aria-pressed={selected} onClick={() => {
+        const next = new Date(date.getFullYear(), date.getMonth(), i);
+        setDate(next);
+        onChange?.(next);
+      }}>{i}</button>);
     }
 
     return days;
@@ -97,11 +87,11 @@ const MiniCalendar: React.ForwardRefRenderFunction<
   return (
     <div className="calendar">
       <div className="header">
-        <button onClick={handlePrevMonth}>&lt;</button>
+        <button aria-label="上个月" onClick={handlePrevMonth}>&lt;</button>
         <div>
           {date.getFullYear()}年{monthNames[date.getMonth()]}
         </div>
-        <button onClick={handleNextMonth}>&gt;</button>
+        <button aria-label="下个月" onClick={handleNextMonth}>&gt;</button>
       </div>
       <div className="days">
         <div className="day">日</div>

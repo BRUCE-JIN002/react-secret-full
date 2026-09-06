@@ -7,12 +7,12 @@ const CountDownDemo = () => {
 
   const { days, hours, minites, seconds } = formattedRes;
   return (
-    <p className="text-3xl flex">
+    <p className="text-lg flex flex-wrap justify-center gap-2 leading-loose">
       距离
-      <span className="text-[red]">{new Date().getFullYear() + 1}</span>年
-      <span className="text-[red]">1</span>月
-      <span className="text-[red]">1</span>日
-      <span className="flex gap-5 min-w-[295px]">
+      <span className="text-blue-600">{new Date().getFullYear() + 1}</span>年
+      <span className="text-blue-600">1</span>月
+      <span className="text-blue-600">1</span>日
+      <span className="flex flex-wrap gap-2">
         还有 {days} 天 {hours} 小时 {minites} 分钟 {seconds} 秒
       </span>
     </p>

@@ -1,0 +1,29 @@
+limit_req_zone $binary_remote_addr zone=react_secret_ai:10m rate=6r/m;
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    server_tokens off;
+    client_max_body_size 220k;
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy strict-origin-when-cross-origin always;
+    location / {
+        proxy_pass http://127.0.0.1:18080;
+        proxy_set_header Host $http_host;
+    }
+    location = /api/ai/status {
+        proxy_pass http://127.0.0.1:15180;
+        proxy_set_header Host $http_host;
+    }
+    location /api/ai/ {
+        limit_req zone=react_secret_ai burst=2 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:15180;
+        proxy_http_version 1.1;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Connection "";
+        proxy_buffering off;
+        proxy_read_timeout 190s;
+    }
+}

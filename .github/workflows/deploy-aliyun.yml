@@ -1,0 +1,49 @@
+name: Deploy to Aliyun
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: aliyun-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: Production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build release images and bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          release="${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          echo "RELEASE_ID=$release" >> "$GITHUB_ENV"
+          docker build --target web -t "react-secret-web:$release" .
+          docker build --target ai -t "react-secret-ai:$release" .
+          mkdir bundle
+          docker save "react-secret-web:$release" "react-secret-ai:$release" | gzip > bundle/images.tar.gz
+          cp deploy/compose.yaml deploy/release.sh bundle/
+          (cd bundle && sha256sum images.tar.gz > images.tar.gz.sha256)
+      - name: Upload and deploy
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST" && test -n "$DEPLOY_USER"
+          test -n "$DEPLOY_SSH_KEY" && test -n "$DEPLOY_KNOWN_HOSTS"
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/deploy_key ~/.ssh/known_hosts
+          trap 'rm -f ~/.ssh/deploy_key' EXIT
+          opts=(-i ~/.ssh/deploy_key -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 -o ServerAliveCountMax=3)
+          remote="react-secret-upload/$RELEASE_ID"
+          ssh "${opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p '$remote'"
+          scp "${opts[@]}" bundle/* "$DEPLOY_USER@$DEPLOY_HOST:$remote/"
+          ssh "${opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "sudo bash '$remote/release.sh' '$RELEASE_ID' \"\$HOME/$remote\""
+          ssh "${opts[@]}" "$DEPLOY_USER@$DEPLOY_HOST" "rm -rf '$remote'"

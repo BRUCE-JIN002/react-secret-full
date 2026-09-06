@@ -1,9 +1,8 @@
 import { StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
-import { HooksType } from "../../menu/Menu";
 
 export interface ConfigListItem {
-  id?: HooksType;
+  id?: string;
   fileName?: string;
   skinColor?: string;
   theme?: string;

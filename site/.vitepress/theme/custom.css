@@ -1,0 +1,38 @@
+:root {
+  --vp-c-brand-1: #5754d6;
+  --vp-c-brand-2: #6762ec;
+  --vp-c-brand-3: #7067f4;
+  --vp-home-hero-name-color: #42acd0;
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+.dark { --vp-c-brand-1: #aaa3ff; --vp-c-brand-2: #9188ff; --vp-c-brand-3: #746af0; }
+.VPNavBarTitle .logo { width: 27px; height: 27px; }
+.VPHero .image-src { width: 290px; height: 290px; filter: drop-shadow(0 0 38px #45baf04d); }
+.VPHero .name, .VPHero .text { letter-spacing: -1.8px; }
+.VPHero .tagline { font-size: 21px; }
+.VPFeature { transition: border-color .2s, transform .2s; }
+.VPFeature:hover { transform: translateY(-3px); }
+.vp-doc { overflow-wrap: anywhere; }
+.vp-doc th { white-space: nowrap; }
+.demo-frame { margin: 28px 0 36px; border: 1px solid var(--vp-c-divider); border-radius: 10px; overflow: hidden; }
+.demo-frame-header { padding: 13px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--vp-c-bg-soft); font-size: 13px; font-weight: 600; }
+.demo-frame-header>div { display: flex; gap: 15px; font-size: 12px; font-weight: 400; }
+.demo-frame-header a { text-decoration: none; }
+.demo-frame-badge { margin-left: 8px; padding: 2px 6px; border-radius: 4px; font-size: 10px; color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); }
+.demo-frame-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 190px; padding: 24px; text-align: center; }
+.demo-frame-placeholder p { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+.demo-frame-placeholder span { color: var(--vp-c-text-2); font-size: 12px; }
+.demo-frame-placeholder button { margin-top: 18px; border-radius: 6px; background: var(--vp-c-brand-3); color: #fff; padding: 7px 19px; font-size: 13px; }
+.demo-frame button:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
+.demo-frame-stage { position: relative; }
+.demo-frame-stage iframe { display: block; width: 100%; height: 540px; border: none; background: #fff; }
+.demo-frame-loading { position: absolute; inset: 0; display: grid; place-items: center; background: var(--vp-c-bg); font-size: 13px; pointer-events: none; }
+.demo-frame-footer { padding: 9px 18px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-3); font-size: 11px; border-top: 1px solid var(--vp-c-divider); }
+@media (max-width: 640px) {
+  .VPHero .image-src { width: 210px; height: 210px; }
+  .VPHero .name, .VPHero .text { letter-spacing: -.7px; }
+  .VPHero .tagline { font-size: 16px; }
+  .demo-frame-header { padding: 12px; flex-wrap: wrap; }
+  .demo-frame-stage iframe { height: 580px; }
+}
+@media (prefers-reduced-motion: reduce) { .VPFeature { transition: none; } .VPFeature:hover { transform: none; } }

@@ -9,9 +9,9 @@ const WatermarkDemo = () => {
       fontStyle={{
         color: "#e0e0e0",
       }}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: 380 }}
     >
-      <div style={{ height: "100%" }}></div>
+      <div style={{ height: 380 }}></div>
     </Watermark>
   );
 };

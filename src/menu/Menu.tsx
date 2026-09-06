@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppstoreOutlined,
-  MailOutlined,
+  CodeOutlined,
   ProductOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { Empty, Menu } from "antd";
 import { useMenuStore } from "../App";
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -116,7 +116,7 @@ const getItem = (
 };
 
 const items: MenuProps["items"] = [
-  getItem("自定义 Hooks", ModuleType.CustomHooks, <MailOutlined />, [
+  getItem("自定义 Hooks", ModuleType.CustomHooks, <CodeOutlined />, [
     getItem("useCookies", HooksType.UseCookies),
     getItem("useCopyToClipboard", HooksType.UseCopyToClipboard),
     getItem("useCountdown", HooksType.UseCountDown),
@@ -205,19 +205,45 @@ const items: MenuProps["items"] = [
   ]),
 ];
 
-const MenuList: React.FC = () => {
+export interface NavigationEntry { key: string; label: string; group: string; parents: string[] }
+export const navigationEntries: NavigationEntry[] = [];
+function collectEntries(nodes: MenuProps["items"], parents: string[] = [], group = "") {
+  nodes?.forEach((node) => {
+    if (!node || !("label" in node)) return;
+    const label = String(node.label);
+    if ("children" in node && node.children) {
+      collectEntries(node.children, [...parents, String(node.key)], group || label);
+    } else {
+      navigationEntries.push({ key: String(node.key), label, group, parents });
+    }
+  });
+}
+collectEntries(items);
+
+const MenuList: React.FC<{ query: string; onNavigate: () => void }> = ({ query, onNavigate }) => {
   const updateCurrentPage = useMenuStore((state) => state.updateCurrentPage);
   const currentPage = useMenuStore((state) => state.currentPage);
   const collapse = useMenuStore((state) => state.collapse);
-
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+  useEffect(() => {
+    if (!collapse) setOpenKeys(navigationEntries.find((entry) => entry.key === currentPage)?.parents || []);
+  }, [currentPage, collapse]);
+  const results = navigationEntries.filter((entry) =>
+    `${entry.label} ${entry.group}`.toLowerCase().includes(query.trim().toLowerCase())
+  );
+  if (query.trim() && !results.length) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="未找到匹配的示例" />;
   return (
     <Menu
-      onClick={(e) => updateCurrentPage(e.key as ComponentsType | HooksType)}
-      defaultSelectedKeys={[currentPage as ComponentsType.MinCalendar]}
+      aria-label="示例导航"
+      onClick={(e) => { updateCurrentPage(e.key as ComponentsType | HooksType); onNavigate(); }}
+      selectedKeys={currentPage ? [currentPage] : []}
+      openKeys={query.trim() ? [] : openKeys}
+      onOpenChange={setOpenKeys}
       mode="inline"
-      theme="dark"
-      items={items}
+      theme="light"
+      items={query.trim() ? results.map((entry) => ({ key: entry.key, label: entry.label })) : items}
       inlineCollapsed={collapse}
+      inlineIndent={16}
     />
   );
 };

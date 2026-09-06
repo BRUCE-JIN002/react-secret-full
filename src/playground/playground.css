@@ -1,0 +1,11 @@
+html, body, #root { min-height: 100%; width: 100%; margin: 0; background: #fff; }
+.playground-content { min-height: 500px; height: auto; overflow: auto; padding: 28px; }
+.playground-status { width: 100%; padding: 64px 24px; text-align: center; color: #697586; }
+.playground-status h2 { margin-bottom: 12px; font-size: 18px; color: #202938; }
+.playground-status p { margin: 14px 0; }
+.playground-status a { color: #6762ec; }
+.playground-content > * { flex-shrink: 0; }
+.playground-content .mini-calendar-examples { gap: 24px; }
+@media(max-width:640px) { .playground-content { padding: 20px 12px; } .calendar-example { max-width: 100%; } }
+
+.playground-content .calendar-example { width: 256px; }
