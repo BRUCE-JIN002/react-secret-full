@@ -96,7 +96,10 @@ const IconDemo: React.FC = () => {
   return (
     <div
       style={{
-        width: "75%",
+        width: "100%",
+        maxWidth: "100%",
+        minWidth: 0,
+        boxSizing: "border-box",
         padding: 10,
         display: "flex",
         flexDirection: "column",
