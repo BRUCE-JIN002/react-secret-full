@@ -16,9 +16,14 @@ const generateTestData = (count: number) => {
 // 样式常量
 const styles = {
   container: {
-    maxWidth: "800px",
+    width: "100%",
+    maxWidth: "min(800px, 100%)",
+    minWidth: 0,
+    flexShrink: 1,
+    boxSizing: "border-box" as const,
     margin: "0 auto",
     padding: "24px",
+    overflowWrap: "break-word",
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     backgroundColor: "#f8fafc",
@@ -49,6 +54,8 @@ const styles = {
     gap: "8px",
     marginBottom: "20px",
     flexWrap: "wrap" as const,
+    maxWidth: "100%",
+    minWidth: 0,
   },
   button: {
     padding: "8px 16px",
@@ -91,7 +98,7 @@ const styles = {
   },
   statsGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(120px, 100%), 1fr))",
     gap: "16px",
     marginTop: "16px",
   },
@@ -117,8 +124,11 @@ const styles = {
     borderRadius: "6px",
     border: "1px solid #d1d5db",
     fontSize: "14px",
-    marginRight: "8px",
-    minWidth: "200px",
+    marginRight: 0,
+    minWidth: 0,
+    width: "auto",
+    maxWidth: "100%",
+    flex: "1 1 220px",
   },
   resultsList: {
     maxHeight: "200px",
@@ -314,7 +324,17 @@ const SearchFilterDemo = () => {
         在 {data.length.toLocaleString()} 条数据中进行实时搜索和过滤
       </p>
 
-      <div style={{ marginBottom: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "8px",
+          alignItems: "center",
+          marginBottom: "20px",
+          maxWidth: "100%",
+          minWidth: 0,
+        }}
+      >
         <input
           type="text"
           value={searchQuery}
@@ -339,7 +359,6 @@ const SearchFilterDemo = () => {
           style={{
             ...styles.button,
             ...styles.secondaryButton,
-            marginLeft: "8px",
           }}
         >
           清空结果
@@ -467,7 +486,7 @@ const ProgressiveComputeDemo = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(200px, 100%), 1fr))",
             gap: "16px",
           }}
         >
