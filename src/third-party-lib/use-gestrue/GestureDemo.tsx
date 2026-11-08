@@ -1,5 +1,5 @@
 import { animated, useSprings } from "@react-spring/web";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { useDrag } from "@use-gesture/react";
 import "./styles.scss";
 import { useBoolean } from "ahooks";
@@ -24,31 +24,57 @@ const header = (onToggle: () => void): JSX.Element => (
 
 const Viewpager: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const width = ref.current?.clientWidth ?? window.innerWidth;
+  const widthRef = useRef(0);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [stateShowCode, setShowCode] = useBoolean(false);
+  activeIndexRef.current = activeIndex;
 
-  const [props, api] = useSprings(pages.length, (i) => ({
-    x: i * width,
+  const [props, api] = useSprings(pages.length, () => ({
+    x: 0,
     scale: 1
   }));
 
+  const readWidth = () => ref.current?.clientWidth || widthRef.current || 0;
+
+  useLayoutEffect(() => {
+    if (stateShowCode) return;
+    const element = ref.current;
+    if (!element) return;
+    const apply = () => {
+      const next = element.clientWidth;
+      if (!next || next === widthRef.current) return;
+      widthRef.current = next;
+      api.start((i) => ({
+        x: (i - activeIndexRef.current) * next,
+        scale: 1,
+        immediate: true
+      }));
+    };
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [api, stateShowCode]);
+
   const bind = useDrag(
     ({ active, movement: [mx], direction: [xDir], cancel }) => {
-      if (active && Math.abs(mx) > width / pages.length) {
-        let newIndex = activeIndex + (xDir > 0 ? -1 : 1);
-        if (newIndex < 0) {
-          return;
-        }
-        if (newIndex > pages.length - 1) {
-          newIndex = pages.length - 1;
-        }
+      const width = readWidth();
+      if (!width) return;
+      let index = activeIndexRef.current;
+      const turned = active && Math.abs(mx) > width / pages.length;
+      if (turned) {
+        let newIndex = index + (xDir > 0 ? -1 : 1);
+        if (newIndex < 0) return;
+        if (newIndex > pages.length - 1) newIndex = pages.length - 1;
+        index = newIndex;
+        activeIndexRef.current = newIndex;
         setActiveIndex(newIndex);
         cancel();
       }
       api.start((i) => {
-        const x = (i - activeIndex) * width + (active ? mx : 0);
-        const scale = active ? 1 - Math.abs(mx) / width / 1.2 : 1;
+        const x = (i - index) * width + (active && !turned ? mx : 0);
+        const scale = active && !turned ? 1 - Math.abs(mx) / width / 1.2 : 1;
         return { x, scale };
       });
     }
@@ -57,20 +83,23 @@ const Viewpager: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => {
+        const width = widthRef.current;
         const nextIndex = (prevIndex + 1) % pages.length;
-        api.start((i) => {
-          const x = (i - nextIndex) * width;
-          return {
-            x,
-            immediate: prevIndex === pages.length - 1 && nextIndex === 0
-          };
-        });
+        if (width) {
+          api.start((i) => {
+            const x = (i - nextIndex) * width;
+            return {
+              x,
+              immediate: prevIndex === pages.length - 1 && nextIndex === 0
+            };
+          });
+        }
         return nextIndex;
       });
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [api, width]);
+  }, [api]);
 
   return (
     <>
@@ -100,7 +129,10 @@ const Viewpager: React.FC = () => {
                 key={index}
                 className={classNames(activeIndex === index ? "active" : "")}
                 onClick={() => {
+                  const width = readWidth();
+                  activeIndexRef.current = index;
                   setActiveIndex(index);
+                  if (!width) return;
                   api.start((i) => {
                     const x = (i - index) * width;
                     return { x };
