@@ -1,6 +1,10 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
 
@@ -76,6 +80,20 @@
       .icon {
         margin-right: 6px;
         font-size: 14px;
+      }
+
+      .label {
+        display: inline-block;
+        text-align: center;
+
+        &::before {
+          content: attr(data-text);
+          display: block;
+          height: 0;
+          overflow: hidden;
+          visibility: hidden;
+          font-weight: 500;
+        }
       }
     }
   }
