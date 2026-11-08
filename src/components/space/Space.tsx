@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React, { Fragment, useContext, useMemo } from "react";
 import { ConfigContext } from "./ConfigProvider";
+import "./layout.scss";
 
 export type SizeType = "small" | "large" | "middle" | number | string;
 
