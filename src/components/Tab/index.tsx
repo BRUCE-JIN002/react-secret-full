@@ -119,7 +119,9 @@ const Tab = ({
               onClick={() => changeTab(tab.name)}
             >
               {tab.icon && <span className={styles.icon}>{tab.icon}</span>}
-              <span>{tab.label}</span>
+              <span className={styles.label} data-text={tab.label}>
+                {tab.label}
+              </span>
             </div>
           );
         })}
@@ -139,7 +141,15 @@ Tab.displayName = "tab";
 
 const TabDemo = () => {
   return (
-    <div style={{ padding: "20px" }}>
+    <div
+      style={{
+        padding: "20px",
+        width: "100%",
+        maxWidth: "100%",
+        minWidth: 0,
+        boxSizing: "border-box",
+      }}
+    >
       <h3>默认样式</h3>
       <Tab defaultActive="react" onChange={(type: string) => console.log(type)}>
         <TabItem name="react" label="React" icon="⚛️">

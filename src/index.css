@@ -719,6 +719,9 @@ button {
 }
 /* Legacy demos share the workspace palette without affecting their behavior. */
 .contentLeft > .code-panel {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 520px;
 }
 .contentLeft > .calendarContainer {
@@ -801,6 +804,8 @@ button {
 }
 .code-editor {
   flex: 1;
+  width: 100%;
+  min-width: 0;
   min-height: 0;
   position: relative;
 }

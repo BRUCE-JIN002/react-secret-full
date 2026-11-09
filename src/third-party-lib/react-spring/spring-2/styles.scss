@@ -11,8 +11,28 @@
 
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 10px;
   border: 1px solid #00000050;
   border-radius: 5px;
   gap: 20px;
+}
+
+.spring-column {
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.wrapper[data-layout="fill"],
+.wrapper[data-layout="stack"] {
+  width: 100%;
+}
+
+.wrapper[data-layout="stack"] {
+  flex-direction: column;
 }

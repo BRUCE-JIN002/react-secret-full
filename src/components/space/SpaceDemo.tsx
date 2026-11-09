@@ -5,6 +5,7 @@ import { useToggle } from "ahooks";
 import { Button, Radio, Switch } from "antd";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import "./styles.scss";
+import "./SpaceDemo.scss";
 
 const getSplitStyle = (direction: SpaceProps["direction"]): CSSProperties => {
   if (direction === "horizontal") {
@@ -45,11 +46,12 @@ const SpaceDemo: React.FC = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "stretch",
         position: "relative",
         gap: 28,
         width: "100%",
+        minWidth: 0,
+        maxWidth: "100%",
       }}
     >
       <div
@@ -118,11 +120,22 @@ const SpaceDemo: React.FC = () => {
           </Button.Group>
         </div>
       </div>
-      <div className="containerWrapper">
+      <div
+        className="containerWrapper"
+        style={{
+          width: "100%",
+          maxWidth: "100%",
+          minWidth: 0,
+          boxSizing: "border-box",
+          overflow: "auto",
+          maxHeight: "min(420px, calc(100vh - 180px))",
+        }}
+      >
         <ConfigProvider space={{ size: stateSize }}>
           <Space
             direction={direction as SpaceProps["direction"]}
             wrap={stateWrap}
+            className={stateWrap ? "space-demo-wrap" : undefined}
             split={
               stateSplit ? (
                 <div

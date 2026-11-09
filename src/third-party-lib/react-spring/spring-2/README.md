@@ -26,7 +26,7 @@ export default function ExamplePage() {
 | --- | --- | --- |
 | `useSprings` | Hook | 创建多个可单独控制的动画 |
 | `useTrail` | Hook | 创建相互跟随的动画序列 |
-| `api.start` | function | 本例挂载时设置 width 为 400 |
+| `api.start` | function | 挂载时把宽度动画到容器可用列宽，不超过 400 |
 
 ## 使用边界
 

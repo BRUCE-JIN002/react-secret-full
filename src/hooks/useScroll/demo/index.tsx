@@ -4,9 +4,14 @@ import { useScroll } from "../index";
 // 样式常量
 const styles = {
   container: {
-    maxWidth: "1000px",
+    width: "100%",
+    maxWidth: "min(1000px, 100%)",
+    minWidth: 0,
+    flexShrink: 1,
+    boxSizing: "border-box" as const,
     margin: "0 auto",
     padding: "24px",
+    overflowWrap: "break-word",
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     backgroundColor: "#f8fafc",
@@ -37,6 +42,8 @@ const styles = {
     gap: "8px",
     marginBottom: "16px",
     flexWrap: "wrap" as const,
+    maxWidth: "100%",
+    minWidth: 0,
   },
   button: {
     padding: "8px 16px",
@@ -87,7 +94,7 @@ const styles = {
   },
   statusGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(120px, 100%), 1fr))",
     gap: "12px",
     marginBottom: "16px",
   },
@@ -323,7 +330,7 @@ const PreciseScrollDemo = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(150px, 100%), 1fr))",
           gap: "12px",
           marginBottom: "16px",
         }}
@@ -525,7 +532,7 @@ const ScrollEventDemo = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100px, 100%), 1fr))",
           gap: "12px",
           marginBottom: "16px",
         }}
@@ -718,7 +725,7 @@ const UseScrollDemo = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(250px, 100%), 1fr))",
             gap: "16px",
           }}
         >
