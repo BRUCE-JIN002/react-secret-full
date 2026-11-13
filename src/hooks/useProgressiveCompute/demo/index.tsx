@@ -23,7 +23,7 @@ const styles = {
     boxSizing: "border-box" as const,
     margin: "0 auto",
     padding: "24px",
-    overflowWrap: "break-word",
+    overflowWrap: "break-word" as const,
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     backgroundColor: "#f8fafc",
